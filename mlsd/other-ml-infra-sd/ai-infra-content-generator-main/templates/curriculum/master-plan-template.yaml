@@ -1,0 +1,134 @@
+# Curriculum Master Plan Template
+#
+# Copy to `curriculum/<role-slug>/master-plan.yaml` per role.
+# Use alongside `templates/curriculum/module-roadmap-template.md`.
+
+role: "<role name>"
+level: "<junior|mid|senior|staff>"
+program_name: "<program title>"
+program_version: "0.1.0"
+date_updated: "<YYYY-MM-DD>"
+research_inputs:
+  - "../research/<role-slug>/role-research.md"
+  - "../research/<role-slug>/skills-matrix.yaml"
+  - "../research/<role-slug>/job-posting-analysis.md"
+repository_config: "../curriculum/repository-strategy.yaml"
+
+target_audience:
+  experience_years: "2-4"
+  prerequisites:
+    - ""
+  personas:
+    - name: ""
+      background: ""
+      goals: ""
+
+learning_outcomes:
+  primary:
+    - ""
+    - ""
+  secondary:
+    - ""
+
+program_structure:
+  total_duration_hours: 120
+  modules:
+    - id: "MOD-01"
+      title: ""
+      duration_hours:
+        lecture: 8
+        lab: 6
+        assessment: 2
+      role_focus:
+        - "<role name>"
+      prerequisites: []
+      learning_objectives:
+        - ""
+      linked_projects:
+        - "PROJ-01"
+    - id: "MOD-02"
+      title: ""
+      duration_hours:
+        lecture: 6
+        lab: 6
+        assessment: 1
+      role_focus:
+        - "<second role if any>"
+      learning_objectives: []
+      linked_projects: []
+
+assessment_strategy:
+  formative:
+    - type: "quiz"
+      cadence: "per module"
+  summative:
+    - type: "capstone"
+      alignment: "Real-world deployment scenario"
+
+project_portfolio:
+  anchor_projects:
+    - id: "PROJ-01"
+      summary: ""
+      difficulty: "medium"
+      assessed_competencies:
+        - ""
+      integration_notes: ""
+  stretch_projects:
+    - id: "PROJ-04"
+      summary: ""
+      difficulty: "advanced"
+      assessed_competencies: []
+
+solutions_plan:
+  placement: "inline"  # inline | separate
+  repo_reference: "ai-infra-curriculum"
+  path_or_repo:
+    exercises: "solutions/exercises/"
+    projects: "solutions/projects/"
+    assessments: "solutions/assessments/"
+  release_policy: "solutions available to instructors only"
+  automation:
+    sync_enabled: true
+    pipeline: "solutions-sync.yml"
+
+role_alignment_matrix:
+  - role: "<role A>"
+    modules:
+      core: ["MOD-01", "MOD-03"]
+      optional: ["MOD-05"]
+    certification_path: ["Exam-01"]
+  - role: "<role B>"
+    modules:
+      core: ["MOD-02", "MOD-04"]
+      optional: []
+    certification_path: []
+
+cross_role_progression:
+  - from_role: "<role A>"
+    to_role: "<role B>"
+    reuse_strategy: "scaffold"
+    shared_assets:
+      - module: "MOD-01"
+        adaptation: "Extend labs with production deployment focus"
+      - project: "PROJ-01"
+        adaptation: "Add observability requirements"
+  - from_role: "<role B>"
+    to_role: "<role C>"
+    reuse_strategy: "augment"
+    shared_assets: []
+
+validation_plan:
+  stakeholder_reviews:
+    - reviewer: ""
+      focus: "Hiring manager perspective"
+      due_date: ""
+  pilot_metrics:
+    completion_rate_target: 0.8
+    satisfaction_target: 4.2
+    assessment_pass_rate_target: 0.85
+
+risk_register:
+  - risk: ""
+    impact: "high|medium|low"
+    likelihood: "high|medium|low"
+    mitigation: ""

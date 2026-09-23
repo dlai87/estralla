@@ -1,0 +1,53 @@
+name: Feature request
+description: Suggest an enhancement or new capability for the AI Infrastructure Content Generator
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We love new ideas! Help us understand the value of your suggestion.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What should we build or improve?
+      placeholder: Provide a concise description of the feature.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why is this feature valuable? What problem does it solve?
+      placeholder: Explain the impact or use case.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: Share any ideas for how this could be implemented.
+      placeholder: |
+        - New templates?
+        - Workflow updates?
+        - Validation tooling?
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you tried anything else that almost works?
+      placeholder: |
+        - Alternative approach 1
+        - Alternative approach 2
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional Context
+      description: Links, references, or related discussions.
+      placeholder: Add any supporting information here.

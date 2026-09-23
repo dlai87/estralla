@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "role": "principal-engineer",
+  "role_title": "Principal Engineer Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-PE-MOD-501-TECHNICAL-STRATEGY",
+      "label": "mod-501-technical-strategy: Technical Strategy + ADRs",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-501-technical-strategy/exercise-01",
+        "mod-501-technical-strategy/exercise-02",
+        "mod-501-technical-strategy/exercise-03",
+        "mod-501-technical-strategy/exercise-04",
+        "mod-501-technical-strategy/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-501-technical-strategy/exercise-01/README.md",
+        "modules/mod-501-technical-strategy/exercise-02/README.md",
+        "modules/mod-501-technical-strategy/exercise-03/README.md",
+        "modules/mod-501-technical-strategy/exercise-04/README.md",
+        "modules/mod-501-technical-strategy/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-501-technical-strategy`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-MOD-502-MENTORSHIP-LEADERSHIP",
+      "label": "mod-502-mentorship-leadership: Mentorship + Leadership without Authority",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-502-mentorship-leadership/exercise-01",
+        "mod-502-mentorship-leadership/exercise-02",
+        "mod-502-mentorship-leadership/exercise-03",
+        "mod-502-mentorship-leadership/exercise-04",
+        "mod-502-mentorship-leadership/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-502-mentorship-leadership/exercise-01/README.md",
+        "modules/mod-502-mentorship-leadership/exercise-02/README.md",
+        "modules/mod-502-mentorship-leadership/exercise-03/README.md",
+        "modules/mod-502-mentorship-leadership/exercise-04/README.md",
+        "modules/mod-502-mentorship-leadership/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-502-mentorship-leadership`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-MOD-503-CROSS-ORG-INITIATIVE",
+      "label": "mod-503-cross-org-initiative: Cross-Org Initiative Leadership",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-503-cross-org-initiative/exercise-01",
+        "mod-503-cross-org-initiative/exercise-02",
+        "mod-503-cross-org-initiative/exercise-03",
+        "mod-503-cross-org-initiative/exercise-04",
+        "mod-503-cross-org-initiative/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-503-cross-org-initiative/exercise-01/README.md",
+        "modules/mod-503-cross-org-initiative/exercise-02/README.md",
+        "modules/mod-503-cross-org-initiative/exercise-03/README.md",
+        "modules/mod-503-cross-org-initiative/exercise-04/README.md",
+        "modules/mod-503-cross-org-initiative/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-503-cross-org-initiative`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-MOD-504-OPEN-SOURCE-COMMUNITY",
+      "label": "mod-504-open-source-community: Open Source + Community Influence",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-504-open-source-community/exercise-01",
+        "mod-504-open-source-community/exercise-02",
+        "mod-504-open-source-community/exercise-03",
+        "mod-504-open-source-community/exercise-04",
+        "mod-504-open-source-community/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-504-open-source-community/exercise-01/README.md",
+        "modules/mod-504-open-source-community/exercise-02/README.md",
+        "modules/mod-504-open-source-community/exercise-03/README.md",
+        "modules/mod-504-open-source-community/exercise-04/README.md",
+        "modules/mod-504-open-source-community/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-504-open-source-community`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-MOD-505-LONG-TERM-TECHNICAL-BETS",
+      "label": "mod-505-long-term-technical-bets: Long-Term Technical Bets",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-505-long-term-technical-bets/exercise-01",
+        "mod-505-long-term-technical-bets/exercise-02",
+        "mod-505-long-term-technical-bets/exercise-03",
+        "mod-505-long-term-technical-bets/exercise-04",
+        "mod-505-long-term-technical-bets/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-505-long-term-technical-bets/exercise-01/README.md",
+        "modules/mod-505-long-term-technical-bets/exercise-02/README.md",
+        "modules/mod-505-long-term-technical-bets/exercise-03/README.md",
+        "modules/mod-505-long-term-technical-bets/exercise-04/README.md",
+        "modules/mod-505-long-term-technical-bets/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-505-long-term-technical-bets`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-PROJECT-01-DISTRIBUTED-TRAINING",
+      "label": "Project 01: Company-Wide Distributed Training Framework",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-01-distributed-training"
+      ],
+      "solutions": [
+        "projects/project-01-distributed-training/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-01-distributed-training`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-PROJECT-02-PLATFORM-INTEGRATION",
+      "label": "Project 02: Cross-Team Platform Integration",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-02-platform-integration"
+      ],
+      "solutions": [
+        "projects/project-02-platform-integration/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-02-platform-integration`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-PROJECT-03-PERFORMANCE-OPTIMIZATION",
+      "label": "Project 03: Performance Optimization Initiative",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-03-performance-optimization"
+      ],
+      "solutions": [
+        "projects/project-03-performance-optimization/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-03-performance-optimization`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-PROJECT-04-INNOVATION-POC",
+      "label": "Project 04: Technical Innovation POC",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-04-innovation-poc"
+      ],
+      "solutions": [
+        "projects/project-04-innovation-poc/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-04-innovation-poc`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PE-PROJECT-05-TECHNICAL-LEADERSHIP",
+      "label": "Project 05: Technical Leadership Capstone",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-05-technical-leadership"
+      ],
+      "solutions": [
+        "projects/project-05-technical-leadership/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-05-technical-leadership`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

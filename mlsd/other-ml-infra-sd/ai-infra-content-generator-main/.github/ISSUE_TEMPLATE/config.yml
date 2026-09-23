@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions / General Support
+    url: https://github.com/ai-infra-curriculum/ai-infra-content-generator/discussions/new?category=q-a
+    about: Please start a discussion for how-to questions or general support.

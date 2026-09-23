@@ -1,0 +1,257 @@
+这个月初买它放了很多E6的HC HR联系面一个特定的组
+电面上来聊25分钟BQ+项目
+写了两道简单的题目
+
+一题是写字符串计算器 类似Leetcode 227
+第二题是手搓二分法 类似 leetcode 278   
+最后问了对方10分钟问题
+买它6的电面主要还是聊天比较重要 写题难度不大
+
+
+Phone 
+Leetcode easy + mid
+
+Onsite 
+2 AI coding + 2 AI sys design + 1 BQ
+
+AI coding 01:
+Friend system: 
+Implement friend recommendation algorithm
+Provided data: list of users, list of friends (user-user pairs)
+design a strategy to recommend new friends to a user (e.g. search for friend of friend, search for popular users, etc...)
+3 test suite, with the 3rd has ~100k users and ~1.5million friend pairs
+
+
+AI coding 02:
+Card:
+Pick card : 36 card deck. Full deck is visible to solver/player, card only have values of 1-9; pick 3 to reach sum==15; only 16(15?记不清了） cards on table is visible, after each pick feed 3 more random cards from the res if possible; Game win if all 36 cards consumed (12 groups)
+need to write new tests to benchmark algorithm on large dataset (>1k games)
+
+
+AI sys design 01:
+video game score leaderboard
+entities: players, games, friends, high-scores(one for each player+game)
+Key feature: show closest scores when user finished a game (range search in large dataset)
+
+
+AI sys design 02
+Ride share system
+
+
+
+
+地里很多问AI面试的林林总总，这也算今年很多公司的新面试模式。地里的面经大部分比较简短，lz这一段时间也面了很多别家的AI coding，结合平时对AI的开发使用经验，也是踩了无数坑总结出来一些希望自己早知道的一些东西，希望对朋友们有帮助。以下是心得分享：
+
+AI coding面试和平常LLM coding agent（以下AI)使用的关键不同
+限时：
+平常几乎没有人会限制AI在5分钟之内回答，先进模型都是追求能独立执行越长越好
+多交互：
+日常使用案例几乎都是越少交互越好，面试几乎完全相反
+面试过程不能干瞪眼，要展示和AI互动的能力
+任何跑偏时间成本巨大
+环境限制：
+面试沙盒性能受限（大部分大厂环境实测1.5core，2G mem，几乎无法多线程/多session/agent），而比如meta 等AI coding后面的测试集几乎都是压力测试
+最近的AI版本大多会自动化测试，不明确指挥的话会自发跑面试环境里的大case，导致巨量耗时/未优化前直接卡死
+策略
+
+开局就简单加一些session prompt，确保AI明确本次会话的特殊性（见下文）
+关键就是向AI说明面试环境的时间限制。下面几个要求其实聪明的模型基本上说明时间限制和面试环境之后，就可以让其自己制定一些觉得应该遵循的规则再应用；我的经验基本不需要重复（write session prompt then re-apply)这一步，手动强调几条关键的一般够用了。
+正确率保证的基础上，速度第一，最小化输出，减少/跳过测试
+最新模型下(claude 4.8/gpt 5.5+)，大部分面试难度的算法基本可以相信AI能一次蒙/做对，不需要每一小步都测试（特别是java环境下每次测试需要build还是会消耗一些时间的）
+切割需求，包含规划，实现，测试，保证每一块2-5分钟出结果
+这点最重要，几乎也会是我每次的会话提示词（set as a session level memory/standard)。
+最新模型下(claude 4.8/gpt 5.5+)，这些都让AI自己做：规划实现步骤，估计时间，需要的话再去提示调整
+最最新模型下，可以运行中插入新提示，不过近来面的几个环境多数不支持，而且面试的小破虚拟机截断执行偶尔导致环境不稳定，甚至需要刷新页面/重启环境，优先尽量减少截断
+进来版本AI的需求切割一般都很理想，尽早瞄准最终目标计划实现步骤（最优化算法），避免常规coding面试中先写完基础版再优化，可以直接尝试较复杂的优化算法，减少之后提示的上下文负担
+
+
+AI sys design：
+目测几乎还没有实装 - 面试官说可以借助AI，但实际上并用不到，有些也直言不建议用。实际上目前见过的几个AI sys design的面试官并没有提供任何use case，只是提供了一个AI聊天窗口，说可以unblock yourself as needed（这和前AI时代碰到不会去google一下也没什么区别）。因为面的也都是百年老题，系统设计本身就是展示知识容量的过程，我个人也确实没觉得有什么positive use case。有些平台有一些AI作图功能在画流程图的时候用了一下（鼠标不太方便），偶尔省个几秒，但是也不是面试的关键。
+
+下面附一些我常用的会话层规则的汇总版，前几场摸清节奏之后几乎每一场都会用，效果还是很好的(e.g. meta card game 10k case: 99.97% win rate in 40 seconds)。当然面试不能直接复制粘贴，我一般会手打几条我觉得对当前题目最重要的，面试过程中也及时调整。
+
+short version:
+Timed interview, weak box (~1.5 cores, flaky tools).
+Cap each response to ~3 min of work. If a task will exceed that, stop and give me a breakdown with step time + expected gain.
+Before any optimization, quote expected gain + effort; skip if marginal.
+No long background runs; cap every run with a timeout (30-60s), single-threaded.
+Correctness first; validate on tiny samples, full sample only with explicit human confirmation.
+完整起始提示词（Java 栈）
+你正在帮助我完成一个限时（40分钟）的 CoderPad 面试任务（Java/Maven，共享容器，约 1.5 个 CPU 核心，工具层不稳定）。目标是尽快交付正确代码，而不是追求巧妙。除非我明确覆盖，否则遵循以下规则：
+时间与沟通
+每次回复最多投入约 3 分钟的工作。如果一个任务会超过这个时间，停止并给我一个拆解方案，包括每一步所需时间 + 预期收益，然后让我选择。
+在进行任何优化之前，先说明：(a) 预期提升，(b) 工作量估计，(c) 风险。如果收益很小或工作量很高，建议跳过。
+保持回答易于快速浏览：先给结果，再给推理。
+环境安全
+永远不要启动后台运行或长时间运行的 JVM 进程。所有运行都必须加 timeout（<= 约 200 秒），并优先使用单线程、nice 降低优先级执行。
+假设只有约 1.5 个可用 CPU 核心：不要并行运行 benchmark，也不要同时启动多个重型 JVM，它们会锁死整个环境。
+每次修改后，重新读取文件，确认修改已正确应用（这个工具有时会报告超时，但实际上修改已经成功，从而导致重复修改）。
+工作流程
+首先阅读代码 + 题目说明，并重新说明目标、通过标准，以及这些标准具体是在哪个 sample / metric 上测量的。
+在优化任何东西之前，先确保 correctness 全部通过。
+尽早建立一个小型测量 harness：分层 sample size（20 / 100 / full），使用固定 seed 并持久化，以保证运行结果可复现、可比较。
+使用能够否定某个改动的最小 sample 进行迭代；只有在我明确要求时才运行 full sample。
+优先一次完成一批修改，而不是进行多次工具往返。把 scratch / benchmark 代码和正式代码清楚分开，并在提交前提醒我删除它们。
+验证纪律
+如果没有在同一个 sample 上进行修改前 / 修改后的实际测量，绝对不要声称有性能提升。
+如果结果可能只是 sample size 太小带来的噪声，要明确指出。
+维护一个简短的 changelog，记录每次修改对应的 avg / worst / time，方便我们比较。
+开始时先阅读题目，然后给我：目标、通过标准、一个包含 3–5 项并带有时间估计的计划，以及第一个 correctness milestone。在我确认之前不要进行优化。
+
+
+
+
+
+是一道in-memory database，但是跟之前看到的不太一样，除了正常的get、set、delete和TTL之外，需要支持key+field粒度的get_when(key,field,at)，返回在之前某个时间点at对应的value。而不是整个数据库的回滚。
+
+solution就是给每个field记录多个version，每个version有开始和结束的时间戳。
+题目不难，但是需要一开始就设计好对后续level的兼容，不然到level4来不及改。没通过，有点可惜
+
+
+
+
+整体感受：
+Meta E5 不是特别偏 hard algorithm，更多是在看 senior engineer 的综合能力：coding 稳定性、system design 深度、以及有没有 ownership。
+
+Timeline：
+
+Week 0：
+Recruiter 联系，主要聊：
+
+background
+current level
+team preference
+interview process
+
+
+Week 2：
+Technical screen
+
+Coding：
+一道 interval 相关变种 + 一道 tree/graph 类题。
+
+难度大概 LC medium。
+
+感觉 Meta coding 主要考：
+
+思路是否清晰
+edge case 是否考虑
+能不能快速写出 bug-free code
+
+
+不要只追求最优解，一定要和 interviewer 沟通。
+
+Week 4：
+Onsite
+
+Coding Round 1：
+偏 production 场景题，涉及 cache / rate limit 设计。
+
+Follow up 主要围绕：
+
+数据量变大怎么办
+多机怎么办
+failure case 怎么处理
+
+
+Coding Round 2：
+Graph / dependency 类问题。
+
+Follow up：
+
+大规模数据
+并发执行
+如何优化
+
+
+System Design：
+
+题目：
+Design Notification System
+
+主要讨论：
+
+storage choice
+fanout strategy
+high traffic handling
+reliability
+
+感觉 E5 的 SD 和 E4 最大区别：
+
+不是只看你能不能设计出来，而是看你有没有考虑长期维护、trade-off 和线上问题。
+
+Behavioral：
+
+准备了几个故事：
+
+最大 impact 的项目
+和 teammate disagreement
+一个失败经历
+如何推动跨团队合作
+
+
+建议大家提前准备。
+
+E5 不太喜欢只讲“我参与了什么”，更想听：
+
+你负责什么
+为什么这么做
+最后带来了什么影响
+
+
+Offer：
+
+最后 package 主要 negotiate equity，base 变化有限。
+
+建议不要太早给自己的 target number，有 competing offer 的话会更容易谈。
+
+
+
+
+接下来是 AI coding，果真是 all in ai 的公司，什么都是 AI。题目是常见的maze solver，如果准备到了，那应该是比较顺利的，不过要注意跟面试官的沟通。并且在家里练练如何同时跟面试官解释，又跟 AI 聊天的能力
+
+
+
+
+你有两根绳子。每根绳子从一端烧到另一端恰好需要一个小时。但问题在于：它们燃烧得并不均匀。半根绳子可能 5 分钟就烧完了，而剩下的部分可能要烧 55 分钟。完全不可预测，而且两根绳子也不一样。
+
+你只有一个打火机，仅此而已。没有手表，没有手机，没有任何可以计时的工具。
+
+问题是：你该如何精准测量出 45 分钟？
+
+
+
+
+
+
+中规中矩的算法题 有用还请加个米哦
+1.
+stock  , any times of transactions, what is the max profit
+
+follow up : just one transaction, what is the max profit
+
+2.
+move(x,y), return True/False
+reachCheese()  return True/False
+return True/False if the mouse starting from (0,0) can it reach cheese
+
+
+
+
+
+有用还请加个米呀 😊
+1.找最长连续子数组，它的和等于target， 可能有多个组合 只需返回能不能找到
+2. cities, populations, 按population抽City
+
+
+
+
+
+第一题是leetcode 112 变种，给一棵 binary tree，找 root-to-leaf sum 最小的路径并返回 path, dfs解的
+第二题是leetcode 680 ，最多删一个字符判断能不能变成回文，后面问如果最多能删 K 个字符怎么改，双指针，follow-up 说了递归加 memo。
+
+
+
+AI coding 是从一组 words 里选一个 subset，选中的 words 之间不能有重复字符，同时让总字符数尽量大。
+SD 是设计 status search，需要支持 AND/OR。
+BQ 问了 most proud project、ambiguous requirements 和 critical feedback，都会继续问细节。

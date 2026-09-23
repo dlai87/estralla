@@ -1,0 +1,289 @@
+{
+  "schema_version": 1,
+  "role": "performance",
+  "role_title": "Performance Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-PERF-MOD-001-GPU-FUNDAMENTALS",
+      "label": "Module 1 \u2014 GPU Fundamentals",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-001-gpu-fundamentals/exercise-01",
+        "mod-001-gpu-fundamentals/exercise-02",
+        "mod-001-gpu-fundamentals/exercise-03",
+        "mod-001-gpu-fundamentals/exercise-04",
+        "mod-001-gpu-fundamentals/exercise-05",
+        "mod-001-gpu-fundamentals/exercise-06"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-001-gpu-fundamentals/exercise-01/README.md",
+        "modules/mod-001-gpu-fundamentals/exercise-02/README.md",
+        "modules/mod-001-gpu-fundamentals/exercise-03/README.md",
+        "modules/mod-001-gpu-fundamentals/exercise-04/README.md",
+        "modules/mod-001-gpu-fundamentals/exercise-05/README.md",
+        "modules/mod-001-gpu-fundamentals/exercise-06/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-001-gpu-fundamentals`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-MOD-002-CUDA-PROGRAMMING",
+      "label": "Module 02: CUDA Programming",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-002-cuda-programming/exercise-01",
+        "mod-002-cuda-programming/exercise-02",
+        "mod-002-cuda-programming/exercise-03",
+        "mod-002-cuda-programming/exercise-04",
+        "mod-002-cuda-programming/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-002-cuda-programming/exercise-01/README.md",
+        "modules/mod-002-cuda-programming/exercise-02/README.md",
+        "modules/mod-002-cuda-programming/exercise-03/README.md",
+        "modules/mod-002-cuda-programming/exercise-04/README.md",
+        "modules/mod-002-cuda-programming/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-002-cuda-programming`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-MOD-003-PERFORMANCE-PROFILING",
+      "label": "Module 03: Performance Profiling",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-003-performance-profiling/exercise-01",
+        "mod-003-performance-profiling/exercise-02",
+        "mod-003-performance-profiling/exercise-03",
+        "mod-003-performance-profiling/exercise-04",
+        "mod-003-performance-profiling/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-003-performance-profiling/exercise-01/README.md",
+        "modules/mod-003-performance-profiling/exercise-02/README.md",
+        "modules/mod-003-performance-profiling/exercise-03/README.md",
+        "modules/mod-003-performance-profiling/exercise-04/README.md",
+        "modules/mod-003-performance-profiling/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-003-performance-profiling`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-MOD-004-TRANSFORMER-OPTIMIZATION",
+      "label": "Module 04: Transformer Optimization",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-004-transformer-optimization/exercise-01",
+        "mod-004-transformer-optimization/exercise-02",
+        "mod-004-transformer-optimization/exercise-03",
+        "mod-004-transformer-optimization/exercise-04",
+        "mod-004-transformer-optimization/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-004-transformer-optimization/exercise-01/README.md",
+        "modules/mod-004-transformer-optimization/exercise-02/README.md",
+        "modules/mod-004-transformer-optimization/exercise-03/README.md",
+        "modules/mod-004-transformer-optimization/exercise-04/README.md",
+        "modules/mod-004-transformer-optimization/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-004-transformer-optimization`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-MOD-005-MODEL-COMPRESSION",
+      "label": "Module 05: Model Compression",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-005-model-compression/exercise-01",
+        "mod-005-model-compression/exercise-02",
+        "mod-005-model-compression/exercise-03",
+        "mod-005-model-compression/exercise-04",
+        "mod-005-model-compression/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-005-model-compression/exercise-01/README.md",
+        "modules/mod-005-model-compression/exercise-02/README.md",
+        "modules/mod-005-model-compression/exercise-03/README.md",
+        "modules/mod-005-model-compression/exercise-04/README.md",
+        "modules/mod-005-model-compression/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-005-model-compression`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-MOD-006-DISTRIBUTED-INFERENCE",
+      "label": "Module 06: Distributed Inference",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-006-distributed-inference/exercise-01",
+        "mod-006-distributed-inference/exercise-02",
+        "mod-006-distributed-inference/exercise-03",
+        "mod-006-distributed-inference/exercise-04",
+        "mod-006-distributed-inference/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-006-distributed-inference/exercise-01/README.md",
+        "modules/mod-006-distributed-inference/exercise-02/README.md",
+        "modules/mod-006-distributed-inference/exercise-03/README.md",
+        "modules/mod-006-distributed-inference/exercise-04/README.md",
+        "modules/mod-006-distributed-inference/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-006-distributed-inference`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-MOD-007-PRODUCTION-DEPLOYMENT",
+      "label": "Module 07: Production Deployment",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-007-production-deployment/exercise-01",
+        "mod-007-production-deployment/exercise-02",
+        "mod-007-production-deployment/exercise-03",
+        "mod-007-production-deployment/exercise-04",
+        "mod-007-production-deployment/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-007-production-deployment/exercise-01/README.md",
+        "modules/mod-007-production-deployment/exercise-02/README.md",
+        "modules/mod-007-production-deployment/exercise-03/README.md",
+        "modules/mod-007-production-deployment/exercise-04/README.md",
+        "modules/mod-007-production-deployment/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-007-production-deployment`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-MOD-008-ADVANCED-TOPICS",
+      "label": "Module 08: Advanced Topics",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-008-advanced-topics/exercise-01",
+        "mod-008-advanced-topics/exercise-02",
+        "mod-008-advanced-topics/exercise-03",
+        "mod-008-advanced-topics/exercise-04",
+        "mod-008-advanced-topics/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-008-advanced-topics/exercise-01/README.md",
+        "modules/mod-008-advanced-topics/exercise-02/README.md",
+        "modules/mod-008-advanced-topics/exercise-03/README.md",
+        "modules/mod-008-advanced-topics/exercise-04/README.md",
+        "modules/mod-008-advanced-topics/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-008-advanced-topics`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-PROJECT-01-MODEL-OPTIMIZATION",
+      "label": "Project 1: Production Model Optimization Pipeline",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-01-model-optimization"
+      ],
+      "solutions": [
+        "projects/project-01-model-optimization/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-01-model-optimization`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-PROJECT-02-GPU-OPTIMIZATION",
+      "label": "Project 2: Custom CUDA Kernels for Transformer Optimization",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-02-gpu-optimization"
+      ],
+      "solutions": [
+        "projects/project-02-gpu-optimization/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-02-gpu-optimization`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PERF-PROJECT-03-DISTRIBUTED-INFERENCE",
+      "label": "Project 3: High-Performance LLM Inference System",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-03-distributed-inference"
+      ],
+      "solutions": [
+        "projects/project-03-distributed-inference/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-03-distributed-inference`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

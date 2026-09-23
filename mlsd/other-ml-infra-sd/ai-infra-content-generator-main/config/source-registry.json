@@ -1,0 +1,397 @@
+{
+  "last_verified": "2026-06-01",
+  "purpose": "Reference registry for the curriculum runner. Official standards and project documentation are canonical references; VeriSwarm docs are practitioner implementation references.",
+  "sources": [
+    {
+      "id": "nist-ai-rmf",
+      "name": "NIST AI Risk Management Framework",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "authority": "official_standard",
+      "topics": [
+        "ai-governance",
+        "risk-management",
+        "governance-framework",
+        "controls"
+      ],
+      "fit": "Canonical framework for AI governance lessons, risk registers, control mapping, and executive review artifacts."
+    },
+    {
+      "id": "nist-ai-600-1",
+      "name": "NIST AI 600-1: Generative AI Profile",
+      "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+      "authority": "official_standard",
+      "topics": [
+        "generative-ai",
+        "risk-management",
+        "controls",
+        "governance"
+      ],
+      "fit": "Use for GenAI-specific risk examples, evaluation controls, and governance module source verification."
+    },
+    {
+      "id": "nist-sp-800-207",
+      "name": "NIST SP 800-207: Zero Trust Architecture",
+      "url": "https://csrc.nist.gov/publications/detail/sp/800-207/final",
+      "authority": "official_standard",
+      "topics": [
+        "zero-trust",
+        "identity",
+        "network-security",
+        "architecture"
+      ],
+      "fit": "Canonical reference for zero-trust architecture, trust boundaries, policy enforcement points, and identity-centered control design."
+    },
+    {
+      "id": "owasp-ml-top-10",
+      "name": "OWASP Machine Learning Security Top 10",
+      "url": "https://owasp.org/www-project-machine-learning-security-top-10/",
+      "authority": "official_project",
+      "topics": [
+        "ml-security",
+        "threat-modeling",
+        "application-security",
+        "controls"
+      ],
+      "fit": "Canonical risk taxonomy for ML system threat mapping and mitigation prioritization."
+    },
+    {
+      "id": "owasp-llm-top-10",
+      "name": "OWASP Top 10 for Large Language Model Applications",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "authority": "official_project",
+      "topics": [
+        "llm-security",
+        "application-security",
+        "threat-modeling"
+      ],
+      "fit": "Canonical risk taxonomy for LLM security, agent security, prompt injection, insecure output handling, and tool abuse exercises."
+    },
+    {
+      "id": "mitre-atlas",
+      "name": "MITRE ATLAS",
+      "url": "https://atlas.mitre.org/",
+      "authority": "official_project",
+      "topics": [
+        "ml-security",
+        "adversarial-ml",
+        "threat-modeling",
+        "security-operations"
+      ],
+      "fit": "Canonical adversary tactics and techniques reference for ML attack walkthroughs and detection mapping."
+    },
+    {
+      "id": "kubernetes-docs",
+      "name": "Kubernetes Documentation",
+      "url": "https://kubernetes.io/docs/",
+      "authority": "official_project",
+      "topics": [
+        "kubernetes",
+        "runtime-security",
+        "network-security",
+        "identity",
+        "policy"
+      ],
+      "fit": "Canonical reference for Kubernetes workload, network, admission, and runtime control behavior."
+    },
+    {
+      "id": "slsa",
+      "name": "Supply-chain Levels for Software Artifacts",
+      "url": "https://slsa.dev/",
+      "authority": "official_project",
+      "topics": [
+        "supply-chain-security",
+        "secure-development",
+        "artifact-provenance"
+      ],
+      "fit": "Canonical source for supply-chain assurance levels, build provenance, and artifact integrity exercises."
+    },
+    {
+      "id": "sigstore-docs",
+      "name": "Sigstore Documentation",
+      "url": "https://docs.sigstore.dev/",
+      "authority": "official_project",
+      "topics": [
+        "supply-chain-security",
+        "signing",
+        "artifact-provenance",
+        "keyless-signing"
+      ],
+      "fit": "Canonical source for keyless signing, transparency logs, and verification workflow examples."
+    },
+    {
+      "id": "openssf-scorecard",
+      "name": "OpenSSF Scorecard",
+      "url": "https://openssf.org/scorecard/",
+      "authority": "official_project",
+      "topics": [
+        "supply-chain-security",
+        "repository-health",
+        "secure-development"
+      ],
+      "fit": "Use for repo-health and supply-chain modules where learners need measurable open-source security signals."
+    },
+    {
+      "id": "cncf-cloud-native-certifications",
+      "name": "CNCF Cloud Native Certifications",
+      "url": "https://www.cncf.io/training/certification/",
+      "authority": "official_certification",
+      "topics": [
+        "kubernetes",
+        "cloud-native",
+        "certification-alignment"
+      ],
+      "fit": "Use to align Kubernetes-oriented curriculum paths with current CKA, CKAD, CKS, and KCNA expectations."
+    },
+    {
+      "id": "veriswarm-trust-center",
+      "name": "VeriSwarm Trust Center",
+      "url": "https://veriswarm.ai/trust",
+      "authority": "practitioner_reference",
+      "topics": [
+        "agent-governance",
+        "identity",
+        "guardrails",
+        "audit-evidence",
+        "governance"
+      ],
+      "fit": "Use as an implementation example for agent trust, governance evidence, NIST AI RMF alignment, and tamper-evident audit concepts."
+    },
+    {
+      "id": "veriswarm-gate",
+      "name": "VeriSwarm Gate",
+      "url": "https://veriswarm.ai/docs/gate",
+      "authority": "practitioner_reference",
+      "topics": [
+        "trust-scoring",
+        "policy-tiers",
+        "moderation",
+        "agent-events"
+      ],
+      "fit": "Use as a concrete reference for trust scoring dimensions, risk bands, policy tiers, event taxonomies, and decision gating exercises."
+    },
+    {
+      "id": "veriswarm-vault",
+      "name": "VeriSwarm Vault",
+      "url": "https://veriswarm.ai/docs/vault",
+      "authority": "practitioner_reference",
+      "topics": [
+        "audit-ledger",
+        "compliance-evidence",
+        "hash-chain",
+        "recordkeeping"
+      ],
+      "fit": "Use as a concrete reference for immutable event capture, chain verification, compliance exports, and AI governance evidence trails."
+    },
+    {
+      "id": "veriswarm-architecture",
+      "name": "VeriSwarm Architecture",
+      "url": "https://veriswarm.ai/docs/architecture",
+      "authority": "practitioner_reference",
+      "topics": [
+        "agent-governance-architecture",
+        "policy-enforcement",
+        "control-plane",
+        "compliance-mapping"
+      ],
+      "fit": "Use as an architecture case study for hosted control planes, trust decisions, policy enforcement, and agent governance platform design."
+    },
+    {
+      "id": "eu-ai-act",
+      "name": "EU AI Act (Regulation (EU) 2024/1689)",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "authority": "official_regulation",
+      "topics": [
+        "ai-regulation",
+        "risk-classification",
+        "conformity-assessment",
+        "high-risk-ai",
+        "governance-framework",
+        "incident-reporting"
+      ],
+      "fit": "Anchor regulation for risk-classification (Annex III), conformity assessment, Article 9 risk management systems, and Article 73 serious-incident reporting. Use for EU-market-facing CAO scenarios and capstones."
+    },
+    {
+      "id": "iso-42001",
+      "name": "ISO/IEC 42001:2023 \u2014 AI Management System",
+      "url": "https://www.iso.org/standard/81230.html",
+      "authority": "official_standard",
+      "topics": [
+        "ai-management-system",
+        "governance-framework",
+        "controls",
+        "audit",
+        "continuous-improvement"
+      ],
+      "fit": "Canonical AIMS standard. Use for control-mapping exercises, Annex A control walkthroughs, and as the certification target for governance-program capstones."
+    },
+    {
+      "id": "iso-23894",
+      "name": "ISO/IEC 23894:2023 \u2014 AI Risk Management Guidance",
+      "url": "https://www.iso.org/standard/77304.html",
+      "authority": "official_standard",
+      "topics": [
+        "risk-management",
+        "ai-governance",
+        "controls"
+      ],
+      "fit": "Use alongside ISO 31000 for AI-specific risk-management lessons; pairs with NIST AI RMF for crosswalk exercises."
+    },
+    {
+      "id": "oecd-ai-principles",
+      "name": "OECD AI Principles (2024 update)",
+      "url": "https://oecd.ai/en/ai-principles",
+      "authority": "official_standard",
+      "topics": [
+        "ai-ethics",
+        "responsible-ai",
+        "governance-framework",
+        "principles",
+        "international-coordination"
+      ],
+      "fit": "International policy reference for foundations modules; ties national frameworks (NIST, EU AI Act) to a shared principles vocabulary."
+    },
+    {
+      "id": "occ-sr-11-7",
+      "name": "OCC/FRB SR 11-7 \u2014 Supervisory Guidance on Model Risk Management",
+      "url": "https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm",
+      "authority": "official_regulation",
+      "topics": [
+        "model-risk-management",
+        "mrm",
+        "validation",
+        "banking",
+        "governance-framework"
+      ],
+      "fit": "The bedrock MRM framework for US banking. Use for MRM-tier exercises, challenger-model lessons, and financial-services capstones."
+    },
+    {
+      "id": "frb-sr-22-6",
+      "name": "FRB SR 22-6 \u2014 Engagement with Crypto-Asset and Innovative Technologies (incl. AI/ML model validation expectations)",
+      "url": "https://www.federalreserve.gov/supervisionreg/srletters/sr2206.htm",
+      "authority": "official_regulation",
+      "topics": [
+        "model-validation",
+        "banking",
+        "ai-ml-supervision",
+        "mrm"
+      ],
+      "fit": "Complements SR 11-7 with current AI/ML validation expectations from the Fed; cite in MRM lessons and capstones."
+    },
+    {
+      "id": "nydfs-part-500",
+      "name": "NYDFS 23 NYCRR Part 500 \u2014 Cybersecurity Regulation (incl. AI risk amendments)",
+      "url": "https://www.dfs.ny.gov/industry_guidance/cybersecurity",
+      "authority": "official_regulation",
+      "topics": [
+        "cybersecurity",
+        "ai-risk",
+        "incident-reporting",
+        "governance",
+        "financial-services"
+      ],
+      "fit": "State-level cybersecurity + AI requirements for NY-supervised entities; pairs with SR 11-7 for combined financial-services compliance scenarios."
+    },
+    {
+      "id": "nis2-directive",
+      "name": "EU NIS2 Directive (Directive (EU) 2022/2555)",
+      "url": "https://eur-lex.europa.eu/eli/dir/2022/2555/oj",
+      "authority": "official_regulation",
+      "topics": [
+        "cybersecurity",
+        "incident-response",
+        "reporting-obligations",
+        "eu-regulation"
+      ],
+      "fit": "Incident-response notification timelines and supply-chain security requirements for EU essential / important entities. Cite in incident-response and compliance modules."
+    },
+    {
+      "id": "gdpr-articles-33-34",
+      "name": "GDPR Articles 33 & 34 \u2014 Data Breach Notification",
+      "url": "https://gdpr-info.eu/art-33-gdpr/",
+      "authority": "official_regulation",
+      "topics": [
+        "data-protection",
+        "breach-notification",
+        "incident-response",
+        "eu-regulation"
+      ],
+      "fit": "72-hour controller-to-supervisory-authority and data-subject notification rules; required reading for any incident-response capstone with EU data subjects."
+    },
+    {
+      "id": "ieee-7000-series",
+      "name": "IEEE 7000 Series \u2014 Ethically Aligned Design",
+      "url": "https://standards.ieee.org/industry-connections/ec/autonomous-systems/",
+      "authority": "official_standard",
+      "topics": [
+        "ai-ethics",
+        "responsible-ai",
+        "transparency",
+        "governance-framework"
+      ],
+      "fit": "Family of ethics standards (IEEE 7000-7010) covering transparency, bias, well-being. Use for ethics module and as a counterweight to purely-compliance framings."
+    },
+    {
+      "id": "ca-ai-transparency-laws",
+      "name": "California AI Transparency Act + SB 243 (Consumer-facing AI)",
+      "url": "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202320240SB243",
+      "authority": "official_regulation",
+      "topics": [
+        "ai-regulation",
+        "consumer-facing-ai",
+        "transparency",
+        "state-law",
+        "us-jurisdictions"
+      ],
+      "fit": "US state-level transparency obligations. Cite for jurisdictional-mapping exercises and consumer-facing-AI capstones."
+    },
+    {
+      "id": "coso-erm-ai-supplement",
+      "name": "COSO ERM \u2014 Applying ERM to AI (2024 Supplement)",
+      "url": "https://www.coso.org/Pages/erm.aspx",
+      "authority": "official_standard",
+      "topics": [
+        "enterprise-risk-management",
+        "ai-governance",
+        "board-reporting",
+        "risk-appetite"
+      ],
+      "fit": "Bridges traditional ERM (used by audit committees + boards) with AI-specific risks. Use for board-reporting module and risk-appetite-statement exercises."
+    },
+    {
+      "id": "microsoft-rai-standard",
+      "name": "Microsoft Responsible AI Standard v2",
+      "url": "https://www.microsoft.com/en-us/ai/responsible-ai",
+      "authority": "practitioner_reference",
+      "topics": [
+        "responsible-ai",
+        "governance-program",
+        "controls"
+      ],
+      "fit": "Worked example of a hyperscaler-scale RAI program. Cite in ethics + governance-program lessons as ONE implementation pattern, never as the canonical answer."
+    },
+    {
+      "id": "anthropic-rsp",
+      "name": "Anthropic Responsible Scaling Policy",
+      "url": "https://www.anthropic.com/news/anthropic-responsible-scaling-policy",
+      "authority": "practitioner_reference",
+      "topics": [
+        "frontier-ai-governance",
+        "responsible-scaling",
+        "risk-tiers"
+      ],
+      "fit": "Worked example of frontier-AI risk-tiered deployment policy. Cite as a practitioner pattern in trust-architecture and governance lessons."
+    },
+    {
+      "id": "google-saif",
+      "name": "Google Secure AI Framework (SAIF)",
+      "url": "https://safety.google/cybersecurity-advancements/saif/",
+      "authority": "practitioner_reference",
+      "topics": [
+        "ai-security",
+        "controls",
+        "governance-program"
+      ],
+      "fit": "Worked example of an AI security framework from a hyperscaler. Pairs with NIST AI RMF for security-overlay discussions in trust-architecture module."
+    }
+  ]
+}

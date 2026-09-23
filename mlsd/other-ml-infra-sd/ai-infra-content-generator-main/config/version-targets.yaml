@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "_comment": [
+    "Curated registry of current target versions across the curriculum.",
+    "Reviewed monthly during research --apply; the runner does NOT update",
+    "this file automatically. Update `current` when a real release lands",
+    "and add older releases to `deprecated` as they age out.",
+    "",
+    "Each entry needs: id, name, current, deprecated[], pattern.",
+    "Optional: eol (bool) -- when true, ANY matched version is flagged",
+    "high-severity regardless of whether it appears in `deprecated`."
+  ],
+  "targets": [
+    {
+      "id": "pytorch",
+      "name": "PyTorch",
+      "current": "2.5",
+      "deprecated": ["1.10", "1.11", "1.12", "1.13", "2.0", "2.1"],
+      "pattern": "(?i)pytorch[\\s=:@v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "torch-package",
+      "name": "torch (PyPI)",
+      "current": "2.5",
+      "deprecated": ["1.10", "1.11", "1.12", "1.13", "2.0", "2.1"],
+      "pattern": "(?:^|[\\s`])torch[\\s=]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "tensorflow",
+      "name": "TensorFlow",
+      "current": "2.18",
+      "deprecated": ["1.15", "2.0", "2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "2.10"],
+      "pattern": "(?i)tensorflow[\\s=:@v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "cuda",
+      "name": "CUDA",
+      "current": "12.6",
+      "deprecated": ["10.2", "11.0", "11.1", "11.2", "11.3", "11.4", "11.6", "11.7", "11.8"],
+      "pattern": "(?i)cuda[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "python",
+      "name": "Python",
+      "current": "3.12",
+      "deprecated": ["3.7", "3.8", "3.9"],
+      "pattern": "(?i)python[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes",
+      "current": "1.31",
+      "deprecated": ["1.20", "1.21", "1.22", "1.23", "1.24", "1.25", "1.26", "1.27"],
+      "pattern": "(?i)kubernetes[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "ray",
+      "name": "Ray",
+      "current": "2.40",
+      "deprecated": ["2.0", "2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8"],
+      "pattern": "(?i)ray[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "vllm",
+      "name": "vLLM",
+      "current": "0.6",
+      "deprecated": ["0.1", "0.2", "0.3", "0.4"],
+      "pattern": "(?i)vllm[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "triton-inference",
+      "name": "Triton Inference Server",
+      "current": "24.10",
+      "deprecated": ["22.0", "22.05", "22.12", "23.01", "23.05"],
+      "pattern": "(?i)triton[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "kserve",
+      "name": "KServe",
+      "current": "0.14",
+      "deprecated": ["0.7", "0.8", "0.9", "0.10"],
+      "pattern": "(?i)kserve[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "kubeflow",
+      "name": "Kubeflow",
+      "current": "1.9",
+      "deprecated": ["1.4", "1.5", "1.6"],
+      "pattern": "(?i)kubeflow[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "mlflow",
+      "name": "MLflow",
+      "current": "2.18",
+      "deprecated": ["1.30", "2.0", "2.1", "2.2", "2.3", "2.4"],
+      "pattern": "(?i)mlflow[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "h100",
+      "name": "NVIDIA H100",
+      "current": "H200",
+      "deprecated": ["V100", "A100"],
+      "pattern": "(?i)NVIDIA\\s+(V100|A100|H100|H200|B100|B200|GB200)"
+    },
+    {
+      "id": "transformers",
+      "name": "transformers (HuggingFace)",
+      "current": "4.46",
+      "deprecated": ["4.20", "4.25", "4.30", "4.35"],
+      "pattern": "(?i)transformers[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    },
+    {
+      "id": "langchain",
+      "name": "langchain",
+      "current": "0.3",
+      "deprecated": ["0.0", "0.1"],
+      "pattern": "(?i)langchain[\\s=:v]*([0-9]+\\.[0-9]+(?:\\.[0-9]+)?)"
+    }
+  ]
+}

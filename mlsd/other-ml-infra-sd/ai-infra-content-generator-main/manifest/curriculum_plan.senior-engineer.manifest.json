@@ -1,0 +1,372 @@
+{
+  "schema_version": 1,
+  "role": "senior-engineer",
+  "role_title": "Senior Engineer Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-SR-MOD-201-ADVANCED-KUBERNETES",
+      "label": "Module 201: Advanced Kubernetes and Cloud-Native Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-201-advanced-kubernetes/exercise-01",
+        "mod-201-advanced-kubernetes/exercise-02",
+        "mod-201-advanced-kubernetes/exercise-03",
+        "mod-201-advanced-kubernetes/exercise-04",
+        "mod-201-advanced-kubernetes/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-201-advanced-kubernetes/exercise-01/README.md",
+        "modules/mod-201-advanced-kubernetes/exercise-02/README.md",
+        "modules/mod-201-advanced-kubernetes/exercise-03/README.md",
+        "modules/mod-201-advanced-kubernetes/exercise-04/README.md",
+        "modules/mod-201-advanced-kubernetes/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-201-advanced-kubernetes`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-202-DISTRIBUTED-TRAINING",
+      "label": "Module 202: Distributed Training at Scale",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-202-distributed-training/exercise-01",
+        "mod-202-distributed-training/exercise-02",
+        "mod-202-distributed-training/exercise-03",
+        "mod-202-distributed-training/exercise-04",
+        "mod-202-distributed-training/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-202-distributed-training/exercise-01/README.md",
+        "modules/mod-202-distributed-training/exercise-02/README.md",
+        "modules/mod-202-distributed-training/exercise-03/README.md",
+        "modules/mod-202-distributed-training/exercise-04/README.md",
+        "modules/mod-202-distributed-training/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-202-distributed-training`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-203-GPU-COMPUTING",
+      "label": "Module 203: Advanced GPU Computing and Optimization",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-203-gpu-computing/exercise-01",
+        "mod-203-gpu-computing/exercise-02",
+        "mod-203-gpu-computing/exercise-03",
+        "mod-203-gpu-computing/exercise-04",
+        "mod-203-gpu-computing/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-203-gpu-computing/exercise-01/README.md",
+        "modules/mod-203-gpu-computing/exercise-02/README.md",
+        "modules/mod-203-gpu-computing/exercise-03/README.md",
+        "modules/mod-203-gpu-computing/exercise-04/README.md",
+        "modules/mod-203-gpu-computing/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-203-gpu-computing`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-204-MODEL-OPTIMIZATION",
+      "label": "Module 204: Advanced Model Optimization and Inference",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-204-model-optimization/exercise-01",
+        "mod-204-model-optimization/exercise-02",
+        "mod-204-model-optimization/exercise-03",
+        "mod-204-model-optimization/exercise-04",
+        "mod-204-model-optimization/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-204-model-optimization/exercise-01/README.md",
+        "modules/mod-204-model-optimization/exercise-02/README.md",
+        "modules/mod-204-model-optimization/exercise-03/README.md",
+        "modules/mod-204-model-optimization/exercise-04/README.md",
+        "modules/mod-204-model-optimization/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-204-model-optimization`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-205-MULTI-CLOUD",
+      "label": "Module 205: Multi-Cloud and Advanced Cloud Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-205-multi-cloud/exercise-01",
+        "mod-205-multi-cloud/exercise-02",
+        "mod-205-multi-cloud/exercise-03",
+        "mod-205-multi-cloud/exercise-04",
+        "mod-205-multi-cloud/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-205-multi-cloud/exercise-01/README.md",
+        "modules/mod-205-multi-cloud/exercise-02/README.md",
+        "modules/mod-205-multi-cloud/exercise-03/README.md",
+        "modules/mod-205-multi-cloud/exercise-04/README.md",
+        "modules/mod-205-multi-cloud/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-205-multi-cloud`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-206-ADVANCED-MLOPS",
+      "label": "Module 206: Advanced MLOps",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-206-advanced-mlops/exercise-01",
+        "mod-206-advanced-mlops/exercise-02",
+        "mod-206-advanced-mlops/exercise-03",
+        "mod-206-advanced-mlops/exercise-04",
+        "mod-206-advanced-mlops/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-206-advanced-mlops/exercise-01/README.md",
+        "modules/mod-206-advanced-mlops/exercise-02/README.md",
+        "modules/mod-206-advanced-mlops/exercise-03/README.md",
+        "modules/mod-206-advanced-mlops/exercise-04/README.md",
+        "modules/mod-206-advanced-mlops/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-206-advanced-mlops`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-207-OBSERVABILITY-SRE",
+      "label": "Module 207: Advanced Observability and SRE Practices",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-207-observability-sre/exercise-01",
+        "mod-207-observability-sre/exercise-02",
+        "mod-207-observability-sre/exercise-03",
+        "mod-207-observability-sre/exercise-04",
+        "mod-207-observability-sre/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-207-observability-sre/exercise-01/README.md",
+        "modules/mod-207-observability-sre/exercise-02/README.md",
+        "modules/mod-207-observability-sre/exercise-03/README.md",
+        "modules/mod-207-observability-sre/exercise-04/README.md",
+        "modules/mod-207-observability-sre/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-207-observability-sre`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-208-IAC-GITOPS",
+      "label": "Module 208: Infrastructure as Code and GitOps",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-208-iac-gitops/exercise-01",
+        "mod-208-iac-gitops/exercise-02",
+        "mod-208-iac-gitops/exercise-03",
+        "mod-208-iac-gitops/exercise-04",
+        "mod-208-iac-gitops/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-208-iac-gitops/exercise-01/README.md",
+        "modules/mod-208-iac-gitops/exercise-02/README.md",
+        "modules/mod-208-iac-gitops/exercise-03/README.md",
+        "modules/mod-208-iac-gitops/exercise-04/README.md",
+        "modules/mod-208-iac-gitops/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-208-iac-gitops`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-209-SECURITY-COMPLIANCE",
+      "label": "Module 209: Security and Compliance for ML Systems",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-209-security-compliance/exercise-01",
+        "mod-209-security-compliance/exercise-02",
+        "mod-209-security-compliance/exercise-03",
+        "mod-209-security-compliance/exercise-04",
+        "mod-209-security-compliance/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-209-security-compliance/exercise-01/README.md",
+        "modules/mod-209-security-compliance/exercise-02/README.md",
+        "modules/mod-209-security-compliance/exercise-03/README.md",
+        "modules/mod-209-security-compliance/exercise-04/README.md",
+        "modules/mod-209-security-compliance/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-209-security-compliance`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-MOD-210-TECHNICAL-LEADERSHIP",
+      "label": "Module 210: Technical Leadership and Mentorship",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-210-technical-leadership/exercise-01",
+        "mod-210-technical-leadership/exercise-02",
+        "mod-210-technical-leadership/exercise-03",
+        "mod-210-technical-leadership/exercise-04",
+        "mod-210-technical-leadership/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-210-technical-leadership/exercise-01/README.md",
+        "modules/mod-210-technical-leadership/exercise-02/README.md",
+        "modules/mod-210-technical-leadership/exercise-03/README.md",
+        "modules/mod-210-technical-leadership/exercise-04/README.md",
+        "modules/mod-210-technical-leadership/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-210-technical-leadership`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-PROJECT-201-DISTRIBUTED-TRAINING",
+      "label": "Project 201: Distributed Training Platform with Ray",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-201-distributed-training"
+      ],
+      "solutions": [
+        "projects/project-201-distributed-training/README.md",
+        "projects/project-201-distributed-training/SOLUTION.md",
+        "projects/project-201-distributed-training/STEP_BY_STEP.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-201-distributed-training`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-PROJECT-202-MODEL-SERVING",
+      "label": "Project 202: High-Performance Model Serving",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-202-model-serving"
+      ],
+      "solutions": [
+        "projects/project-202-model-serving/README.md",
+        "projects/project-202-model-serving/SOLUTION.md"
+      ],
+      "tests": [
+        "projects/project-202-model-serving/tests/__init__.py",
+        "projects/project-202-model-serving/tests/conftest.py",
+        "projects/project-202-model-serving/tests/test_routing.py",
+        "projects/project-202-model-serving/tests/test_serving.py",
+        "projects/project-202-model-serving/tests/test_tensorrt.py",
+        "projects/project-202-model-serving/tests/test_tracing.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing project `project-202-model-serving`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-PROJECT-203-MULTI-REGION",
+      "label": "Project 203: Multi-Region ML Platform",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-203-multi-region"
+      ],
+      "solutions": [
+        "projects/project-203-multi-region/README.md",
+        "projects/project-203-multi-region/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-203-multi-region`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SR-PROJECT-204-K8S-OPERATOR",
+      "label": "Project 204: Kubernetes Operator for ML Training",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-204-k8s-operator"
+      ],
+      "solutions": [
+        "projects/project-204-k8s-operator/README.md",
+        "projects/project-204-k8s-operator/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-204-k8s-operator`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

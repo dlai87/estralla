@@ -1,0 +1,521 @@
+# Prometheus Configuration for Enterprise MLOps Platform
+# Implements ADR-009 (Cost Management & FinOps - monitoring)
+# Comprehensive monitoring for platform, models, and infrastructure
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 30s
+      scrape_timeout: 10s
+      evaluation_interval: 30s
+      external_labels:
+        cluster: mlops-platform
+        environment: production
+
+    # Alertmanager configuration
+    alerting:
+      alertmanagers:
+      - static_configs:
+        - targets:
+          - alertmanager.monitoring.svc.cluster.local:9093
+        timeout: 10s
+        api_version: v2
+
+    # Rule files
+    rule_files:
+    - /etc/prometheus/rules/*.yaml
+
+    # Scrape configurations
+    scrape_configs:
+
+    # Prometheus self-monitoring
+    - job_name: 'prometheus'
+      static_configs:
+      - targets: ['localhost:9090']
+
+    # Kubernetes API server
+    - job_name: 'kubernetes-apiservers'
+      kubernetes_sd_configs:
+      - role: endpoints
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+        action: keep
+        regex: default;kubernetes;https
+
+    # Kubernetes nodes (kubelet)
+    - job_name: 'kubernetes-nodes'
+      kubernetes_sd_configs:
+      - role: node
+      scheme: https
+      tls_config:
+        ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+      relabel_configs:
+      - action: labelmap
+        regex: __meta_kubernetes_node_label_(.+)
+
+    # Kubernetes pods
+    - job_name: 'kubernetes-pods'
+      kubernetes_sd_configs:
+      - role: pod
+      relabel_configs:
+      # Only scrape pods with prometheus.io/scrape: "true" annotation
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+      # Use custom scrape path if specified
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+      # Use custom port if specified
+      - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+        action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        target_label: __address__
+      # Add pod metadata as labels
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: kubernetes_pod_name
+      - source_labels: [__meta_kubernetes_pod_node_name]
+        action: replace
+        target_label: kubernetes_node
+
+    # MLflow metrics
+    - job_name: 'mlflow'
+      kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+          - mlflow
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_app]
+        action: keep
+        regex: mlflow-server
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_port]
+        action: replace
+        regex: (\d+)
+        target_label: __address__
+        replacement: ${1}:5000
+      metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'mlflow_(.+)'
+        action: keep
+
+    # KServe model serving metrics
+    - job_name: 'kserve-models'
+      kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+          - kserve
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_serving_kserve_io_inferenceservice]
+        action: keep
+        regex: (.+)
+      - source_labels: [__meta_kubernetes_pod_label_serving_kserve_io_inferenceservice]
+        action: replace
+        target_label: model_name
+      metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: '(http_requests_total|http_request_duration_seconds.*|model_inference_.*)'
+        action: keep
+
+    # Platform API metrics
+    - job_name: 'platform-api'
+      kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+          - mlops-platform
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_app]
+        action: keep
+        regex: platform-api
+      metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: '(http_.*|api_.*|request_.*)'
+        action: keep
+
+    # Node Exporter (infrastructure metrics)
+    - job_name: 'node-exporter'
+      kubernetes_sd_configs:
+      - role: node
+      relabel_configs:
+      - source_labels: [__address__]
+        regex: '(.*):10250'
+        replacement: '${1}:9100'
+        target_label: __address__
+      - source_labels: [__meta_kubernetes_node_name]
+        target_label: node
+
+    # Kube State Metrics (Kubernetes object metrics)
+    - job_name: 'kube-state-metrics'
+      static_configs:
+      - targets: ['kube-state-metrics.monitoring.svc.cluster.local:8080']
+
+    # AWS CloudWatch Exporter (for cost metrics)
+    - job_name: 'cloudwatch-exporter'
+      static_configs:
+      - targets: ['cloudwatch-exporter.monitoring.svc.cluster.local:9106']
+      metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'aws_.*'
+        action: keep
+
+    # NVIDIA DCGM Exporter (GPU metrics)
+    - job_name: 'dcgm-exporter'
+      kubernetes_sd_configs:
+      - role: pod
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_app]
+        action: keep
+        regex: dcgm-exporter
+      metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: 'DCGM_.*'
+        action: keep
+
+  # Alert rules
+  alerts.yaml: |
+    groups:
+    # Platform Infrastructure Alerts
+    - name: infrastructure
+      interval: 30s
+      rules:
+      - alert: HighCPUUsage
+        expr: |
+          100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 10m
+        labels:
+          severity: warning
+          component: infrastructure
+        annotations:
+          summary: "High CPU usage on {{ $labels.instance }}"
+          description: "CPU usage is above 80% (current: {{ $value | humanize }}%)"
+
+      - alert: HighMemoryUsage
+        expr: |
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 85
+        for: 10m
+        labels:
+          severity: warning
+          component: infrastructure
+        annotations:
+          summary: "High memory usage on {{ $labels.instance }}"
+          description: "Memory usage is above 85% (current: {{ $value | humanize }}%)"
+
+      - alert: DiskSpaceLow
+        expr: |
+          (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 15
+        for: 5m
+        labels:
+          severity: critical
+          component: infrastructure
+        annotations:
+          summary: "Low disk space on {{ $labels.instance }}"
+          description: "Disk space is below 15% (current: {{ $value | humanize }}%)"
+
+    # Model Serving Alerts
+    - name: model_serving
+      interval: 30s
+      rules:
+      - alert: ModelHighErrorRate
+        expr: |
+          (rate(http_requests_total{job="kserve-models",status=~"5.."}[5m])
+          / rate(http_requests_total{job="kserve-models"}[5m])) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          component: model_serving
+        annotations:
+          summary: "High error rate for model {{ $labels.model_name }}"
+          description: "Error rate is above 5% (current: {{ $value | humanizePercentage }})"
+
+      - alert: ModelHighLatency
+        expr: |
+          histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="kserve-models"}[5m])) > 1.0
+        for: 10m
+        labels:
+          severity: warning
+          component: model_serving
+        annotations:
+          summary: "High latency for model {{ $labels.model_name }}"
+          description: "P95 latency is above 1s (current: {{ $value | humanizeDuration }})"
+
+      - alert: ModelLowThroughput
+        expr: |
+          rate(http_requests_total{job="kserve-models"}[5m]) < 1
+        for: 15m
+        labels:
+          severity: info
+          component: model_serving
+        annotations:
+          summary: "Low throughput for model {{ $labels.model_name }}"
+          description: "Request rate is below 1 req/sec (current: {{ $value | humanize }} req/sec)"
+
+    # MLflow Alerts
+    - name: mlflow
+      interval: 30s
+      rules:
+      - alert: MLflowDown
+        expr: up{job="mlflow"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          component: mlflow
+        annotations:
+          summary: "MLflow tracking server is down"
+          description: "MLflow has been down for more than 2 minutes"
+
+      - alert: MLflowHighResponseTime
+        expr: |
+          histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="mlflow"}[5m])) > 5.0
+        for: 10m
+        labels:
+          severity: warning
+          component: mlflow
+        annotations:
+          summary: "MLflow high response time"
+          description: "P95 response time is above 5s (current: {{ $value | humanizeDuration }})"
+
+    # Cost Management Alerts
+    - name: cost_management
+      interval: 1h
+      rules:
+      - alert: HighDailyCost
+        expr: |
+          sum(rate(aws_billing_estimated_charges_usd[1d])) > 1000
+        for: 1h
+        labels:
+          severity: warning
+          component: cost_management
+        annotations:
+          summary: "Daily AWS cost exceeds threshold"
+          description: "Estimated daily cost is ${{ $value | humanize }}"
+
+      - alert: UnusedGPUResources
+        expr: |
+          (1 - avg(DCGM_FI_DEV_GPU_UTIL) / 100) > 0.7
+        for: 4h
+        labels:
+          severity: info
+          component: cost_management
+        annotations:
+          summary: "Low GPU utilization detected"
+          description: "GPU utilization is below 30% for 4 hours (waste of resources)"
+
+    # Data Quality Alerts
+    - name: data_quality
+      interval: 5m
+      rules:
+      - alert: DataQualityDegraded
+        expr: |
+          data_quality_score{dataset=~".+"} < 0.90
+        for: 15m
+        labels:
+          severity: warning
+          component: data_quality
+        annotations:
+          summary: "Data quality degraded for {{ $labels.dataset }}"
+          description: "Quality score is below 90% (current: {{ $value | humanizePercentage }})"
+
+      - alert: DataPipelineFailure
+        expr: |
+          increase(data_pipeline_failures_total[15m]) > 0
+        labels:
+          severity: critical
+          component: data_quality
+        annotations:
+          summary: "Data pipeline failure detected"
+          description: "Pipeline {{ $labels.pipeline }} has failed"
+
+    # Kubernetes Alerts
+    - name: kubernetes
+      interval: 30s
+      rules:
+      - alert: PodCrashLooping
+        expr: |
+          rate(kube_pod_container_status_restarts_total[15m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is crash looping"
+          description: "Pod has restarted {{ $value | humanize }} times in the last 15 minutes"
+
+      - alert: PodNotReady
+        expr: |
+          kube_pod_status_phase{phase!~"Running|Succeeded"} == 1
+        for: 10m
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} not ready"
+          description: "Pod has been in {{ $labels.phase }} state for more than 10 minutes"
+
+      - alert: DeploymentReplicasMismatch
+        expr: |
+          kube_deployment_spec_replicas != kube_deployment_status_replicas_available
+        for: 15m
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "Deployment {{ $labels.namespace }}/{{ $labels.deployment }} replica mismatch"
+          description: "Desired replicas ({{ $value }}) != available replicas"
+---
+# Prometheus Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      serviceAccountName: prometheus
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        fsGroup: 65534
+      containers:
+      - name: prometheus
+        image: prom/prometheus:v2.47.0
+        args:
+        - '--config.file=/etc/prometheus/prometheus.yml'
+        - '--storage.tsdb.path=/prometheus'
+        - '--storage.tsdb.retention.time=30d'
+        - '--storage.tsdb.retention.size=50GB'
+        - '--web.enable-lifecycle'
+        - '--web.enable-admin-api'
+        ports:
+        - containerPort: 9090
+          name: http
+        resources:
+          requests:
+            cpu: "2000m"
+            memory: "4Gi"
+          limits:
+            cpu: "4000m"
+            memory: "8Gi"
+        volumeMounts:
+        - name: config
+          mountPath: /etc/prometheus
+        - name: storage
+          mountPath: /prometheus
+        livenessProbe:
+          httpGet:
+            path: /-/healthy
+            port: 9090
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /-/ready
+            port: 9090
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: config
+        configMap:
+          name: prometheus-config
+      - name: storage
+        persistentVolumeClaim:
+          claimName: prometheus-storage
+---
+# Prometheus Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  type: ClusterIP
+  selector:
+    app: prometheus
+  ports:
+  - port: 9090
+    targetPort: 9090
+    name: http
+---
+# Prometheus ServiceAccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+  namespace: monitoring
+---
+# Prometheus ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus
+rules:
+- apiGroups: [""]
+  resources:
+  - nodes
+  - nodes/proxy
+  - services
+  - endpoints
+  - pods
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - extensions
+  resources:
+  - ingresses
+  verbs: ["get", "list", "watch"]
+- nonResourceURLs: ["/metrics"]
+  verbs: ["get"]
+---
+# Prometheus ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+- kind: ServiceAccount
+  name: prometheus
+  namespace: monitoring
+---
+# PersistentVolumeClaim for Prometheus data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-storage
+  namespace: monitoring
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: gp3-encrypted
+  resources:
+    requests:
+      storage: 100Gi

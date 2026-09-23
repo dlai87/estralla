@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "role": "ml-platform",
+  "role_title": "Ml Platform Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-MLP-MOD-001-PLATFORM-FUNDAMENTALS",
+      "label": "Module 01: Platform Fundamentals",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-001-platform-fundamentals/exercise-01",
+        "mod-001-platform-fundamentals/exercise-02",
+        "mod-001-platform-fundamentals/exercise-03",
+        "mod-001-platform-fundamentals/exercise-04",
+        "mod-001-platform-fundamentals/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-001-platform-fundamentals/exercise-01/README.md",
+        "modules/mod-001-platform-fundamentals/exercise-02/README.md",
+        "modules/mod-001-platform-fundamentals/exercise-03/README.md",
+        "modules/mod-001-platform-fundamentals/exercise-04/README.md",
+        "modules/mod-001-platform-fundamentals/exercise-05/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-001-platform-fundamentals`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-MOD-002-API-DESIGN",
+      "label": "Module 02: API Design for ML Platforms",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-002-api-design/exercise-01",
+        "mod-002-api-design/exercise-02",
+        "mod-002-api-design/exercise-03",
+        "mod-002-api-design/exercise-04",
+        "mod-002-api-design/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-002-api-design/exercise-01/README.md",
+        "modules/mod-002-api-design/exercise-02/README.md",
+        "modules/mod-002-api-design/exercise-03/README.md",
+        "modules/mod-002-api-design/exercise-04/README.md",
+        "modules/mod-002-api-design/exercise-05/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-002-api-design`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-MOD-003-MULTI-TENANCY-RESOURCES",
+      "label": "Module 03: Multi-Tenancy & Resource Management",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-003-multi-tenancy-resources/exercise-01",
+        "mod-003-multi-tenancy-resources/exercise-02",
+        "mod-003-multi-tenancy-resources/exercise-03",
+        "mod-003-multi-tenancy-resources/exercise-04",
+        "mod-003-multi-tenancy-resources/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-003-multi-tenancy-resources/exercise-01/README.md",
+        "modules/mod-003-multi-tenancy-resources/exercise-02/README.md",
+        "modules/mod-003-multi-tenancy-resources/exercise-03/README.md",
+        "modules/mod-003-multi-tenancy-resources/exercise-04/README.md",
+        "modules/mod-003-multi-tenancy-resources/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-003-multi-tenancy-resources`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-MOD-004-FEATURE-STORE",
+      "label": "Module 04: Feature Store Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-004-feature-store/exercise-01",
+        "mod-004-feature-store/exercise-02",
+        "mod-004-feature-store/exercise-03",
+        "mod-004-feature-store/exercise-04",
+        "mod-004-feature-store/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-004-feature-store/exercise-01/README.md",
+        "modules/mod-004-feature-store/exercise-02/README.md",
+        "modules/mod-004-feature-store/exercise-03/README.md",
+        "modules/mod-004-feature-store/exercise-04/README.md",
+        "modules/mod-004-feature-store/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-004-feature-store`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-MOD-005-WORKFLOW-ORCHESTRATION",
+      "label": "Module 05: Workflow Orchestration",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-005-workflow-orchestration/exercise-01",
+        "mod-005-workflow-orchestration/exercise-02",
+        "mod-005-workflow-orchestration/exercise-03",
+        "mod-005-workflow-orchestration/exercise-04",
+        "mod-005-workflow-orchestration/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-005-workflow-orchestration/exercise-01/README.md",
+        "modules/mod-005-workflow-orchestration/exercise-02/README.md",
+        "modules/mod-005-workflow-orchestration/exercise-03/README.md",
+        "modules/mod-005-workflow-orchestration/exercise-04/README.md",
+        "modules/mod-005-workflow-orchestration/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-005-workflow-orchestration`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-MOD-006-MODEL-MANAGEMENT",
+      "label": "Module 06: Model Management & Registry",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-006-model-management/exercise-01",
+        "mod-006-model-management/exercise-02",
+        "mod-006-model-management/exercise-03",
+        "mod-006-model-management/exercise-04",
+        "mod-006-model-management/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-006-model-management/exercise-01/README.md",
+        "modules/mod-006-model-management/exercise-02/README.md",
+        "modules/mod-006-model-management/exercise-03/README.md",
+        "modules/mod-006-model-management/exercise-04/README.md",
+        "modules/mod-006-model-management/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-006-model-management`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-MOD-007-DEVELOPER-EXPERIENCE",
+      "label": "Module 07: Developer Experience & Tooling",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-007-developer-experience/exercise-01",
+        "mod-007-developer-experience/exercise-02",
+        "mod-007-developer-experience/exercise-03",
+        "mod-007-developer-experience/exercise-04",
+        "mod-007-developer-experience/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-007-developer-experience/exercise-01/README.md",
+        "modules/mod-007-developer-experience/exercise-02/README.md",
+        "modules/mod-007-developer-experience/exercise-03/README.md",
+        "modules/mod-007-developer-experience/exercise-04/README.md",
+        "modules/mod-007-developer-experience/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-007-developer-experience`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-MOD-008-OBSERVABILITY",
+      "label": "Module 08: Observability & Monitoring",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-008-observability/exercise-01",
+        "mod-008-observability/exercise-02",
+        "mod-008-observability/exercise-03",
+        "mod-008-observability/exercise-04",
+        "mod-008-observability/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-008-observability/exercise-01/README.md",
+        "modules/mod-008-observability/exercise-02/README.md",
+        "modules/mod-008-observability/exercise-03/README.md",
+        "modules/mod-008-observability/exercise-04/README.md",
+        "modules/mod-008-observability/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-008-observability`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-MOD-009-SECURITY-GOVERNANCE",
+      "label": "Module 09: Security & Governance",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-009-security-governance/exercise-01",
+        "mod-009-security-governance/exercise-02",
+        "mod-009-security-governance/exercise-03",
+        "mod-009-security-governance/exercise-04",
+        "mod-009-security-governance/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-009-security-governance/exercise-01/README.md",
+        "modules/mod-009-security-governance/exercise-02/README.md",
+        "modules/mod-009-security-governance/exercise-03/README.md",
+        "modules/mod-009-security-governance/exercise-04/README.md",
+        "modules/mod-009-security-governance/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-009-security-governance`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-PROJECT-01-PLATFORM-CORE",
+      "label": "Project 01: Self-Service ML Platform Core",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-01-platform-core"
+      ],
+      "solutions": [
+        "projects/project-01-platform-core/README.md",
+        "projects/project-01-platform-core/SOLUTION.md",
+        "projects/project-01-platform-core/STEP_BY_STEP.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-01-platform-core`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-PROJECT-02-FEATURE-STORE",
+      "label": "Project 02: Enterprise Feature Store",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-02-feature-store"
+      ],
+      "solutions": [
+        "projects/project-02-feature-store/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-02-feature-store`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-PROJECT-03-WORKFLOW-ORCHESTRATION",
+      "label": "Project 03: ML Workflow Orchestration Engine",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-03-workflow-orchestration"
+      ],
+      "solutions": [
+        "projects/project-03-workflow-orchestration/README.md",
+        "projects/project-03-workflow-orchestration/SOLUTION.md",
+        "projects/project-03-workflow-orchestration/STEP_BY_STEP.md"
+      ],
+      "tests": [
+        "projects/project-03-workflow-orchestration/tests/test_state_machine.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing project `project-03-workflow-orchestration`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-PROJECT-04-MODEL-REGISTRY",
+      "label": "Project 04: Model Management System",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-04-model-registry"
+      ],
+      "solutions": [
+        "projects/project-04-model-registry/README.md",
+        "projects/project-04-model-registry/SOLUTION.md",
+        "projects/project-04-model-registry/STEP_BY_STEP.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-04-model-registry`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLP-PROJECT-05-DEVELOPER-PORTAL",
+      "label": "Project 05: Developer Portal & SDK",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-05-developer-portal"
+      ],
+      "solutions": [
+        "projects/project-05-developer-portal/README.md",
+        "projects/project-05-developer-portal/SOLUTION.md",
+        "projects/project-05-developer-portal/STEP_BY_STEP.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-05-developer-portal`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

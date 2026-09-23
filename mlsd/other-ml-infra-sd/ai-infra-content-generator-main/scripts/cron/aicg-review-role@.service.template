@@ -1,0 +1,11 @@
+[Unit]
+Description=AICG per-role freshness review: %i
+
+[Service]
+Type=oneshot
+Environment=PATH={PATH}
+Environment=HOME={HOME}
+ExecStartPre=/bin/mkdir -p {LOG_DIR}
+ExecStart={RUNNER_DIR}/scripts/aicg-org-job.sh review-role %i --workspace {WORKSPACE} --manifest {MANIFEST} --state-dir {STATE_DIR}
+StandardOutput=append:{LOG_DIR}/review-role-%i.log
+StandardError=append:{LOG_DIR}/review-role-%i.log

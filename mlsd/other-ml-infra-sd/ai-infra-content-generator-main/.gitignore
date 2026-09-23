@@ -1,0 +1,13 @@
+.venv/
+.aicg/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+__pycache__/
+*.py[cod]
+manifest/.cache/
+
+# calibration run output (transient; BAR lives in config)
+calibration/last-report.json
+
+.venv-mac/

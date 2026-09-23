@@ -1,0 +1,231 @@
+{
+  "org": "ml-engineering-curriculum",
+  "default_remote": "git@github.com:ml-engineering-curriculum/{repo}.git",
+  "release": {
+    "tag_format": "v%Y.%m",
+    "branch": "main",
+    "package_workflow": "release-package.yml"
+  },
+  "quality_judge": {
+    "enabled": true,
+    "flag_only": true,
+    "agent_command": "{runner}/scripts/run-claude-judge.sh --prompt {prompt} --output-dir {output_dir} --repo {repo} --work-id {work_id} --artifact {artifact}",
+    "thresholds": {
+      "default": 70,
+      "freshness": 52
+    },
+    "dimensions": [
+      "correctness",
+      "clarity",
+      "source_quality",
+      "depth"
+    ],
+    "timeout_seconds": 300,
+    "freshness_cooldown_days": 90
+  },
+  "pipeline": {
+    "phases": {
+      "author": true,
+      "reaudit_autofix": false,
+      "research_autopromote": false,
+      "retire": false,
+      "package": false
+    },
+    "daily_budget": 8,
+    "rotation_days": 90,
+    "reaudit_slice": 30
+  },
+  "extra_repos": [
+    {
+      "name": ".github",
+      "kind": "org-profile",
+      "release": false
+    }
+  ],
+  "maintained_by": {
+    "_comment": "Project maintainership attribution. Used by aicg org rebrand to write the footer, and by the audits to treat references to these orgs as legitimate (not 'orphan'). Distinct from the source policy for curriculum content \u2014 those rules are unchanged.",
+    "name": "VeriSwarm.ai",
+    "url": "https://veriswarm.ai",
+    "phrasing": "Maintained by [VeriSwarm.ai](https://veriswarm.ai)",
+    "footer_marker": "<!-- aicg:maintained-by -->"
+  },
+  "documentation": {
+    "format_guard_files": [
+      "CURRICULUM.md",
+      "CURRICULUM_INDEX.md",
+      "README.md",
+      "VERSIONS.md"
+    ],
+    "org_readme_repo": ".github",
+    "org_readme_files": [
+      "README.md",
+      "profile/README.md"
+    ]
+  },
+  "schedules": {
+    "monthly_release": "0 2 1 * *",
+    "monthly_research": "30 5 1 3,6,9,12 *",
+    "weekly_audit": "0 3 * * 0",
+    "daily_remediate": "0 * * * *",
+    "daily_issues": "20 4 * * *",
+    "daily_steward": "40 4 * * *",
+    "daily_discussions": "0 5 * * *",
+    "monthly_review": "0 6 1 3,6,9,12 *"
+  },
+  "automation": {
+    "state_dir": ".aicg/org",
+    "lock_name": "aicg-org.lock",
+    "auto_merge": false,
+    "max_daily_work_items": 1,
+    "_comment_daily_drain": "True = drain queue per tick until empty / wall-clock cap; False = exactly one item per tick.",
+    "daily_drain": false,
+    "agent": {
+      "provider": "openai",
+      "model": "codex-gpt-5.5",
+      "interface": "local_cli_subscription",
+      "agent_command": "{runner}/scripts/run-codex-control.sh --model codex-gpt-5.5 --prompt {prompt} --output-dir {output_dir} --repo {repo} --work-id {work_id}",
+      "purpose": "repo orchestration, audits, validation, PR/issue/discussion stewardship, and scheduler control"
+    }
+  },
+  "content_generation": {
+    "agent": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-7",
+      "interface": "local_cli_subscription",
+      "purpose": "curriculum, solution, job-requirement, and supplemental content generation",
+      "agent_command": "{runner}/scripts/run-claude-content.sh --model claude-opus-4-7 --prompt {prompt} --output-dir {output_dir} --repo {repo} --work-id {work_id}"
+    }
+  },
+  "job_requirements": {
+    "ownership_strategy": "lowest_level_role",
+    "markdown_file": "JOB_REQUIREMENTS.md",
+    "structured_file": ".aicg/job-requirements.json",
+    "supplemental_dir": "supplemental"
+  },
+  "research": {
+    "agent": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-7",
+      "interface": "local_cli_subscription",
+      "purpose": "quarterly job-market research with web tools enabled",
+      "agent_command": "{runner}/scripts/run-claude-research.sh --model claude-opus-4-7 --prompt {prompt} --output-dir {output_dir} --repo {repo} --work-id {work_id}"
+    },
+    "minimum_postings_per_role": 25,
+    "source_window_days": 90,
+    "caps": {
+      "_comment": "Per role, per research run. Anything above the cap is rejected with a 'cap_exceeded' reason and surfaced in the proposal PR so a human can decide whether to raise the cap or trim the list.",
+      "max_modules_per_run": 1,
+      "max_exercises_per_run": 3,
+      "max_projects_per_run": 0
+    },
+    "min_evidence_count": 3,
+    "min_evidence_window_days": 90
+  },
+  "roles": [
+    {
+      "id": "ml-engineer",
+      "title": "Machine Learning Engineer",
+      "level": 20,
+      "learning_repo": "ml-engineer-learning",
+      "solution_repo": "ml-engineer-solutions",
+      "aliases": [
+        "Machine Learning Engineer",
+        "ML Engineer",
+        "Deep Learning Engineer",
+        "Model Training Engineer"
+      ]
+    },
+    {
+      "id": "fine-tuning-engineer",
+      "title": "Fine-Tuning Engineer",
+      "level": 30,
+      "learning_repo": "fine-tuning-engineer-learning",
+      "solution_repo": "fine-tuning-engineer-solutions",
+      "aliases": [
+        "Fine-Tuning Engineer",
+        "LLM Fine-tuning Engineer",
+        "Model Adaptation Engineer",
+        "Post-training Engineer"
+      ]
+    },
+    {
+      "id": "model-evaluation-engineer",
+      "title": "Model Evaluation Engineer",
+      "level": 30,
+      "learning_repo": "model-evaluation-engineer-learning",
+      "solution_repo": "model-evaluation-engineer-solutions",
+      "aliases": [
+        "Model Evaluation Engineer",
+        "ML Evaluation Engineer",
+        "Benchmark Engineer",
+        "Eval Engineer"
+      ]
+    },
+    {
+      "id": "nlp-engineer",
+      "title": "NLP Engineer",
+      "level": 30,
+      "learning_repo": "nlp-engineer-learning",
+      "solution_repo": "nlp-engineer-solutions",
+      "aliases": [
+        "NLP Engineer",
+        "Natural Language Processing Engineer",
+        "Applied NLP Engineer",
+        "Language Model Engineer"
+      ]
+    },
+    {
+      "id": "senior-ml-engineer",
+      "title": "Senior Machine Learning Engineer",
+      "level": 30,
+      "learning_repo": "senior-ml-engineer-learning",
+      "solution_repo": "senior-ml-engineer-solutions",
+      "aliases": [
+        "Senior Machine Learning Engineer",
+        "Senior ML Engineer",
+        "ML Engineer II",
+        "Fine-tuning Engineer"
+      ]
+    },
+    {
+      "id": "training-pipeline-engineer",
+      "title": "Training Pipeline Engineer",
+      "level": 35,
+      "learning_repo": "training-pipeline-engineer-learning",
+      "solution_repo": "training-pipeline-engineer-solutions",
+      "aliases": [
+        "Training Pipeline Engineer",
+        "ML Training Infrastructure Engineer",
+        "Distributed Training Engineer",
+        "Training Systems Engineer"
+      ]
+    },
+    {
+      "id": "staff-ml-engineer",
+      "title": "Staff Machine Learning Engineer",
+      "level": 40,
+      "learning_repo": "staff-ml-engineer-learning",
+      "solution_repo": "staff-ml-engineer-solutions",
+      "aliases": [
+        "Staff Machine Learning Engineer",
+        "Staff ML Engineer",
+        "Lead ML Engineer",
+        "ML Tech Lead",
+        "ML Research Engineer"
+      ]
+    },
+    {
+      "id": "principal-ml-engineer",
+      "title": "Principal Machine Learning Engineer",
+      "level": 48,
+      "learning_repo": "principal-ml-engineer-learning",
+      "solution_repo": "principal-ml-engineer-solutions",
+      "aliases": [
+        "Principal Machine Learning Engineer",
+        "Principal ML Engineer",
+        "Distinguished ML Engineer",
+        "Applied ML Architect"
+      ]
+    }
+  ]
+}

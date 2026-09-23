@@ -1,0 +1,19 @@
+# Checkpoint System .gitignore
+
+# Ignore all checkpoint directories (these are local working state)
+checkpoints/
+
+# Exception: Keep the directory structure
+!checkpoints/.gitkeep
+
+# Ignore any temporary or working files
+*.tmp
+*.swp
+*~
+
+# Ignore backup files
+*.bak
+*.backup
+
+# Keep template files
+!templates/

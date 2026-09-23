@@ -1,0 +1,68 @@
+name: Template or workflow enhancement
+description: Request new templates or updates to existing workflows/process docs
+title: "[Template/Workflow]: "
+labels:
+  - enhancement
+  - templates
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tell us how we can improve the curriculum/research/solution templates or workflows.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      description: Select the primary area you want to improve.
+      options:
+        - Research templates
+        - Curriculum planning templates
+        - Solutions templates
+        - Workflows
+        - Validation tooling
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Use Case / Scenario
+      description: Describe the scenario or learner experience driving this request.
+      placeholder: |
+        Who is the target role?
+        What phase of the pipeline needs support?
+        What problem are you trying to solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: Outline the structure, sections, or steps you’d like to add or change.
+      placeholder: |
+        - New sections or headings
+        - Fields to capture
+        - Workflow steps to add/remove
+    validations:
+      required: false
+  - type: textarea
+    id: reuse
+    attributes:
+      label: Reuse & Cross-Role Considerations
+      description: Note opportunities to reuse assets across roles or phases.
+      placeholder: |
+        - Shared components
+        - Role progression impact
+        - Dependencies
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: References / Prior Art
+      description: Link to existing templates, external resources, or examples we can learn from.
+      placeholder: |
+        - Link 1
+        - Link 2
+    validations:
+      required: false

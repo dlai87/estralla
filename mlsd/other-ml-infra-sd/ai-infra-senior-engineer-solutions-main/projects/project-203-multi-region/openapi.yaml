@@ -1,0 +1,866 @@
+openapi: 3.1.0
+info:
+  title: Multi-Region ML Platform API
+  description: |
+    Globally distributed ML serving and training control plane. The same API is
+    served from every region (us-west-2, eu-west-1, ap-south-1); clients can
+    optionally pin to a region with `X-Preferred-Region`, otherwise the global
+    load balancer routes by latency.
+
+    All write endpoints accept an `Idempotency-Key` header to make retries safe.
+    All responses include `X-RateLimit-*` headers and a stable `X-Request-Id`.
+
+    Errors follow RFC 7807 (`application/problem+json`).
+  version: "1.4.0"
+  contact:
+    name: ML Platform Team
+    email: ai-infra-curriculum@joshua-ferguson.com
+  license:
+    name: MIT
+servers:
+  - url: https://api.ml-platform.example.com/v1
+    description: Global edge (routes to nearest region)
+  - url: https://api-us-west-2.ml-platform.example.com/v1
+    description: AWS us-west-2 (pinned)
+  - url: https://api-eu-west-1.ml-platform.example.com/v1
+    description: GCP eu-west-1 (pinned)
+  - url: https://api-ap-south-1.ml-platform.example.com/v1
+    description: Azure ap-south-1 (pinned)
+
+security:
+  - bearerAuth: []
+
+tags:
+  - name: training-jobs
+    description: Submit and manage distributed training jobs
+  - name: inference
+    description: Real-time and batch inference
+  - name: models
+    description: Model registry operations
+  - name: admin
+    description: Operational, region-aware
+  - name: health
+    description: Health and readiness probes
+
+paths:
+  /healthz:
+    get:
+      tags: [health]
+      summary: Liveness probe
+      description: Lightweight liveness check. No auth required.
+      security: []
+      responses:
+        "200":
+          description: Service process is alive
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+
+  /readyz:
+    get:
+      tags: [health]
+      summary: Readiness probe
+      description: Returns 200 only when the region can accept traffic — all dependencies (model store, vector DB, queue) reachable.
+      security: []
+      responses:
+        "200":
+          description: Ready to serve
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+        "503":
+          description: Not ready
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+
+  /training-jobs:
+    post:
+      tags: [training-jobs]
+      summary: Submit a distributed training job
+      description: |
+        Submit a Ray-based training job. The job runs in the region indicated by
+        `region` (request body), or in the caller's preferred region if not
+        specified. Cross-region scheduling is supported via the `multi_region`
+        field — useful when one region lacks GPU capacity.
+
+        The endpoint is idempotent on `Idempotency-Key`: two submissions with
+        the same key within 24 hours return the same `job_id`.
+      operationId: submitTrainingJob
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/PreferredRegion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingJobCreate"
+      responses:
+        "201":
+          description: Job accepted
+          headers:
+            X-Request-Id: { $ref: "#/components/headers/X-Request-Id" }
+            X-RateLimit-Limit:     { $ref: "#/components/headers/X-RateLimit-Limit" }
+            X-RateLimit-Remaining: { $ref: "#/components/headers/X-RateLimit-Remaining" }
+            X-RateLimit-Reset:     { $ref: "#/components/headers/X-RateLimit-Reset" }
+            X-Served-Region:       { $ref: "#/components/headers/X-Served-Region" }
+            Location:
+              description: URL of the new job resource
+              schema: { type: string, format: uri }
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TrainingJob" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "409":
+          description: Conflict on Idempotency-Key with a different body
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "429": { $ref: "#/components/responses/RateLimited" }
+        "503": { $ref: "#/components/responses/Unavailable" }
+    get:
+      tags: [training-jobs]
+      summary: List training jobs
+      operationId: listTrainingJobs
+      parameters:
+        - in: query
+          name: state
+          schema:
+            type: string
+            enum: [pending, running, succeeded, failed, cancelled]
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - in: query
+          name: cursor
+          schema: { type: string }
+        - $ref: "#/components/parameters/PreferredRegion"
+      responses:
+        "200":
+          description: Paginated list of jobs
+          headers:
+            X-RateLimit-Limit:     { $ref: "#/components/headers/X-RateLimit-Limit" }
+            X-RateLimit-Remaining: { $ref: "#/components/headers/X-RateLimit-Remaining" }
+            X-RateLimit-Reset:     { $ref: "#/components/headers/X-RateLimit-Reset" }
+            X-Served-Region:       { $ref: "#/components/headers/X-Served-Region" }
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, next_cursor]
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/TrainingJob" }
+                  next_cursor:
+                    type: string
+                    nullable: true
+
+  /training-jobs/{job_id}:
+    parameters:
+      - $ref: "#/components/parameters/JobId"
+      - $ref: "#/components/parameters/PreferredRegion"
+    get:
+      tags: [training-jobs]
+      summary: Get a training job
+      operationId: getTrainingJob
+      responses:
+        "200":
+          description: Job state
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TrainingJob" }
+        "404": { $ref: "#/components/responses/NotFound" }
+    delete:
+      tags: [training-jobs]
+      summary: Cancel a training job
+      operationId: cancelTrainingJob
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      responses:
+        "202":
+          description: Cancellation accepted; job is moving to `cancelled`
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TrainingJob" }
+        "404": { $ref: "#/components/responses/NotFound" }
+        "409":
+          description: Job already in a terminal state
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+
+  /training-jobs/{job_id}/logs:
+    parameters:
+      - $ref: "#/components/parameters/JobId"
+      - $ref: "#/components/parameters/PreferredRegion"
+    get:
+      tags: [training-jobs]
+      summary: Stream training job logs
+      description: Server-sent events stream of log lines.
+      operationId: streamTrainingJobLogs
+      responses:
+        "200":
+          description: SSE stream of `{ ts, rank, level, message }` events
+          content:
+            text/event-stream:
+              schema: { type: string }
+        "404": { $ref: "#/components/responses/NotFound" }
+
+  /inference:
+    post:
+      tags: [inference]
+      summary: Real-time inference
+      description: |
+        Synchronous inference against a registered model. The request is
+        routed to a replica in the caller's preferred region (or nearest).
+        Set `model` to either `<name>` (latest) or `<name>@<version>`.
+      operationId: invokeInference
+      parameters:
+        - $ref: "#/components/parameters/PreferredRegion"
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/InferenceRequest" }
+      responses:
+        "200":
+          description: Successful inference
+          headers:
+            X-Request-Id:          { $ref: "#/components/headers/X-Request-Id" }
+            X-Model-Version:       { $ref: "#/components/headers/X-Model-Version" }
+            X-Served-Region:       { $ref: "#/components/headers/X-Served-Region" }
+            X-RateLimit-Limit:     { $ref: "#/components/headers/X-RateLimit-Limit" }
+            X-RateLimit-Remaining: { $ref: "#/components/headers/X-RateLimit-Remaining" }
+            X-RateLimit-Reset:     { $ref: "#/components/headers/X-RateLimit-Reset" }
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/InferenceResponse" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "404":
+          description: Model not found
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "413":
+          description: Payload too large for inference path
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "429": { $ref: "#/components/responses/RateLimited" }
+        "503": { $ref: "#/components/responses/Unavailable" }
+
+  /inference/batch:
+    post:
+      tags: [inference]
+      summary: Submit a batch inference job
+      description: |
+        Asynchronous batch inference. The caller supplies an input URI
+        (`s3://`, `gs://`, `azblob://`); results are written to `output_uri`
+        when the job completes. The endpoint returns a `batch_id` immediately.
+      operationId: submitBatchInference
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+        - $ref: "#/components/parameters/PreferredRegion"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BatchInferenceRequest" }
+      responses:
+        "202":
+          description: Batch accepted
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BatchInferenceJob" }
+        "400": { $ref: "#/components/responses/BadRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "429": { $ref: "#/components/responses/RateLimited" }
+
+  /inference/batch/{batch_id}:
+    parameters:
+      - in: path
+        name: batch_id
+        required: true
+        schema: { type: string, format: uuid }
+      - $ref: "#/components/parameters/PreferredRegion"
+    get:
+      tags: [inference]
+      summary: Get a batch inference job status
+      operationId: getBatchInferenceJob
+      responses:
+        "200":
+          description: Batch state
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BatchInferenceJob" }
+        "404": { $ref: "#/components/responses/NotFound" }
+
+  /models:
+    get:
+      tags: [models]
+      summary: List models
+      operationId: listModels
+      parameters:
+        - in: query
+          name: q
+          description: Substring match on model name
+          schema: { type: string }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - in: query
+          name: cursor
+          schema: { type: string }
+      responses:
+        "200":
+          description: Paginated list of models
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, next_cursor]
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/Model" }
+                  next_cursor:
+                    type: string
+                    nullable: true
+
+  /models/{name}:
+    parameters:
+      - in: path
+        name: name
+        required: true
+        schema: { type: string, pattern: "^[a-z0-9][a-z0-9-_]{0,63}$" }
+    get:
+      tags: [models]
+      summary: Get model metadata (latest version)
+      operationId: getModel
+      responses:
+        "200":
+          description: Model
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Model" }
+        "404": { $ref: "#/components/responses/NotFound" }
+
+  /models/{name}/versions:
+    parameters:
+      - in: path
+        name: name
+        required: true
+        schema: { type: string }
+    get:
+      tags: [models]
+      summary: List versions of a model
+      operationId: listModelVersions
+      responses:
+        "200":
+          description: Versions
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ModelVersion" }
+
+  /admin/regions:
+    get:
+      tags: [admin]
+      summary: Region health summary
+      description: Aggregated view of all regions — replication lag, current traffic, model coverage.
+      operationId: regionsStatus
+      responses:
+        "200":
+          description: Region summary
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/RegionStatus" }
+
+  /admin/failover:
+    post:
+      tags: [admin]
+      summary: Trigger manual failover
+      description: |
+        Drains traffic from `from_region` to `to_region`. Requires
+        admin-level credentials. Returns immediately; failover is
+        observable via /admin/regions.
+      operationId: triggerFailover
+      parameters:
+        - $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [from_region, to_region]
+              properties:
+                from_region: { $ref: "#/components/schemas/Region" }
+                to_region:   { $ref: "#/components/schemas/Region" }
+                reason:      { type: string, minLength: 8, maxLength: 280 }
+                strategy:
+                  type: string
+                  enum: [graceful, immediate]
+                  default: graceful
+      responses:
+        "202":
+          description: Failover started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  failover_id: { type: string, format: uuid }
+                  status:      { type: string, enum: [draining, completed, failed] }
+        "403":
+          description: Caller lacks the admin role
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "409":
+          description: A failover is already in progress
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Bearer token issued by the central identity service. Token includes
+        a `roles` claim. Operational endpoints require `role:admin`.
+
+  parameters:
+    IdempotencyKey:
+      in: header
+      name: Idempotency-Key
+      description: |
+        Unique key for safe retries. Maximum 255 characters. The server stores
+        the response for 24 hours and replays it on identical retries.
+      required: false
+      schema:
+        type: string
+        minLength: 8
+        maxLength: 255
+    PreferredRegion:
+      in: header
+      name: X-Preferred-Region
+      description: |
+        Region the caller prefers to be served from. The platform honors it
+        when capacity allows; otherwise it falls back to the nearest healthy
+        region and signals via `X-Served-Region`.
+      required: false
+      schema: { $ref: "#/components/schemas/Region" }
+    JobId:
+      in: path
+      name: job_id
+      required: true
+      schema: { type: string, format: uuid }
+
+  headers:
+    X-Request-Id:
+      description: Server-assigned request identifier for log correlation.
+      schema: { type: string, format: uuid }
+    X-RateLimit-Limit:
+      description: Quota window size (requests per window).
+      schema: { type: integer, minimum: 1 }
+    X-RateLimit-Remaining:
+      description: Requests remaining in the current window.
+      schema: { type: integer, minimum: 0 }
+    X-RateLimit-Reset:
+      description: Unix epoch seconds when the window resets.
+      schema: { type: integer, minimum: 0 }
+    X-Served-Region:
+      description: Region that actually handled this request.
+      schema: { $ref: "#/components/schemas/Region" }
+    X-Model-Version:
+      description: Exact model version that produced the response (`name@version`).
+      schema: { type: string }
+
+  responses:
+    BadRequest:
+      description: Validation error
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    Unauthorized:
+      description: Missing or invalid auth token
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    NotFound:
+      description: Resource not found
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    RateLimited:
+      description: Caller has exceeded the rate limit
+      headers:
+        Retry-After:
+          description: Seconds to wait before retrying
+          schema: { type: integer, minimum: 1 }
+        X-RateLimit-Limit:     { $ref: "#/components/headers/X-RateLimit-Limit" }
+        X-RateLimit-Remaining: { $ref: "#/components/headers/X-RateLimit-Remaining" }
+        X-RateLimit-Reset:     { $ref: "#/components/headers/X-RateLimit-Reset" }
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    Unavailable:
+      description: Region not ready or temporarily unable to accept traffic
+      headers:
+        Retry-After:
+          schema: { type: integer, minimum: 1 }
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+
+  schemas:
+    Region:
+      type: string
+      enum:
+        - us-west-2
+        - eu-west-1
+        - ap-south-1
+      description: ISO-aligned region identifier.
+
+    Health:
+      type: object
+      required: [status, region, version]
+      properties:
+        status:  { type: string, enum: [ok, degraded, down] }
+        region:  { $ref: "#/components/schemas/Region" }
+        version: { type: string, example: "1.4.0" }
+        uptime_seconds: { type: integer, minimum: 0 }
+
+    Problem:
+      type: object
+      description: RFC 7807 problem details.
+      required: [type, title, status]
+      properties:
+        type:
+          type: string
+          format: uri
+          description: URI reference identifying the problem type.
+          example: "https://api.ml-platform.example.com/problems/idempotency-conflict"
+        title:
+          type: string
+          example: "Idempotency-Key conflict"
+        status:
+          type: integer
+          example: 409
+        detail:
+          type: string
+          example: "Idempotency-Key 'abc' was previously used with a different body."
+        instance:
+          type: string
+          format: uri
+          example: "/v1/training-jobs"
+        request_id:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          description: Field-level errors (for 400s).
+          items:
+            type: object
+            required: [field, message]
+            properties:
+              field:   { type: string }
+              message: { type: string }
+
+    TrainingJobCreate:
+      type: object
+      required: [name, image, command, resources]
+      properties:
+        name:
+          type: string
+          pattern: "^[a-z0-9][a-z0-9-]{0,62}$"
+          example: resnet50-imagenet
+        description:
+          type: string
+          maxLength: 1024
+        image:
+          type: string
+          description: Container image (registry path + tag/digest).
+          example: us-west2-docker.pkg.dev/ml/training:1.2.0
+        command:
+          type: array
+          items: { type: string }
+          minItems: 1
+          example: ["python", "-m", "train", "--config", "configs/resnet.yaml"]
+        env:
+          type: object
+          additionalProperties: { type: string }
+        region:
+          $ref: "#/components/schemas/Region"
+        multi_region:
+          type: boolean
+          default: false
+          description: Allow scheduler to place across multiple regions if needed.
+        resources:
+          $ref: "#/components/schemas/Resources"
+        priority:
+          type: string
+          enum: [low, normal, high]
+          default: normal
+        max_runtime_seconds:
+          type: integer
+          minimum: 60
+          maximum: 604800
+          default: 86400
+        labels:
+          type: object
+          additionalProperties: { type: string }
+
+    TrainingJob:
+      allOf:
+        - $ref: "#/components/schemas/TrainingJobCreate"
+        - type: object
+          required: [job_id, state, created_at]
+          properties:
+            job_id:    { type: string, format: uuid }
+            state:
+              type: string
+              enum: [pending, running, succeeded, failed, cancelled]
+            created_at: { type: string, format: date-time }
+            started_at: { type: string, format: date-time, nullable: true }
+            finished_at: { type: string, format: date-time, nullable: true }
+            served_region: { $ref: "#/components/schemas/Region" }
+            metrics:
+              type: object
+              additionalProperties:
+                oneOf:
+                  - { type: number }
+                  - { type: string }
+            error:
+              type: object
+              nullable: true
+              properties:
+                code:    { type: string }
+                message: { type: string }
+
+    Resources:
+      type: object
+      required: [cpu, memory_gb]
+      properties:
+        cpu:
+          type: number
+          minimum: 0.1
+          maximum: 256
+          description: vCPUs requested per worker.
+        memory_gb:
+          type: number
+          minimum: 0.5
+          maximum: 4096
+        gpu:
+          type: object
+          properties:
+            count: { type: integer, minimum: 0, maximum: 32 }
+            type:
+              type: string
+              enum: [t4, l4, a10g, a100-40g, a100-80g, h100]
+          required: [count]
+        num_workers:
+          type: integer
+          minimum: 1
+          maximum: 64
+          default: 1
+        ephemeral_storage_gb:
+          type: integer
+          minimum: 1
+          maximum: 4096
+          default: 50
+
+    InferenceRequest:
+      type: object
+      required: [model, input]
+      properties:
+        model:
+          type: string
+          description: "Model name or `name@version`."
+          example: image-classifier@v3
+        input:
+          description: Model-specific input. Schema enforced server-side per model.
+          oneOf:
+            - { type: object }
+            - { type: array, items: {} }
+            - { type: string, contentEncoding: base64 }
+        parameters:
+          type: object
+          additionalProperties: true
+          description: Optional model-specific parameters (temperature, top_k, etc.).
+        stream:
+          type: boolean
+          default: false
+          description: If true and the model supports it, returns SSE.
+
+    InferenceResponse:
+      type: object
+      required: [model, request_id, output]
+      properties:
+        model:
+          type: string
+          example: image-classifier@v3
+        request_id:
+          type: string
+          format: uuid
+        served_region:
+          $ref: "#/components/schemas/Region"
+        output:
+          description: Model-specific.
+          oneOf:
+            - { type: object }
+            - { type: array, items: {} }
+            - { type: string }
+        latency_ms:
+          type: number
+          minimum: 0
+        usage:
+          type: object
+          description: Resource usage metrics for billing/observability.
+          properties:
+            input_tokens:  { type: integer, minimum: 0 }
+            output_tokens: { type: integer, minimum: 0 }
+            compute_seconds: { type: number, minimum: 0 }
+
+    BatchInferenceRequest:
+      type: object
+      required: [model, input_uri, output_uri]
+      properties:
+        model:      { type: string }
+        input_uri:
+          type: string
+          pattern: "^(s3|gs|azblob)://.+"
+        output_uri:
+          type: string
+          pattern: "^(s3|gs|azblob)://.+"
+        format:
+          type: string
+          enum: [jsonl, parquet, csv]
+          default: jsonl
+        parameters:
+          type: object
+          additionalProperties: true
+        region: { $ref: "#/components/schemas/Region" }
+        max_concurrency:
+          type: integer
+          minimum: 1
+          maximum: 256
+          default: 16
+
+    BatchInferenceJob:
+      allOf:
+        - $ref: "#/components/schemas/BatchInferenceRequest"
+        - type: object
+          required: [batch_id, state]
+          properties:
+            batch_id: { type: string, format: uuid }
+            state:
+              type: string
+              enum: [queued, running, succeeded, failed, cancelled]
+            created_at:  { type: string, format: date-time }
+            started_at:  { type: string, format: date-time, nullable: true }
+            finished_at: { type: string, format: date-time, nullable: true }
+            served_region: { $ref: "#/components/schemas/Region" }
+            progress:
+              type: object
+              properties:
+                completed: { type: integer, minimum: 0 }
+                total:     { type: integer, minimum: 0 }
+                failed:    { type: integer, minimum: 0 }
+            error:
+              type: object
+              nullable: true
+              properties:
+                code:    { type: string }
+                message: { type: string }
+
+    Model:
+      type: object
+      required: [name, latest_version, regions]
+      properties:
+        name:           { type: string }
+        latest_version: { type: string, example: v7 }
+        description:    { type: string }
+        labels:
+          type: object
+          additionalProperties: { type: string }
+        framework:
+          type: string
+          enum: [pytorch, tensorflow, jax, sklearn, xgboost, onnx, custom]
+        created_at:    { type: string, format: date-time }
+        updated_at:    { type: string, format: date-time }
+        regions:
+          type: array
+          description: Regions where this model's latest version is replicated.
+          items: { $ref: "#/components/schemas/Region" }
+
+    ModelVersion:
+      type: object
+      required: [version, artifact_uri, sha256, created_at]
+      properties:
+        version:      { type: string, example: v7 }
+        artifact_uri: { type: string, format: uri }
+        sha256:
+          type: string
+          pattern: "^[a-f0-9]{64}$"
+        size_bytes:   { type: integer, minimum: 1 }
+        created_at:   { type: string, format: date-time }
+        regions:
+          type: array
+          items: { $ref: "#/components/schemas/Region" }
+        replication:
+          type: object
+          description: Per-region replication state.
+          additionalProperties:
+            type: object
+            properties:
+              state:
+                type: string
+                enum: [pending, replicating, complete, failed]
+              progress_pct: { type: integer, minimum: 0, maximum: 100 }
+              error: { type: string, nullable: true }
+
+    RegionStatus:
+      type: object
+      required: [region, healthy, accepting_traffic]
+      properties:
+        region: { $ref: "#/components/schemas/Region" }
+        healthy: { type: boolean }
+        accepting_traffic: { type: boolean }
+        traffic_weight:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Current global traffic weight assigned to this region.
+        replication_lag_seconds:
+          type: integer
+          minimum: 0
+          description: Time since the most recent successful cross-region sync.
+        active_jobs:
+          type: integer
+          minimum: 0
+        gpus_total:
+          type: integer
+          minimum: 0
+        gpus_available:
+          type: integer
+          minimum: 0
+        last_failover_at:
+          type: string
+          format: date-time
+          nullable: true

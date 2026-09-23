@@ -1,0 +1,376 @@
+{
+  "schema_version": 1,
+  "role": "mlops",
+  "role_title": "Mlops Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-MLO-MOD-001-MLOPS-FOUNDATIONS",
+      "label": "Module 01: MLOps Foundations",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-001-mlops-foundations/exercise-01",
+        "mod-001-mlops-foundations/exercise-02",
+        "mod-001-mlops-foundations/exercise-03",
+        "mod-001-mlops-foundations/exercise-04",
+        "mod-001-mlops-foundations/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-001-mlops-foundations/exercise-04/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-001-mlops-foundations`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-002-EXPERIMENT-TRACKING",
+      "label": "Module 02: Experiment Tracking & MLflow",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-002-experiment-tracking/exercise-01",
+        "mod-002-experiment-tracking/exercise-02",
+        "mod-002-experiment-tracking/exercise-03",
+        "mod-002-experiment-tracking/exercise-04",
+        "mod-002-experiment-tracking/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-002-experiment-tracking/exercise-01/README.md",
+        "modules/mod-002-experiment-tracking/exercise-02/README.md",
+        "modules/mod-002-experiment-tracking/exercise-03/README.md",
+        "modules/mod-002-experiment-tracking/exercise-04/README.md",
+        "modules/mod-002-experiment-tracking/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-002-experiment-tracking`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-003-MODEL-MONITORING",
+      "label": "Module 03: Model Monitoring and Drift Detection",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-003-model-monitoring/exercise-01",
+        "mod-003-model-monitoring/exercise-02",
+        "mod-003-model-monitoring/exercise-03",
+        "mod-003-model-monitoring/exercise-04",
+        "mod-003-model-monitoring/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-003-model-monitoring/exercise-01/README.md",
+        "modules/mod-003-model-monitoring/exercise-02/README.md",
+        "modules/mod-003-model-monitoring/exercise-03/README.md",
+        "modules/mod-003-model-monitoring/exercise-04/README.md",
+        "modules/mod-003-model-monitoring/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-003-model-monitoring`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-004-DATA-QUALITY",
+      "label": "Module 04: Data Quality and Validation",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-004-data-quality/exercise-01",
+        "mod-004-data-quality/exercise-02",
+        "mod-004-data-quality/exercise-03",
+        "mod-004-data-quality/exercise-04",
+        "mod-004-data-quality/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-004-data-quality/exercise-01/README.md",
+        "modules/mod-004-data-quality/exercise-02/README.md",
+        "modules/mod-004-data-quality/exercise-03/README.md",
+        "modules/mod-004-data-quality/exercise-04/README.md",
+        "modules/mod-004-data-quality/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-004-data-quality`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-005-EXPERIMENTATION",
+      "label": "Module 05: Experimentation and A/B Testing",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-005-experimentation/exercise-01",
+        "mod-005-experimentation/exercise-02",
+        "mod-005-experimentation/exercise-03",
+        "mod-005-experimentation/exercise-04",
+        "mod-005-experimentation/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-005-experimentation/exercise-01/README.md",
+        "modules/mod-005-experimentation/exercise-02/README.md",
+        "modules/mod-005-experimentation/exercise-03/README.md",
+        "modules/mod-005-experimentation/exercise-04/README.md",
+        "modules/mod-005-experimentation/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-005-experimentation`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-006-AUTOMATION",
+      "label": "Module 06: Automation and Orchestration",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-006-automation/exercise-01",
+        "mod-006-automation/exercise-02",
+        "mod-006-automation/exercise-03",
+        "mod-006-automation/exercise-04",
+        "mod-006-automation/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-006-automation/exercise-01/README.md",
+        "modules/mod-006-automation/exercise-02/README.md",
+        "modules/mod-006-automation/exercise-03/README.md",
+        "modules/mod-006-automation/exercise-04/README.md",
+        "modules/mod-006-automation/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-006-automation`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-007-GOVERNANCE",
+      "label": "Module 07: ML Governance and Compliance",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-007-governance/exercise-01",
+        "mod-007-governance/exercise-02",
+        "mod-007-governance/exercise-03",
+        "mod-007-governance/exercise-04",
+        "mod-007-governance/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-007-governance/exercise-01/README.md",
+        "modules/mod-007-governance/exercise-02/README.md",
+        "modules/mod-007-governance/exercise-03/README.md",
+        "modules/mod-007-governance/exercise-04/README.md",
+        "modules/mod-007-governance/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-007-governance`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-008-PRODUCTION-OPS",
+      "label": "Module 08: Production Operations",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-008-production-ops/exercise-01",
+        "mod-008-production-ops/exercise-02",
+        "mod-008-production-ops/exercise-03",
+        "mod-008-production-ops/exercise-04",
+        "mod-008-production-ops/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-008-production-ops/exercise-04/README.md",
+        "modules/mod-008-production-ops/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-008-production-ops`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-009-SECURITY",
+      "label": "Module 09: MLOps Security",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-009-security/exercise-01",
+        "mod-009-security/exercise-02",
+        "mod-009-security/exercise-03",
+        "mod-009-security/exercise-04",
+        "mod-009-security/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-009-security/exercise-02/README.md",
+        "modules/mod-009-security/exercise-03/README.md",
+        "modules/mod-009-security/exercise-04/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-009-security`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-MOD-010-ADVANCED-TOPICS",
+      "label": "Module 10: Advanced MLOps Topics",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-010-advanced-topics/exercise-01",
+        "mod-010-advanced-topics/exercise-02",
+        "mod-010-advanced-topics/exercise-03",
+        "mod-010-advanced-topics/exercise-04",
+        "mod-010-advanced-topics/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-010-advanced-topics/exercise-01/README.md",
+        "modules/mod-010-advanced-topics/exercise-02/README.md",
+        "modules/mod-010-advanced-topics/exercise-03/README.md",
+        "modules/mod-010-advanced-topics/exercise-04/README.md",
+        "modules/mod-010-advanced-topics/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-010-advanced-topics`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-PROJECT-01-ML-PIPELINE",
+      "label": "Project 1: End-to-End ML Pipeline",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-01-ml-pipeline"
+      ],
+      "solutions": [
+        "projects/project-01-ml-pipeline/README.md",
+        "projects/project-01-ml-pipeline/SOLUTION.md",
+        "projects/project-01-ml-pipeline/STEP_BY_STEP.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-01-ml-pipeline`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-PROJECT-02-MODEL-SERVING",
+      "label": "Project 2: Production Model Serving Platform",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-02-model-serving"
+      ],
+      "solutions": [
+        "projects/project-02-model-serving/README.md",
+        "projects/project-02-model-serving/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-02-model-serving`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-PROJECT-03-EXPERIMENTATION",
+      "label": "Project 3: ML Experimentation Platform",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-03-experimentation"
+      ],
+      "solutions": [
+        "projects/project-03-experimentation/README.md",
+        "projects/project-03-experimentation/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-03-experimentation`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-PROJECT-04-GOVERNANCE",
+      "label": "Project 4: ML Governance & Compliance System",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-04-governance"
+      ],
+      "solutions": [
+        "projects/project-04-governance/README.md",
+        "projects/project-04-governance/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-04-governance`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-MLO-PROJECT-05-LLMOPS",
+      "label": "Project 5: LLMOps Production System",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-05-llmops"
+      ],
+      "solutions": [
+        "projects/project-05-llmops/README.md",
+        "projects/project-05-llmops/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-05-llmops`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

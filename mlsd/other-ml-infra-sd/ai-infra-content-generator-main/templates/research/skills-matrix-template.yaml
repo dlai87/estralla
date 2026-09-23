@@ -1,0 +1,73 @@
+# Skills Progression Matrix Template
+#
+# Copy into `research/<role-slug>/skills-matrix.yaml`.
+# Capture progression across proficiency bands (Awareness → Working → Proficient → Expert).
+#
+# For multi-role programs, combine files from multiple roles into `curriculum/roles/skills-matrix-master.yaml`.
+
+role: "<role name>"
+level: "<junior|mid|senior|staff>"
+last_updated: "<YYYY-MM-DD>"
+research_sources:
+  - type: "job_posting_analysis"
+    reference: "research/<role-slug>/job-posting-analysis.md"
+  - type: "practitioner_interviews"
+    reference: "research/<role-slug>/interviews/"
+  - type: "industry_report"
+    reference: ""
+
+competency_domains:
+  - name: "Platform Architecture"
+    description: "Design and operate scalable AI/ML infrastructure"
+    skills:
+      - name: "Model Serving Architecture"
+        proficiency:
+          awareness:
+            description: "Understands core serving patterns and terminology"
+            evidence_sources:
+              - type: "job_posting"
+                id: "JP-03"
+          working:
+            description: "Implements baseline serving stack with monitoring"
+            evidence_sources:
+              - type: "interview"
+                id: "INT-02"
+          proficient:
+            description: "Optimizes serving pipelines for performance and cost"
+            evidence_sources: []
+          expert:
+            description: "Designs multi-region, multi-model serving architectures"
+            evidence_sources: []
+        assessment_types:
+          - "Hands-on project"
+          - "Architecture review"
+      - name: "Feature Store Operations"
+        proficiency:
+          awareness:
+            description: ""
+            evidence_sources: []
+          working:
+            description: ""
+            evidence_sources: []
+          proficient:
+            description: ""
+            evidence_sources: []
+          expert:
+            description: ""
+            evidence_sources: []
+        assessment_types:
+          - "Case study"
+          - "Lab exercise"
+  - name: "Delivery & Governance"
+    description: ""
+    skills: []
+
+progression_map:
+  awareness: "Intro modules, foundational labs"
+  working: "Guided projects, code reviews"
+  proficient: "Capstone projects, applied research"
+  expert: "Cross-functional initiatives, mentorship"
+
+notes:
+  - "Aligns with competency framework v1.2"
+  - "Validate with hiring managers quarterly"

@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "role": "principal-architect",
+  "role_title": "Principal Architect Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-PARCH-MOD-601-ORG-WIDE-ARCHITECTURE",
+      "label": "mod-601-org-wide-architecture: Organization-Wide Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-601-org-wide-architecture/exercise-01",
+        "mod-601-org-wide-architecture/exercise-02",
+        "mod-601-org-wide-architecture/exercise-03",
+        "mod-601-org-wide-architecture/exercise-04",
+        "mod-601-org-wide-architecture/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-601-org-wide-architecture/exercise-01/README.md",
+        "modules/mod-601-org-wide-architecture/exercise-02/README.md",
+        "modules/mod-601-org-wide-architecture/exercise-03/README.md",
+        "modules/mod-601-org-wide-architecture/exercise-04/README.md",
+        "modules/mod-601-org-wide-architecture/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-601-org-wide-architecture`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-MOD-602-INDUSTRY-STANDARDS",
+      "label": "mod-602-industry-standards: Industry Standards + Influence",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-602-industry-standards/exercise-01",
+        "mod-602-industry-standards/exercise-02",
+        "mod-602-industry-standards/exercise-03",
+        "mod-602-industry-standards/exercise-04",
+        "mod-602-industry-standards/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-602-industry-standards/exercise-01/README.md",
+        "modules/mod-602-industry-standards/exercise-02/README.md",
+        "modules/mod-602-industry-standards/exercise-03/README.md",
+        "modules/mod-602-industry-standards/exercise-04/README.md",
+        "modules/mod-602-industry-standards/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-602-industry-standards`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-MOD-603-MULTI-YEAR-INVESTMENT",
+      "label": "mod-603-multi-year-investment: Multi-Year Investment Strategy",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-603-multi-year-investment/exercise-01",
+        "mod-603-multi-year-investment/exercise-02",
+        "mod-603-multi-year-investment/exercise-03",
+        "mod-603-multi-year-investment/exercise-04",
+        "mod-603-multi-year-investment/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-603-multi-year-investment/exercise-01/README.md",
+        "modules/mod-603-multi-year-investment/exercise-02/README.md",
+        "modules/mod-603-multi-year-investment/exercise-03/README.md",
+        "modules/mod-603-multi-year-investment/exercise-04/README.md",
+        "modules/mod-603-multi-year-investment/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-603-multi-year-investment`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-MOD-604-STAKEHOLDER-COALITION",
+      "label": "mod-604-stakeholder-coalition: Stakeholder Coalition Building",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-604-stakeholder-coalition/exercise-01",
+        "mod-604-stakeholder-coalition/exercise-02",
+        "mod-604-stakeholder-coalition/exercise-03",
+        "mod-604-stakeholder-coalition/exercise-04",
+        "mod-604-stakeholder-coalition/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-604-stakeholder-coalition/exercise-01/README.md",
+        "modules/mod-604-stakeholder-coalition/exercise-02/README.md",
+        "modules/mod-604-stakeholder-coalition/exercise-03/README.md",
+        "modules/mod-604-stakeholder-coalition/exercise-04/README.md",
+        "modules/mod-604-stakeholder-coalition/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-604-stakeholder-coalition`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-MOD-605-TECH-DEBT-MODERNIZATION",
+      "label": "mod-605-tech-debt-modernization: Tech Debt + Modernization Strategy",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-605-tech-debt-modernization/exercise-01",
+        "mod-605-tech-debt-modernization/exercise-02",
+        "mod-605-tech-debt-modernization/exercise-03",
+        "mod-605-tech-debt-modernization/exercise-04",
+        "mod-605-tech-debt-modernization/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-605-tech-debt-modernization/exercise-01/README.md",
+        "modules/mod-605-tech-debt-modernization/exercise-02/README.md",
+        "modules/mod-605-tech-debt-modernization/exercise-03/README.md",
+        "modules/mod-605-tech-debt-modernization/exercise-04/README.md",
+        "modules/mod-605-tech-debt-modernization/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-605-tech-debt-modernization`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-PROJECT-01-ENTERPRISE-PLATFORM",
+      "label": "Project 01: Enterprise AI Platform Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-01-enterprise-platform"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-01-enterprise-platform`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-PROJECT-02-TECHNOLOGY-ROADMAP",
+      "label": "Project 02: 3-Year AI Platform Technology Roadmap",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-02-technology-roadmap"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-02-technology-roadmap`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-PROJECT-03-GOVERNANCE-FRAMEWORK",
+      "label": "Project 03: Architecture Governance Framework",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-03-governance-framework"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-03-governance-framework`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-PROJECT-04-MA-INTEGRATION",
+      "label": "Project 04: M&A Integration Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-04-ma-integration"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-04-ma-integration`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-PARCH-PROJECT-05-THOUGHT-LEADERSHIP",
+      "label": "Project 05: Thought Leadership Portfolio",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-05-thought-leadership"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-05-thought-leadership`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

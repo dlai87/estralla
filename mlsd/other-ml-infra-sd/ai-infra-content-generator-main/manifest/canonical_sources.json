@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "description": "Canonical source URLs for external references the curriculum cites. Used by the link-refresh resolver to find the right successor URL BEFORE falling back to Wayback. Add entries here whenever a vendor consolidates, renames, deprecates, or moves a resource the curriculum links to.",
+  "updated_at": "2026-06-04",
+  "sources": [
+    {
+      "name": "Bitnami Helm Charts",
+      "canonical": "oci://registry-1.docker.io/bitnamicharts",
+      "topic": ["helm", "kubernetes", "charts", "bitnami"],
+      "rationale": "Bitnami moved charts to an OCI registry on Docker Hub in August 2025. The classic Helm repo URL still 302-redirects to a Broadcom mirror, but new content should reference the OCI form.",
+      "successors": {
+        "https://charts.bitnami.com/bitnami": "oci://registry-1.docker.io/bitnamicharts",
+        "https://repo.broadcom.com/bitnami-files": "oci://registry-1.docker.io/bitnamicharts",
+        "https://repo.broadcom.com/bitnami-files/": "oci://registry-1.docker.io/bitnamicharts"
+      }
+    },
+    {
+      "name": "exa (deprecated) -> eza",
+      "canonical": "https://github.com/eza-community/eza",
+      "topic": ["cli", "ls", "rust", "filesystem"],
+      "rationale": "exa has been unmaintained since ~2021. eza is the community-maintained successor.",
+      "successors": {
+        "https://the.exa.website/": "https://github.com/eza-community/eza",
+        "https://the.exa.website": "https://github.com/eza-community/eza",
+        "https://github.com/ogham/exa": "https://github.com/eza-community/eza"
+      }
+    },
+    {
+      "name": "AngelList Talent -> Wellfound",
+      "canonical": "https://wellfound.com/jobs",
+      "topic": ["jobs", "hiring", "startups"],
+      "rationale": "AngelList rebranded their jobs platform to Wellfound in 2024.",
+      "successors": {
+        "https://angel.co/jobs": "https://wellfound.com/jobs",
+        "https://angel.co/job-collections": "https://wellfound.com/jobs",
+        "http://angel.co/jobs": "https://wellfound.com/jobs"
+      }
+    },
+    {
+      "name": "linuxjourney -> LabEx",
+      "canonical": "https://labex.io/linuxjourney",
+      "topic": ["linux", "tutorial", "beginner"],
+      "rationale": "linuxjourney.com was acquired/migrated to LabEx in 2024.",
+      "successors": {
+        "https://linuxjourney.com/": "https://labex.io/linuxjourney",
+        "https://linuxjourney.com": "https://labex.io/linuxjourney",
+        "http://linuxjourney.com/": "https://labex.io/linuxjourney"
+      }
+    },
+    {
+      "name": "Sigstore Fulcio (canonical CA endpoint)",
+      "canonical": "https://fulcio.sigstore.dev",
+      "topic": ["sigstore", "cosign", "supply-chain", "keyless"],
+      "rationale": "The Fulcio production CA endpoint. Returns 404 on GET / because it's an API root with no UI — DO NOT treat that as a broken link. Used by cosign / policy-controller via the API path. This is a machine-consumed endpoint and must never be Wayback-substituted.",
+      "machine_consumed": true,
+      "successors": {}
+    },
+    {
+      "name": "Kubernetes Documentation (canonical)",
+      "canonical": "https://kubernetes.io/docs/",
+      "topic": ["kubernetes", "k8s", "documentation"],
+      "rationale": "Authoritative source for Kubernetes concept docs. Always prefer kubernetes.io over vendor blogs or third-party guides for concept references.",
+      "successors": {}
+    },
+    {
+      "name": "Helm Documentation (canonical)",
+      "canonical": "https://helm.sh/docs/",
+      "topic": ["helm", "kubernetes", "charts"],
+      "rationale": "Authoritative Helm docs.",
+      "successors": {}
+    },
+    {
+      "name": "Docker Documentation (canonical)",
+      "canonical": "https://docs.docker.com/",
+      "topic": ["docker", "containers"],
+      "rationale": "Authoritative Docker docs. Use docs.docker.com for technical references, NOT docker.com (marketing).",
+      "successors": {}
+    },
+    {
+      "name": "Prometheus Documentation (canonical)",
+      "canonical": "https://prometheus.io/docs/",
+      "topic": ["prometheus", "monitoring", "metrics"],
+      "rationale": "Authoritative Prometheus docs.",
+      "successors": {}
+    },
+    {
+      "name": "OpenTelemetry Documentation (canonical)",
+      "canonical": "https://opentelemetry.io/docs/",
+      "topic": ["otel", "opentelemetry", "tracing", "observability"],
+      "rationale": "Authoritative OTel docs.",
+      "successors": {}
+    },
+    {
+      "name": "MITRE ATT&CK (canonical)",
+      "canonical": "https://attack.mitre.org/",
+      "topic": ["mitre", "attack", "security", "tactics"],
+      "rationale": "Authoritative MITRE ATT&CK matrix. The atlas.mitre.org domain hosts the ML-specific ATLAS matrix.",
+      "successors": {}
+    },
+    {
+      "name": "MITRE ATLAS for ML (canonical)",
+      "canonical": "https://atlas.mitre.org/",
+      "topic": ["mitre", "atlas", "ml-security", "adversarial-ml"],
+      "rationale": "Authoritative MITRE ATLAS adversarial-ML matrix. Subject to 429 anti-bot challenges on probes — do NOT classify a probe failure as link rot.",
+      "successors": {}
+    }
+  ]
+}

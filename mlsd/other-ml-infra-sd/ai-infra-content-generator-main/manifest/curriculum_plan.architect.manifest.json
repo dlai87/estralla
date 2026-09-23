@@ -1,0 +1,418 @@
+{
+  "schema_version": 1,
+  "role": "architect",
+  "role_title": "Architect Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-ARCH-MOD-301-ENTERPRISE-ARCHITECTURE",
+      "label": "Enterprise Architecture Fundamentals",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-301-enterprise-architecture/exercise-01",
+        "mod-301-enterprise-architecture/exercise-02",
+        "mod-301-enterprise-architecture/exercise-03",
+        "mod-301-enterprise-architecture/exercise-04",
+        "mod-301-enterprise-architecture/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-301-enterprise-architecture/exercise-01/README.md",
+        "modules/mod-301-enterprise-architecture/exercise-02/README.md",
+        "modules/mod-301-enterprise-architecture/exercise-03/README.md",
+        "modules/mod-301-enterprise-architecture/exercise-04/README.md",
+        "modules/mod-301-enterprise-architecture/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-301-enterprise-architecture`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-302-MULTICLOUD-HYBRID",
+      "label": "Multi-Cloud and Hybrid Architecture Design",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-302-multicloud-hybrid/exercise-01",
+        "mod-302-multicloud-hybrid/exercise-02",
+        "mod-302-multicloud-hybrid/exercise-03",
+        "mod-302-multicloud-hybrid/exercise-04",
+        "mod-302-multicloud-hybrid/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-302-multicloud-hybrid/exercise-01/README.md",
+        "modules/mod-302-multicloud-hybrid/exercise-02/README.md",
+        "modules/mod-302-multicloud-hybrid/exercise-03/README.md",
+        "modules/mod-302-multicloud-hybrid/exercise-04/README.md",
+        "modules/mod-302-multicloud-hybrid/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-302-multicloud-hybrid`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-303-SECURITY-COMPLIANCE",
+      "label": "Enterprise Security and Compliance Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-303-security-compliance/exercise-01",
+        "mod-303-security-compliance/exercise-02",
+        "mod-303-security-compliance/exercise-03",
+        "mod-303-security-compliance/exercise-04",
+        "mod-303-security-compliance/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-303-security-compliance/exercise-01/README.md",
+        "modules/mod-303-security-compliance/exercise-02/README.md",
+        "modules/mod-303-security-compliance/exercise-03/README.md",
+        "modules/mod-303-security-compliance/exercise-04/README.md",
+        "modules/mod-303-security-compliance/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-303-security-compliance`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-304-COST-FINOPS",
+      "label": "Cost Optimization and FinOps Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-304-cost-finops/exercise-01",
+        "mod-304-cost-finops/exercise-02",
+        "mod-304-cost-finops/exercise-03",
+        "mod-304-cost-finops/exercise-04",
+        "mod-304-cost-finops/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-304-cost-finops/exercise-01/README.md",
+        "modules/mod-304-cost-finops/exercise-02/README.md",
+        "modules/mod-304-cost-finops/exercise-03/README.md",
+        "modules/mod-304-cost-finops/exercise-04/README.md",
+        "modules/mod-304-cost-finops/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-304-cost-finops`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-305-HA-DR",
+      "label": "High-Availability and Disaster Recovery Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-305-ha-dr/exercise-01",
+        "mod-305-ha-dr/exercise-02",
+        "mod-305-ha-dr/exercise-03",
+        "mod-305-ha-dr/exercise-04",
+        "mod-305-ha-dr/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-305-ha-dr/exercise-01/README.md",
+        "modules/mod-305-ha-dr/exercise-02/README.md",
+        "modules/mod-305-ha-dr/exercise-03/README.md",
+        "modules/mod-305-ha-dr/exercise-04/README.md",
+        "modules/mod-305-ha-dr/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-305-ha-dr`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-306-ENTERPRISE-MLOPS",
+      "label": "Enterprise MLOps Platform Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-306-enterprise-mlops/exercise-01",
+        "mod-306-enterprise-mlops/exercise-02",
+        "mod-306-enterprise-mlops/exercise-03",
+        "mod-306-enterprise-mlops/exercise-04",
+        "mod-306-enterprise-mlops/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-306-enterprise-mlops/exercise-01/README.md",
+        "modules/mod-306-enterprise-mlops/exercise-02/README.md",
+        "modules/mod-306-enterprise-mlops/exercise-03/README.md",
+        "modules/mod-306-enterprise-mlops/exercise-04/README.md",
+        "modules/mod-306-enterprise-mlops/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-306-enterprise-mlops`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-307-DATA-ARCHITECTURE",
+      "label": "Data Architecture and Engineering for AI",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-307-data-architecture/exercise-01",
+        "mod-307-data-architecture/exercise-02",
+        "mod-307-data-architecture/exercise-03",
+        "mod-307-data-architecture/exercise-04",
+        "mod-307-data-architecture/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-307-data-architecture/exercise-01/README.md",
+        "modules/mod-307-data-architecture/exercise-02/README.md",
+        "modules/mod-307-data-architecture/exercise-03/README.md",
+        "modules/mod-307-data-architecture/exercise-04/README.md",
+        "modules/mod-307-data-architecture/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-307-data-architecture`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-308-LLM-RAG",
+      "label": "LLM Platform and RAG Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-308-llm-rag/exercise-01",
+        "mod-308-llm-rag/exercise-02",
+        "mod-308-llm-rag/exercise-03",
+        "mod-308-llm-rag/exercise-04",
+        "mod-308-llm-rag/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-308-llm-rag/exercise-01/README.md",
+        "modules/mod-308-llm-rag/exercise-02/README.md",
+        "modules/mod-308-llm-rag/exercise-03/README.md",
+        "modules/mod-308-llm-rag/exercise-04/README.md",
+        "modules/mod-308-llm-rag/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-308-llm-rag`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-309-ARCH-COMMUNICATION",
+      "label": "Architecture Communication and Leadership",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-309-arch-communication/exercise-01",
+        "mod-309-arch-communication/exercise-02",
+        "mod-309-arch-communication/exercise-03",
+        "mod-309-arch-communication/exercise-04",
+        "mod-309-arch-communication/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-309-arch-communication/exercise-01/README.md",
+        "modules/mod-309-arch-communication/exercise-02/README.md",
+        "modules/mod-309-arch-communication/exercise-03/README.md",
+        "modules/mod-309-arch-communication/exercise-04/README.md",
+        "modules/mod-309-arch-communication/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-309-arch-communication`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-MOD-310-EMERGING-TECH",
+      "label": "Emerging Technologies and Innovation",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-310-emerging-tech/exercise-01",
+        "mod-310-emerging-tech/exercise-02",
+        "mod-310-emerging-tech/exercise-03",
+        "mod-310-emerging-tech/exercise-04",
+        "mod-310-emerging-tech/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-310-emerging-tech/exercise-01/README.md",
+        "modules/mod-310-emerging-tech/exercise-02/README.md",
+        "modules/mod-310-emerging-tech/exercise-03/README.md",
+        "modules/mod-310-emerging-tech/exercise-04/README.md",
+        "modules/mod-310-emerging-tech/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-310-emerging-tech`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-PROJECT-301-ENTERPRISE-MLOPS-PLATFORM",
+      "label": "Enterprise ML Platform Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-301-enterprise-mlops-platform"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-301-enterprise-mlops-platform`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-PROJECT-301-ENTERPRISE-MLOPS",
+      "label": "Project 301: Enterprise MLOps Platform Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-301-enterprise-mlops"
+      ],
+      "solutions": [
+        "projects/project-301-enterprise-mlops/README.md",
+        "projects/project-301-enterprise-mlops/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-301-enterprise-mlops`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-PROJECT-302-MULTICLOUD-INFRASTRUCTURE",
+      "label": "Multi-Cloud AI Infrastructure",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-302-multicloud-infrastructure"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-302-multicloud-infrastructure`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-PROJECT-302-MULTICLOUD-INFRA",
+      "label": "Project 302: Multi-Cloud AI Infrastructure",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-302-multicloud-infra"
+      ],
+      "solutions": [
+        "projects/project-302-multicloud-infra/README.md",
+        "projects/project-302-multicloud-infra/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-302-multicloud-infra`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-PROJECT-303-LLM-RAG-PLATFORM",
+      "label": "LLM Platform with RAG",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-303-llm-rag-platform"
+      ],
+      "solutions": [
+        "projects/project-303-llm-rag-platform/README.md",
+        "projects/project-303-llm-rag-platform/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-303-llm-rag-platform`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-PROJECT-304-DATA-PLATFORM",
+      "label": "Data Platform for AI",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-304-data-platform"
+      ],
+      "solutions": [
+        "projects/project-304-data-platform/README.md",
+        "projects/project-304-data-platform/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-304-data-platform`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-ARCH-PROJECT-305-SECURITY-FRAMEWORK",
+      "label": "Security and Compliance Framework",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-305-security-framework"
+      ],
+      "solutions": [
+        "projects/project-305-security-framework/README.md",
+        "projects/project-305-security-framework/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-305-security-framework`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

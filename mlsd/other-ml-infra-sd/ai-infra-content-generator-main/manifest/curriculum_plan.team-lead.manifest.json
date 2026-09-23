@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "role": "team-lead",
+  "role_title": "Team Lead Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-TL-MOD-701-TEAM-OPERATIONS",
+      "label": "mod-701-team-operations: Team Operations + Cadences",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-701-team-operations/exercise-01",
+        "mod-701-team-operations/exercise-02",
+        "mod-701-team-operations/exercise-03",
+        "mod-701-team-operations/exercise-04",
+        "mod-701-team-operations/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-701-team-operations/exercise-01/README.md",
+        "modules/mod-701-team-operations/exercise-02/README.md",
+        "modules/mod-701-team-operations/exercise-03/README.md",
+        "modules/mod-701-team-operations/exercise-04/README.md",
+        "modules/mod-701-team-operations/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-701-team-operations`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-MOD-702-PEOPLE-MANAGEMENT",
+      "label": "mod-702-people-management: People Management Basics",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-702-people-management/exercise-01",
+        "mod-702-people-management/exercise-02",
+        "mod-702-people-management/exercise-03",
+        "mod-702-people-management/exercise-04",
+        "mod-702-people-management/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-702-people-management/exercise-01/README.md",
+        "modules/mod-702-people-management/exercise-02/README.md",
+        "modules/mod-702-people-management/exercise-03/README.md",
+        "modules/mod-702-people-management/exercise-04/README.md",
+        "modules/mod-702-people-management/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-702-people-management`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-MOD-703-PROJECT-ROADMAP",
+      "label": "mod-703-project-roadmap: Project + Roadmap Management",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-703-project-roadmap/exercise-01",
+        "mod-703-project-roadmap/exercise-02",
+        "mod-703-project-roadmap/exercise-03",
+        "mod-703-project-roadmap/exercise-04",
+        "mod-703-project-roadmap/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-703-project-roadmap/exercise-01/README.md",
+        "modules/mod-703-project-roadmap/exercise-02/README.md",
+        "modules/mod-703-project-roadmap/exercise-03/README.md",
+        "modules/mod-703-project-roadmap/exercise-04/README.md",
+        "modules/mod-703-project-roadmap/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-703-project-roadmap`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-MOD-704-CROSS-TEAM-COORDINATION",
+      "label": "mod-704-cross-team-coordination: Cross-Team Coordination",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-704-cross-team-coordination/exercise-01",
+        "mod-704-cross-team-coordination/exercise-02",
+        "mod-704-cross-team-coordination/exercise-03",
+        "mod-704-cross-team-coordination/exercise-04",
+        "mod-704-cross-team-coordination/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-704-cross-team-coordination/exercise-01/README.md",
+        "modules/mod-704-cross-team-coordination/exercise-02/README.md",
+        "modules/mod-704-cross-team-coordination/exercise-03/README.md",
+        "modules/mod-704-cross-team-coordination/exercise-04/README.md",
+        "modules/mod-704-cross-team-coordination/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-704-cross-team-coordination`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-MOD-705-HIRING-ONBOARDING",
+      "label": "mod-705-hiring-onboarding: Hiring + Onboarding",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-705-hiring-onboarding/exercise-01",
+        "mod-705-hiring-onboarding/exercise-02",
+        "mod-705-hiring-onboarding/exercise-03",
+        "mod-705-hiring-onboarding/exercise-04",
+        "mod-705-hiring-onboarding/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-705-hiring-onboarding/exercise-01/README.md",
+        "modules/mod-705-hiring-onboarding/exercise-02/README.md",
+        "modules/mod-705-hiring-onboarding/exercise-03/README.md",
+        "modules/mod-705-hiring-onboarding/exercise-04/README.md",
+        "modules/mod-705-hiring-onboarding/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-705-hiring-onboarding`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-PROJECT-01-TEAM-PROCESS",
+      "label": "Project 01 \u2014 Team Process Implementation",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-01-team-process"
+      ],
+      "solutions": [
+        "projects/project-01-team-process/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-01-team-process`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-PROJECT-02-TECHNICAL-STRATEGY",
+      "label": "Project 02 \u2014 Technical Strategy & Roadmap",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-02-technical-strategy"
+      ],
+      "solutions": [
+        "projects/project-02-technical-strategy/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-02-technical-strategy`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-PROJECT-03-HIRING-ONBOARDING",
+      "label": "Project 03 \u2014 Hiring & Onboarding Pipeline",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-03-hiring-onboarding"
+      ],
+      "solutions": [
+        "projects/project-03-hiring-onboarding/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-03-hiring-onboarding`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-PROJECT-04-PLATFORM-PROJECT",
+      "label": "Project 04 \u2014 Cross-Functional Platform Project",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-04-platform-project"
+      ],
+      "solutions": [
+        "projects/project-04-platform-project/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-04-platform-project`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-TL-PROJECT-05-LEADERSHIP-CAPSTONE",
+      "label": "Project 05 \u2014 Leadership Capstone",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-05-leadership-capstone"
+      ],
+      "solutions": [
+        "projects/project-05-leadership-capstone/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-05-leadership-capstone`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

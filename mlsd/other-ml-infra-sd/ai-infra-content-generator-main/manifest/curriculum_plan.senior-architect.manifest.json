@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "role": "senior-architect",
+  "role_title": "Senior Architect Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-SARCH-MOD-401-ENTERPRISE-AI-STRATEGY",
+      "label": "MOD-401: Enterprise AI Strategy and Vision",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-401-enterprise-ai-strategy/exercise-01",
+        "mod-401-enterprise-ai-strategy/exercise-02",
+        "mod-401-enterprise-ai-strategy/exercise-03",
+        "mod-401-enterprise-ai-strategy/exercise-04",
+        "mod-401-enterprise-ai-strategy/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-401-enterprise-ai-strategy/exercise-01/README.md",
+        "modules/mod-401-enterprise-ai-strategy/exercise-02/README.md",
+        "modules/mod-401-enterprise-ai-strategy/exercise-03/README.md",
+        "modules/mod-401-enterprise-ai-strategy/exercise-04/README.md",
+        "modules/mod-401-enterprise-ai-strategy/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-401-enterprise-ai-strategy`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-402-EXECUTIVE-LEADERSHIP",
+      "label": "MOD-402: executive leadership",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-402-executive-leadership/exercise-01",
+        "mod-402-executive-leadership/exercise-02",
+        "mod-402-executive-leadership/exercise-03",
+        "mod-402-executive-leadership/exercise-04",
+        "mod-402-executive-leadership/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-402-executive-leadership/exercise-01/README.md",
+        "modules/mod-402-executive-leadership/exercise-02/README.md",
+        "modules/mod-402-executive-leadership/exercise-03/README.md",
+        "modules/mod-402-executive-leadership/exercise-04/README.md",
+        "modules/mod-402-executive-leadership/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-402-executive-leadership`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-403-ENTERPRISE-GOVERNANCE",
+      "label": "MOD-403: enterprise governance",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-403-enterprise-governance/exercise-01",
+        "mod-403-enterprise-governance/exercise-02",
+        "mod-403-enterprise-governance/exercise-03",
+        "mod-403-enterprise-governance/exercise-04",
+        "mod-403-enterprise-governance/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-403-enterprise-governance/exercise-01/README.md",
+        "modules/mod-403-enterprise-governance/exercise-02/README.md",
+        "modules/mod-403-enterprise-governance/exercise-03/README.md",
+        "modules/mod-403-enterprise-governance/exercise-04/README.md",
+        "modules/mod-403-enterprise-governance/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-403-enterprise-governance`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-404-INNOVATION-RD",
+      "label": "MOD-404: innovation rd",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-404-innovation-rd/exercise-01",
+        "mod-404-innovation-rd/exercise-02",
+        "mod-404-innovation-rd/exercise-03",
+        "mod-404-innovation-rd/exercise-04",
+        "mod-404-innovation-rd/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-404-innovation-rd/exercise-01/README.md",
+        "modules/mod-404-innovation-rd/exercise-02/README.md",
+        "modules/mod-404-innovation-rd/exercise-03/README.md",
+        "modules/mod-404-innovation-rd/exercise-04/README.md",
+        "modules/mod-404-innovation-rd/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-404-innovation-rd`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-405-RESPONSIBLE-AI",
+      "label": "MOD-405: responsible ai",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-405-responsible-ai/exercise-01",
+        "mod-405-responsible-ai/exercise-02",
+        "mod-405-responsible-ai/exercise-03",
+        "mod-405-responsible-ai/exercise-04",
+        "mod-405-responsible-ai/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-405-responsible-ai/exercise-01/README.md",
+        "modules/mod-405-responsible-ai/exercise-02/README.md",
+        "modules/mod-405-responsible-ai/exercise-03/README.md",
+        "modules/mod-405-responsible-ai/exercise-04/README.md",
+        "modules/mod-405-responsible-ai/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-405-responsible-ai`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-406-GLOBAL-INFRASTRUCTURE",
+      "label": "MOD-406: global infrastructure",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-406-global-infrastructure/exercise-01",
+        "mod-406-global-infrastructure/exercise-02",
+        "mod-406-global-infrastructure/exercise-03",
+        "mod-406-global-infrastructure/exercise-04",
+        "mod-406-global-infrastructure/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-406-global-infrastructure/exercise-01/README.md",
+        "modules/mod-406-global-infrastructure/exercise-02/README.md",
+        "modules/mod-406-global-infrastructure/exercise-03/README.md",
+        "modules/mod-406-global-infrastructure/exercise-04/README.md",
+        "modules/mod-406-global-infrastructure/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-406-global-infrastructure`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-407-STRATEGIC-PARTNERSHIPS",
+      "label": "MOD-407: strategic partnerships",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-407-strategic-partnerships/exercise-01",
+        "mod-407-strategic-partnerships/exercise-02",
+        "mod-407-strategic-partnerships/exercise-03",
+        "mod-407-strategic-partnerships/exercise-04",
+        "mod-407-strategic-partnerships/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-407-strategic-partnerships/exercise-01/README.md",
+        "modules/mod-407-strategic-partnerships/exercise-02/README.md",
+        "modules/mod-407-strategic-partnerships/exercise-03/README.md",
+        "modules/mod-407-strategic-partnerships/exercise-04/README.md",
+        "modules/mod-407-strategic-partnerships/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-407-strategic-partnerships`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-408-MA-DUE-DILIGENCE",
+      "label": "MOD-408: ma due diligence",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-408-ma-due-diligence/exercise-01",
+        "mod-408-ma-due-diligence/exercise-02",
+        "mod-408-ma-due-diligence/exercise-03",
+        "mod-408-ma-due-diligence/exercise-04",
+        "mod-408-ma-due-diligence/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-408-ma-due-diligence/exercise-01/README.md",
+        "modules/mod-408-ma-due-diligence/exercise-02/README.md",
+        "modules/mod-408-ma-due-diligence/exercise-03/README.md",
+        "modules/mod-408-ma-due-diligence/exercise-04/README.md",
+        "modules/mod-408-ma-due-diligence/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-408-ma-due-diligence`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-409-THOUGHT-LEADERSHIP",
+      "label": "MOD-409: thought leadership",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-409-thought-leadership/exercise-01",
+        "mod-409-thought-leadership/exercise-02",
+        "mod-409-thought-leadership/exercise-03",
+        "mod-409-thought-leadership/exercise-04",
+        "mod-409-thought-leadership/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-409-thought-leadership/exercise-01/README.md",
+        "modules/mod-409-thought-leadership/exercise-02/README.md",
+        "modules/mod-409-thought-leadership/exercise-03/README.md",
+        "modules/mod-409-thought-leadership/exercise-04/README.md",
+        "modules/mod-409-thought-leadership/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-409-thought-leadership`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-MOD-410-FUTURE-OF-AI-INFRA",
+      "label": "MOD-410: future of ai infra",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-410-future-of-ai-infra/exercise-01",
+        "mod-410-future-of-ai-infra/exercise-02",
+        "mod-410-future-of-ai-infra/exercise-03",
+        "mod-410-future-of-ai-infra/exercise-04",
+        "mod-410-future-of-ai-infra/exercise-05"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-410-future-of-ai-infra/exercise-01/README.md",
+        "modules/mod-410-future-of-ai-infra/exercise-02/README.md",
+        "modules/mod-410-future-of-ai-infra/exercise-03/README.md",
+        "modules/mod-410-future-of-ai-infra/exercise-04/README.md",
+        "modules/mod-410-future-of-ai-infra/exercise-05/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-410-future-of-ai-infra`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-PROJECT-401-AI-TRANSFORMATION-STRATEGY",
+      "label": "Project 401: Enterprise AI Transformation Strategy",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-401-ai-transformation-strategy"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-401-ai-transformation-strategy`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-PROJECT-401-TRANSFORMATION-STRATEGY",
+      "label": "Project 401: Enterprise AI Transformation Strategy",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-401-transformation-strategy"
+      ],
+      "solutions": [
+        "projects/project-401-transformation-strategy/README.md",
+        "projects/project-401-transformation-strategy/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-401-transformation-strategy`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-PROJECT-402-GLOBAL-AI-PLATFORM-ARCHITECTURE",
+      "label": "Project 402: Global AI Platform Architecture",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-402-global-ai-platform-architecture"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-402-global-ai-platform-architecture`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-PROJECT-403-RESPONSIBLE-AI-FRAMEWORK",
+      "label": "Project 403: Enterprise Responsible-AI Framework",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-403-responsible-ai-framework"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-403-responsible-ai-framework`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-PROJECT-404-INNOVATION-PROGRAM-DESIGN",
+      "label": "Project 404: Enterprise AI Innovation Program",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-404-innovation-program-design"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-404-innovation-program-design`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-PROJECT-405-INDUSTRY-THOUGHT-LEADERSHIP",
+      "label": "Project 405: Industry Thought Leadership Portfolio",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-405-industry-thought-leadership"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-405-industry-thought-leadership`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-SARCH-PROJECT-406-ENTERPRISE-GOVERNANCE-MODEL",
+      "label": "Project 406: Enterprise AI Governance Operating Model",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-406-enterprise-governance-model"
+      ],
+      "solutions": [],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-406-enterprise-governance-model`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

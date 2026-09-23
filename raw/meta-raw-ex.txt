@@ -1,0 +1,981 @@
+Phone 
+Leetcode easy + mid
+
+Onsite 
+2 AI coding + 2 AI sys design + 1 BQ
+
+AI coding 01:
+Friend system: 
+Implement friend recommendation algorithm
+Provided data: list of users, list of friends (user-user pairs)
+design a strategy to recommend new friends to a user (e.g. search for friend of friend, search for popular users, etc...)
+3 test suite, with the 3rd has ~100k users and ~1.5million friend pairs
+
+
+AI coding 02:
+Card:
+Pick card : 36 card deck. Full deck is visible to solver/player, card only have values of 1-9; pick 3 to reach sum==15; only 16(15?记不清了） cards on table is visible, after each pick feed 3 more random cards from the res if possible; Game win if all 36 cards consumed (12 groups)
+need to write new tests to benchmark algorithm on large dataset (>1k games)
+
+
+AI sys design 01:
+video game score leaderboard
+entities: players, games, friends, high-scores(one for each player+game)
+Key feature: show closest scores when user finished a game (range search in large dataset)
+
+
+AI sys design 02
+Ride share system
+
+
+
+地里很多问AI面试的林林总总，这也算今年很多公司的新面试模式。地里的面经大部分比较简短，lz这一段时间也面了很多别家的AI coding，结合平时对AI的开发使用经验，也是踩了无数坑总结出来一些希望自己早知道的一些东西，希望对朋友们有帮助。以下是心得分享：
+
+AI coding面试和平常LLM coding agent（以下AI)使用的关键不同
+限时：
+平常几乎没有人会限制AI在5分钟之内回答，先进模型都是追求能独立执行越长越好
+多交互：
+日常使用案例几乎都是越少交互越好，面试几乎完全相反
+面试过程不能干瞪眼，要展示和AI互动的能力
+任何跑偏时间成本巨大
+环境限制：
+面试沙盒性能受限（大部分大厂环境实测1.5core，2G mem，几乎无法多线程/多session/agent），而比如meta 等AI coding后面的测试集几乎都是压力测试
+最近的AI版本大多会自动化测试，不明确指挥的话会自发跑面试环境里的大case，导致巨量耗时/未优化前直接卡死
+策略
+
+开局就简单加一些session prompt，确保AI明确本次会话的特殊性（见下文）
+关键就是向AI说明面试环境的时间限制。下面几个要求其实聪明的模型基本上说明时间限制和面试环境之后，就可以让其自己制定一些觉得应该遵循的规则再应用；我的经验基本不需要重复（write session prompt then re-apply)这一步，手动强调几条关键的一般够用了。
+正确率保证的基础上，速度第一，最小化输出，减少/跳过测试
+最新模型下(claude 4.8/gpt 5.5+)，大部分面试难度的算法基本可以相信AI能一次蒙/做对，不需要每一小步都测试（特别是java环境下每次测试需要build还是会消耗一些时间的）
+切割需求，包含规划，实现，测试，保证每一块2-5分钟出结果
+这点最重要，几乎也会是我每次的会话提示词（set as a session level memory/standard)。
+最新模型下(claude 4.8/gpt 5.5+)，这些都让AI自己做：规划实现步骤，估计时间，需要的话再去提示调整
+最最新模型下，可以运行中插入新提示，不过近来面的几个环境多数不支持，而且面试的小破虚拟机截断执行偶尔导致环境不稳定，甚至需要刷新页面/重启环境，优先尽量减少截断
+进来版本AI的需求切割一般都很理想，尽早瞄准最终目标计划实现步骤（最优化算法），避免常规coding面试中先写完基础版再优化，可以直接尝试较复杂的优化算法，减少之后提示的上下文负担
+
+
+AI sys design：
+目测几乎还没有实装 - 面试官说可以借助AI，但实际上并用不到，有些也直言不建议用。实际上目前见过的几个AI sys design的面试官并没有提供任何use case，只是提供了一个AI聊天窗口，说可以unblock yourself as needed（这和前AI时代碰到不会去google一下也没什么区别）。因为面的也都是百年老题，系统设计本身就是展示知识容量的过程，我个人也确实没觉得有什么positive use case。有些平台有一些AI作图功能在画流程图的时候用了一下（鼠标不太方便），偶尔省个几秒，但是也不是面试的关键。
+
+下面附一些我常用的会话层规则的汇总版，前几场摸清节奏之后几乎每一场都会用，效果还是很好的(e.g. meta card game 10k case: 99.97% win rate in 40 seconds)。当然面试不能直接复制粘贴，我一般会手打几条我觉得对当前题目最重要的，面试过程中也及时调整。
+
+short version:
+Timed interview, weak box (~1.5 cores, flaky tools).
+Cap each response to ~3 min of work. If a task will exceed that, stop and give me a breakdown with step time + expected gain.
+Before any optimization, quote expected gain + effort; skip if marginal.
+No long background runs; cap every run with a timeout (30-60s), single-threaded.
+Correctness first; validate on tiny samples, full sample only with explicit human confirmation.
+完整起始提示词（Java 栈）
+你正在帮助我完成一个限时（40分钟）的 CoderPad 面试任务（Java/Maven，共享容器，约 1.5 个 CPU 核心，工具层不稳定）。目标是尽快交付正确代码，而不是追求巧妙。除非我明确覆盖，否则遵循以下规则：
+时间与沟通
+每次回复最多投入约 3 分钟的工作。如果一个任务会超过这个时间，停止并给我一个拆解方案，包括每一步所需时间 + 预期收益，然后让我选择。
+在进行任何优化之前，先说明：(a) 预期提升，(b) 工作量估计，(c) 风险。如果收益很小或工作量很高，建议跳过。
+保持回答易于快速浏览：先给结果，再给推理。
+环境安全
+永远不要启动后台运行或长时间运行的 JVM 进程。所有运行都必须加 timeout（<= 约 200 秒），并优先使用单线程、nice 降低优先级执行。
+假设只有约 1.5 个可用 CPU 核心：不要并行运行 benchmark，也不要同时启动多个重型 JVM，它们会锁死整个环境。
+每次修改后，重新读取文件，确认修改已正确应用（这个工具有时会报告超时，但实际上修改已经成功，从而导致重复修改）。
+工作流程
+首先阅读代码 + 题目说明，并重新说明目标、通过标准，以及这些标准具体是在哪个 sample / metric 上测量的。
+在优化任何东西之前，先确保 correctness 全部通过。
+尽早建立一个小型测量 harness：分层 sample size（20 / 100 / full），使用固定 seed 并持久化，以保证运行结果可复现、可比较。
+使用能够否定某个改动的最小 sample 进行迭代；只有在我明确要求时才运行 full sample。
+优先一次完成一批修改，而不是进行多次工具往返。把 scratch / benchmark 代码和正式代码清楚分开，并在提交前提醒我删除它们。
+验证纪律
+如果没有在同一个 sample 上进行修改前 / 修改后的实际测量，绝对不要声称有性能提升。
+如果结果可能只是 sample size 太小带来的噪声，要明确指出。
+维护一个简短的 changelog，记录每次修改对应的 avg / worst / time，方便我们比较。
+开始时先阅读题目，然后给我：目标、通过标准、一个包含 3–5 项并带有时间估计的计划，以及第一个 correctness milestone。在我确认之前不要进行优化。
+
+
+刚出炉的面试 总共5轮 刚面完 希望给自己攒点人品
+
+店面 live coding 主要是看代码正确性 lz 感觉题目不难 上手直接就写了 大概面完半小时 recruiter反馈直接下一轮 不过表示 coding execution 很好 但是要多说 注意沟通
+VO 总共四轮
+rate limiter 地理都有 实现token bucket， 追问produciton 场景 全部接住 全程沟通 基本上是我放慢速度教学一样 个人感觉发挥最好的
+sd. notificaiton 基本上就是地理那些套路 全程面试官喜欢drive 我全程接招 全部接住 我个人感觉问题不大
+ml sd 这一轮感受到面试官确实很专业 应该是有非常强的实战经验 问了巨多生产端的事情 虽然是所有里面面的没有那么好的 但是我个人感觉发挥了95%的实力 50个问题 可能就1个没有完全答上来？其他全部接住
+hm project/bq 最成功/失败的 negative feedback why here? 我个人觉得面的很不错 基本上是和hm聊了巨多 巨细节 然后hm给我介绍组里的情况 51mins结束
+整体感觉reddit这个mle 确实bar比较高 coding还好 sd mlsd 和hm会沿着 回答 往下继续deep dive目前五轮全部结束，等结果，攒人品
+
+
+
+中规中矩的算法题 有用还请加个米哦
+1.
+stock  , any times of transactions, what is the max profit
+
+follow up : just one transaction, what is the max profit
+
+2.
+move(x,y), return True/False
+reachCheese()  return True/False
+return True/False if the mouse starting from (0,0) can it reach cheese
+
+
+
+第一题是幺幺二变种，给一棵 binary tree，找 root-to-leaf sum 最小的路径并返回 path, dfs解的
+第二题是溜吧灵，最多删一个字符判断能不能变成回文，后面问如果最多能删 K 个字符怎么改，双指针，follow-up 说了递归加 memo。
+
+
+
+AI coding 是从一组 words 里选一个 subset，选中的 words 之间不能有重复字符，同时让总字符数尽量大。
+SD 是设计 status search，需要支持 AND/OR。
+BQ 问了 most proud project、ambiguous requirements 和 critical feedback，都会继续问细节。
+
+
+买它店面+VO面经，题目和思路都写了，回馈地里
+一直受惠于地里的面经，这次准备基本就是靠着地里的帖子把高频题过了几遍，发个帖回馈一下。因为签了 NDA，题目就用谐音了，见谅。
+店面
+45 分钟两道题，开场自我介绍五分钟，剩下的时间基本都在写代码。
+第一题 幺零舅幺，二维矩阵从左上角走到右下角，0 能走 1 不能走。我先把 BFS 和 DFS 两种思路都说了一遍，面试官让我选一个写，我选了 BFS。写完之后 follow up 要求把路径打印出来。我一开始想的是在 queue 里直接带着整个 path 一起进，面试官提示说有没有更省空间的做法，后来改成在 queue 里维护一个 parent map，最后从终点往前 loop 构造 path。
+第二题 物流领，给一个数组和一个 target，求和等于 target 的 subarray 个数。这题算是送分，prefix sum + hashmap，五分钟写完。面试官让我自己想 test case，我说了空数组、单个元素、全是 0、有负数、target 是 0 这几种。
+这里提醒一下大家，买它是真的很看重 test case，我看地里好几个帖子都提到了，每道题写完都要自己 dry run 一遍。
+VO Coding 1
+
+国人小哥，人很 nice，全程有互动。
+第一题 伊留儿变种，不是找 peak 而是 find local min，一样二分。我口头说了思路，面试官追问了几个边界：如果数组只有一个元素怎么办、如果相邻两个相等怎么办。答完开始写，写的过程中有个 typo 面试官直接提醒了。感觉买它这边不强求 bug free 一遍过，但是逻辑要清楚，而且要自己跑 test case。
+第二题 遛巴铃，删一个字符判断能不能变成回文。写完之后 follow up 问如果可以删 K 个字符怎么办。我说改成递归加 memo，把 (left, right, k) 当 state，面试官问了复杂度，我说 O(n*k)。
+VO Coding 2
+这轮遇到了变种，有点慌。
+第一题是耳柏的变体，不是直接问岛的数量，而是要实现一个 API，类似 isSizeExist(int size)，问存不存在一个岛的大小正好等于这个数。我的做法是先用 DFS 把所有岛的 size precompute 出来存到 HashSet 里，然后 API 直接查，O(1)。
+这里我犯了个错，一开始把 set.add() 写到 DFS 里面去了，跑 test case 的时候发现不对才改过来。最近 backtracking 刷多了，惯性思维害人。
+第二题 幺二舅，binary tree 每条 path 上的数字拼起来求和。常规 DFS，很快写完了，剩了点时间聊了聊 iterative 的写法，以及树很深的时候 recursion 会不会 stack overflow。
+System Design
+题目是设计一个系统可以搜索用户发布的 status，纯文本，需要支持 AND 和 OR 的查询条件。
+我上来先 clarify 了几个问题：QPS 大概多少、是不是需要支持实时搜索、要不要考虑排序和相关性。面试官说不用考虑 ranking，重点在数据结构和存储。
+然后我就往 inverted index 的方向讲，term -> list of status id 的 mapping，AND 就是求交集，OR 就是求并集，list 保持有序可以用 skip pointer 加速求交。面试官比较满意，然后开始往深里挖：用户新发一条 status 的时候，你怎么更新这些 index？
+这里就要讲 Tokenization、Normalization、Indexing 这几个环节。我说了大概的 pipeline：写入的时候先进 message queue，consumer 做分词和归一化（大小写、stemming、停用词），然后更新 index。
+面试官又问，如果 index 已经很大了单机存不下怎么办。我说 shard based on term，用 consistent hashing。他继续追问那 query 有多个 term 的时候是不是要 scatter-gather，我说是的，然后讨论了一下按 term 分片和按 document 分片的 tradeoff。
+这一轮聊得比较顺，主要还是因为地里之前有帖子提过这个题，我提前看过。
+BQ
+外国大哥，全程比较严肃，问题一个接一个，感觉是卡着时间来的。
+Most proud project，要求用最近的例子
+讲一个你必须在信息不完整的情况下就开始做的项目
+项目做到一半方向变了，你怎么处理的
+收到过什么 critical feedback，之后做了什么改变
+跟难相处的人合作的经历
+我一共准备了六七个 story，基本都 cover 到了。感觉买它 BQ 是真的在收集 signal，每个问题他都会追问细节：你当时具体做了什么、为什么这么决定、有没有数据支撑、如果重来一次会怎么做。所以 story 不能只讲个大概，一定要有具体的数字和结果。
+一些感想
+熟练度比什么都重要。 买它的题真的都不难，九成都是 medium，但 45 分钟两道题时间很紧。地里的高频题过两三遍，保证看到题 20 分钟内能说清思路 + 写完 + 跑 test case。
+不要一上来就把三种解法都摆出来。 我看地里有帖子说这样容易让面试官觉得你在背答案。更好的方式是由浅入深：先说最直接的做法（比如用 map 记 frequency 再排序），然后自己指出缺点（费空间、来新数据要重排），再自然引出最优解（heap，空间 O(K)、时间 O(logK)）。把「因为什么 constraint、想达成什么效率、所以选什么方法」这个思考过程说出来，比直接甩最优解有用。
+Test case 一定要自己想。 几乎每个面试官都会问，空集、一个元素、两个元素、全相同、全递增、全递减、有重复，这几类先背下来。
+BQ 要认真准备。 尤其是 level 高一点的，story 的质量直接决定 signal。同样是讲解决冲突，「我和同事讨论了一下最后达成一致」和「我 drive 了跨组的 alignment、写文档、开会、summarize 发到 channel、最后重新对齐了 timeline」，给出的 level 信号完全不是一回事。
+卡住了就说出来。 有一轮我想岔了，是面试官提示才回到正轨的。与其闷头想五分钟，不如把当前的思路讲出来让对方帮你 redirect。
+求大米，也祝大家都能顺利上岸！
+
+最近收到meta面试，我看meta的面试内容有两个coding，一个是ai- native coding，一个是ai- structured coding，请问跟之前有什么区别？
+
+我问hr，他说ai native coding可以用ai辅助（我猜就是之前的ai- enable coding？ 不知道题目有没有变化，还是maze，unique string character，card problem那些？
+
+但是Structured AI Coding是什么，不是传统leetcode题吗？
+
+回馈地里 - 两轮ML design，两轮AI coding， 一轮BQ
+1. ML design
+
+Design a system to detect and block content with weapons on Facebook
+Input is multimodal (text, image, video, audio) and multilingual
+Detection should happen near real-time after a post is shared publicly
+
+2. MLdesign
+
+new tab on facebook - nearby restaurant recommendation, design the recommendation system for it.
+
+3. AI coding
+
+maze solver 和hello interview 内容很像
+
+4. AI coding
+
+friend recommendation,前面内容和地里面经差不多 最后的follow up: how to make sure the implemented friend recommendation is performing well. Answer: create a hold-out dataset and measure recall/precision.
+
+
+Plan Round Trip With Minimum Flight Cost
+
+Given a departure cost D = [.....] and Return cost R = [...]
+
+1. Find the min cost of travel where Departure < Return
+2. Return indices of departure and return. If tied return the earliest departure and latest return
+3. Start with O(n^2) then optimize to O(n)
+
+Example:  D = [10, 7, 8, 3, 6] R = [ 5, 4, 10, 7, 5]  
+Answer depart on D[3] = 3 and return on R[4] cost = 8
+
+其实是在25年10月份开始找了，两轮coding+电面，一直被拖着，以为就这样了。但是某一天突然收到了邮件参与onsite，大概是突然给headcount了。然后准备project deepdive。
+
+overall我觉得表现还行，behavior和manager聊的也不错，但是VO之后三个礼拜没有feedback。发邮件去问了发现被拒了，GG。
+
+
+VO behavior: 主要聊你对openAI看法，其中一个问题是如果openAI rollout一个新产品，你会关注哪些方面
+
+VO coding题目：数据清理，找出那个标注错误的人。地里有类似的，主要需要熟悉pandas。我最后没有采取比较fancy的算法，而是用了比较bruteforce的方式直接排序每个labeler的数据quality
+
+前段面了买它，被拒了，发一下。求米
+
+具体题目：
+2轮 research design: 给了我一些具体的场景，然后让我设计方案。一个是设计coding LLM, 一个是设计一个聊天机器人
+1轮 机器学习基础知识，问了optimizers, scaling law, k-means clustering and GMM，我答的不是特别好
+1轮 coding, coding问了常规的attention， 网上面经能找到，让我把attention代码写一下，算下复杂度，然后口头上问了我一些最近新的attention是怎么做的（比如知不知道flash attention, flash attention怎么个flash， linear attention是怎么回事）
+1轮 behavior
+
+AI enable coding: Find the maximum subset of word, that is not overlapping with each other, but the set captures most characters.
+
+Coding:
+1. two arrays for Depature price & Arrival price. find the minimum round trip cost.
+2. two arrays of sorted increasing & non-overlapping intervals. Merge them
+
+System Design: Design backend system to detect and serve trending hashtags from Facebook posts. Timeliness — the trend should surface on Facebook while the real event is taking place. The latency here is 1 minute. We also want to consider posts from the last 24 hours. The recent ones are more important. Popularity — the trend should be of interest to many people in the community.
+Novelty — the trend should be about something new. People were not posting about it before, or at least not with the same intensity.
+
+
+
+
+timeline:
+
+四月底 phone screen
+五月底 onsite
+两轮system design 【video ranking 和 event recommnedation】
+两轮ai coding 【substring 和 echo】
+一轮behaviour
+六月初 通知进TM 【本来以为freeze了】
+
+
+target 6，电面的时候还是behavior+两道lc，当时还问面试官听说你们要裁员，我的职位会不会被影响，面试官说他也不知道，但一般hiring freeze只会锁junior的，像我面6的话而且是mle应该不受影响。后来排onsite前跟recruiter电话准备onsite我又问了她这个事情，她还信誓旦旦跟我说ml ai这些岗位肯定不会受影响
+
+onsite全是ai coding
+第一轮coding两个烙印 工作台不同工序做饭 做出4问好像还有第五问 具体有点不太记得了 反正没感觉自己干了什么 也没写几行代码 都ai搞了
+第二轮coding两个亚女 maze
+感觉面试官都在学习这种新面试，让你用ai也不是，不让用也不是，为了让他们能在feedback上有东西写，我都是先把我的算法描述清楚再用ai，中间还被claude limit了只能临时换gpt，他们的codepad也在改进，第一轮没有cc，第二轮cc codex都有了
+
+第一轮design event recs，问的很细，包括模型架构具体怎么实现
+第二轮design 武器广告，问题比较集中在数据收集
+感觉鱿鱼的design时间都太短了，45分钟很多东西根本来不及展开，碰上面试官稍微迟到几分钟再来个自我介绍，基本上只能说半小时，其他公司design都是一小时的
+两轮design都说是ai enabled，但是面试官也没enable ai，其实也没时间用ai就还跟以前一样
+
+bq 问了一堆平时怎么用ai的问题，问的很细包括用什么tool干什么事情，我都觉得鱿鱼是不是用这种方式来吸收业界大家怎么用ai的经验，感觉他们内部挺焦虑的。还问到怎么提高communication，我说了几个包括看书看视频，结果面试官还追问你都看些什么书，我就觉得挺无语的感情整个面试就是陪你们training来套我话了
+
+过了两天给我发邮件公司计划有变我面的这个岗位不招了，不知道地里有没有小伙伴也有同样的经历
+
+另外求大家加点米，这几天看包裹消耗太多了。。
+
+Position: Software Engineer, Product
+Result: Target E5 Pass
+
+OA有點久遠但是地裡題庫中的題目
+
+phone screen recruiter幫我waive掉了直接進入VO
+
+VO總共4輪
+
+AI-Enabled SD
+
+說是AI-Enabled 但Interviewer小哥似乎是第一次面試這種的，題庫也沒準備好，set up 環境也花了10來分鐘，最後給了一道design door dash；其中重點考察decision trade-offs比如shopping cart persistency, driver location update etc
+
+AI-Native BQ
+基本BQ問題proudest project, resolve conflict etc最後問了使用AI的經驗
+
+AI-Enabled Coding 1
+經典Maze Solver 前三問都是debug 最後一問是鑰匙跟門
+
+AI-Enabled Coding 2
+題目名稱面試官自己加了點巧思，叫做ParanoidEcho但本質上就是word container那題，是個open-ended的問題，主要在看你如何drive decisions。題目給了一個brute force implementation，面試官問你可以怎麼優化，我先給出了bottleneck然後用AI brainstorm (我自己也不確定這是不是個用AI的好時機但結果看起來是可以的）AI給了Trie跟Hashset兩種解法，我分析了兩種解法的pros&cons然後選擇先implement Trie，接著馬上叫AI implement，run test通過之後面試官要我把implementation加進benchmark裡 (provided)；跑通之後面試官要我把另一種解法也寫一下並也跑一下benchmark，結果出來runtime差不多但memory用比較多。這邊面試官有準備兩種benchmark，兩者跑完之後隨意分析一通就結束面試了
+
+
+
+AI coding 迷宫题。前面就是修 test case，后面问到 BFS 没加 visited 会死循环，还有只能往左/右走、门和钥匙那种
+
+SD 设计Instagram，主要就是发帖/feed/like/comment 那套，后面问到如果大号或者热门帖突然流量上来怎么扛，我答了缓存、限流和异步处理这些，但讲得有点散
+
+BQ 就常规的 项目里怎么跟人合作、需求不清楚的时候怎么推进、事情堆一起怎么排优先级 没什么特别奇怪的问题
+
+
+二月下旬 Recruiter Reachout，中间每次推进都约在一个月以后，全程主打一个佛系。
+
+Phone Screen
+
+LC 65
+此帖中 12/4 coding 1 的第二题
+VO
+
+Coding: LC 121; LC 199
+AI coding: Card deck
+BQ: Favorite project (scope/complexity) / Conflict resolution / Move fast / Volunteer on important project (leadership) / Cross team/function collaboration / Constructive feedback from manager
+
+
+SD Design a queue service (e.g. Kafka)
+SD Design a taxi request service (Uber) requirement和uber稍微有点不同 需要支持很多司机同时接单；用户选一个司机；被选中的司机要接受用户的选择
+
+
+Coding
+LC26 LC329 都写出来+followup回答上来了
+
+Al-native Random friend recommender
+四问写出来，但最后一个算score用了一个比较简单的写法
+
+
+
+System Design
+Instagram 走完了全部design和基本的dive deep
+一个Follow up没有回答上，问s3 presigned url怎么保证不会被恶意上传文件，回答了s3限制size和server side validation但好像不是面试官想要的
+
+BQ
+Conflicts, ambiguity, priority, mistake
+
+一周后送hc应该没过，拒信无feedback
+
+LC: 思旧吧
+LC: 伊尔久
+
+
+
+
+LC: 散散就
+LC: 要留五菱（只给parent，比较抽象，我最后和面试官用了白板做的推演）
+
+
+
+AI-Native Coding
+以下内容需要积分高于 188 您已经可以浏览
+
+Maze 四问
+
+
+
+System Design
+以下内容需要积分高于 188 您已经可以浏览
+
+Instagram 拍卖，用户能够竞价以及看到实时最高价
+面试官challenge了我为什么用乐观锁（Ins 有celebrity的情况所以他最后要求我用悲观锁），其他都和HelloInterview 类似
+
+
+
+BQ
+以下内容需要积分高于 188 您已经可以浏览
+
+常规：Constructive feedbacks, Conflicts 等
+
+
+之前投过其他岗位电面，过了后没来得及约vo岗位就没了，所以这次没电面，OA后就vo了
+
+第一轮BQ，就常规问题，还有些怎么用ai，心得体会之类的
+
+第二轮AI coding, maze，面经很多了
+
+第三轮AI coding，好像没怎么见过，是有些产品需要不同工序，不同工序所需时间和工作台也不同，还有些不同的工人对不同工序有不同熟练度，整体就是根据订单和时限，怎么maximize分数(完成订单产品获取相应分数)
+
+第四轮 传统systemdesign，一个write heavy的系统
+
+第五轮 AI system design，设计个agent来处理大规模pipeline的issue
+
+我不是SDE出身，没怎么准备过system design，这次感觉传统design答的不太好
+
+补充内容 (2026-05-08 08:13 +08:00):
+7 年经验，之前做其他非ML非传统SDE的算法
+
+
+Coding: (1) 里扣要酒旧 + (2) 两个linked list, 每个node.val是一个string,判断两个list构成的字符串是否相同
+
+AI Coding: 给一个list of words, 比如['jan', 'feb',...]，输出subset of words with maxunique characters without duplicate.
+System Design: How to avoid harmful ads in facebook.
+
+整体面试都是比较常规，难度也不算大。相对来说，AI Coding有点不太好做，需要多多准备一下。求大米求大米
+
+
+
+回馈地里，谢谢这么多同学的分享，准备起来很有帮助哈。祝大家找工顺利！
+coding：利口气儿三，斯九龄
+ML SD：Design a machine learning system that recommends places to a user in a maps
+ML SD：FB marketplace recommendation page
+AI coding：Maze （1-4问和地里分享的一模一样）。用的GPT5.4，one prompt就直接solve了。因为做的可能比较快，面试官还要我第三问时尝试着自己写😂。
+🔗 www.1point3acres.com
+🔗 www.1point3acres.com
+LZ是做推广搜的， HR也说了只考ranking/recommendation。把我自己准备的买它高频ML SD总结了一下：
+
+Ranking: Place recommendation, Short video recommendation, FB Marketplace recommendation, Instagram explore tab
+Classification: Harmful post or weapon sales, Event recommendation (probability of an event being attended by a user),  Ads recommendations
+
+
+过去一年地里考过的原稿：
+MLSD：目测翻车了。题目是设计一个模型，检测用户上传的图片是否违背版权。楼主说可以用pretrai 的 VLM对用户图片和已知有版权的图片做embedding，serving时用ANN search看用户上传图片是否能match 到受版权保护的图片，然后判断版权owner是否就是上传者。面试官追问： 如何 fine-tune这个VLM？ 如果用户上传的是九宫格，只有一格违反版权怎么办？ 图片里有 adversarial text怎么办？ 原图有版权，但用户相机照一个算是侵权吗？ 楼主回答可以先对图片做分割，检测每个部分是否违规；训练时加入一些adversarial example做contrastive learning。面试官似乎不完全满意，只觉得data augmentation之外还得改变模型本身；楼主又补充可以在盗图检测模型前加一个专门的segmentation模型，面试官说能不能一个模型实现。楼主是搜广推 MLE，确实不知道还有什么更好的办法，假如挂了也只能认栽了。
+ML design: design model to predict the p(dislike) of FB newsfeed: 这个面试官全程没咋followup，我按标准流程走基本没有interrupt我 we have a ML model which predicts p(like) of a post in FB newfeed. How to leverage a new feature “post liked in last 6 month”, follow up: what if offline metric doesn’t translate into online metric Predict whether current user will attend facebook events 预测用户是否参加event ----
+题目：短视频推荐系统（类似TikTok/Reels）+5 楼主的方案： 检索：Two-Tower model做candidate generation 精排：DCN-V2 / MMoE多目标（P(click), P(comment), P(share), E(watch_percentage)） 重排：Business logic + diversity保障 Feature engineering：视频特征、用户特征、交叉特征、GraphSAGE社交特征、上下文特征 探索：Contextual bandits（epsilon-greedy + Thompson sampling, 2% exploration traffic） Cold start处理 追问的点： position bias（用inverse propensity weighting）、training/serving skew、feedback loop问题。 整体表现：Strong E5, borderline E6。
+附近地点推荐，给可能在移动的手机用户。+5 build from scratch，讨论了一下怎么获取数据 考的题是Yelp like place recomendation，不讨论Search ranking，直接到Personalized discovery。feature engineering扣得比较细，并且modeling本身的pros/cons也最好主动说一下。 Design a machine learning system that recommends places to a user in a maps or local-discovery product. ML SD是经典推荐系统，这轮感觉很坑，总是问非常open 的question，比如说你觉得label会有什么问题，XGBoost会有什么问题，而不是说有这个问题，那你该怎么解决。
+通知推荐排序。这些通知来自于各个产品比如新产品，朋友新动态，广告商自己发的广告的结果等等。 Ads Ranking. 也是买它的广告精排。主要讨论了 feature engineering, model architecture, 和 calibration。+ 1 NewsFeed ranking，着重问了除了内容质量额外的考虑，并且在多次pull thread。data management部分讲过的也要重新讲有结构的feature Engineering。时间不够讲全部modeling的时候，candidates generation可以跳过，直接上DNN。
+设计一个抓高风险账户的ml pipeline 感谢国人面试官给我高频的weapon sale ads detection。中间会时不时问我一些问题，比如怎么搜集training data，漏斗模型traning data是一样的吗。也会给我一些反馈。+7 检测包含武器的广告，大概用 HelloInterview 里对 harmful content detection 的思路来做。觉得表现不是很好，目前也不知道这一轮的具体 feedback。要感谢华人老哥抬了一手。 设计end-to-end ML system to enforce 武器销售广告。问题准备不充分，面试官也不太友好，一直问如果是刚研发从未见过的新型武器如何收集训练数据，一脸懵。 Detect weapon-selling ads from posts 回答时候只注重weapon detection了， 没有着重讨论selling的features 另外problem clarification, data (how to get labels), feature engineering 花太多时间，没有留下太多时间给model，evaluation， deployment and other topics
+
+
+
+
+2轮code interview：
+1，国人面试官，做了3题，挺简单的tag题
+2，印度面试官，做了2题，也是tag题。这一轮有点累了，没第一轮那么顺不过面试官给了提示，差不多也写完了不过没那么完美。
+2轮 MLSD,
+
+1, 国人面试官，推荐系统，把准备的推荐相关的全部很快输出了，和面试官交互也挺好的。
+2， 2个白人面试官，一个shadow的。分类问题，harmful item detection。这一轮也把准备的全部输出了，不过感觉面试官心不在焉的感觉，只问了1,2个followup。
+2轮 behavior：
+就是一些常规题吧。
+总体感觉，准备充足的话不难，过不过hc就看运气。
+求米看面经。
+
+
+
+1.
+高频题 web crawler 就是地理一样的那道有很多node去挖网页nadao
+按照地理思路回答 感觉不错 一个烙印+一个老美shadow
+2
+design ticket system
+后来feedback是挂在这一轮,我是直接背诵的hellointerview的ticket master,一开始问了下要求和需求,国人小哥不太热心就叫我自己去设计,然而我设计了大概半小时,小哥突然来一句,我就是要你设计一个单机的ticket system,够一个学校的学生用就可以了,然后我恍然大悟估计是小哥心情不好,又重新从brutal force开始说起,结果也没时间去表演deep dive了. 最好recuiter简单说了下feedback,这轮没有讨论需求,挂
+
+
+
+三月下开始的面试
+Phone Screen: 两题，噫气流二问了很多edge case，第二题应该是易二流无，讨论了几种处理方式，最后还是让我用基础方式实现，结果一紧张四步基本操作没写对，本以为肯定挂了结果意外进了下一轮。
+
+VO前HR说会以E5 target我，然后说Design要展现drive，Behavior要展现各种leadership etc
+
+coding：遗留物领，伊尔四舅总体比较顺利
+
+
+AI coding: grid maze问题，看别的面经说有不止四问，但只给我了四问，四问都很顺利，早早就做完讨论了。
+
+SD：Instgram，和面试官讨论了核心workflow，最后只讨论了一个deep dive，完整的deep dive也没有做完，
+
+Behavior：面试官烙印看起来挺年轻的，问的也就那些基本的常见题，大概也就三十五分钟就结束了，感觉面试官有了signal就想早点结束了
+
+面完复盘感觉coding两轮很顺利，但SD和Behavior完全没信心能达到5，以为要挂了，过了一周说到了Team match，但说SD和Behavior signal还是不够，downgrade到了4。
+最近看到好几个贴，都是面试表现还不错结果是reject，基本都怀疑因为hire freeze。感觉最近可能match上是比较难，内部动荡也挺大的，但还是希望能早点被捞起吧。
+
+求米求米~谢谢
+
+
+
+
+
+Meta Data Engineer Interview — AI Native Full Stack Round
+Platform: CoderPad (app.coderpad.io) with integrated AI Assist
+Level: IC5/IC6 Data Engineer
+Round Type: Technical Screen (single interviewer)
+I'm not pasting question here, if you want question reach out here: https://t.me/m/NvigbYL-ZDc1
+---
+1. Interview Structure & Timing
+The interview is a single 60-minute session divided into 4 back-to-back sections that build on each other through one continuous business scenario. There are no breaks between sections.
+| Section | Duration | Format | Tools Used |
+|---------|----------|--------|------------|
+| Business Case | ~15 min | Written text (left panel) | Plain Text mode in CoderPad |
+| Data Modeling | ~15 min | Written text (left panel) | Plain Text mode in CoderPad |8
+| SQL | ~15 min | Live SQL with runnable DB | PostgreSQL 12.4 in CoderPad |
+| Coding | ~15 min | Python with runnable code | Python Project mode in CoderPad |
+[!IMPORTANT]
+All 4 sections share one unified business scenario. The interviewer progressively builds on your answers. What you write in Section 1 directly impacts what you're asked in Section 2, 3, and 4.
+---
+2. How Each Section Works
+Section 1: Business Case (~15 min)
+CoderPad Mode: Plain Text
+What happens:
+The interviewer pastes a business context paragraph into the left panel describing a product scenario
+Below the context, there's a specific question asking you to respond in writing
+You type your answer directly in the CoderPad text editor
+There are follow-up questions that build on your response
+What the interviewer evaluates:
+Can you identify ambiguity in a business ask?
+Do you ask the right clarifying questions before jumping to solutions?
+Can you think from multiple stakeholder perspectives?
+Do you consider both product success and potential negative impacts?
+Format of questions:
+Open-ended text prompts (not multiple choice)
+You write your answers as if you're responding to a PM/stakeholder
+Typically 2 sub-parts: (1) clarifying questions, (2) translate business goals into technical terms
+What's expected:
+4-6 well-structured clarifying questions
+Show you understand the difference between vanity metrics and actionable metrics
+Cover multiple angles: growth, engagement, retention, cannibalization, user satisfaction
+Think about what "success" means for different stakeholders
+---
+Section 2: Data Modeling (~15 min)
+CoderPad Mode: Plain Text
+What happens:
+The interviewer gives you system constraints (scale of data, retention policies, etc.)
+You're asked to design a data model (dimension + fact tables) in the text editor
+Follow-up questions test if your model can answer new business questions without schema changes
+Additional follow-ups ask you to extend the model for new use cases
+What the interviewer evaluates:
+Star schema design (fact vs. dimension tables)
+Appropriate grain selection for fact tables
+Understanding of partitioning strategies for large-scale data
+Foreign key relationships and entity identification
+Whether your model is flexible enough to answer ad-hoc questions
+How you'd extend an existing model vs. redesigning it
+Format of questions:
+Text-based: "Design your core data model that supports X"
+Constraints are given (e.g., data volume, retention window)
+Follow-ups: "How does your model answer Y?" and "Now extend it for Z"
+Typically 3 sub-parts building in complexity
+What's expected:
+Clear table definitions with column names, types, and keys
+Explicit grain statement ("my fact table is at the X-level grain")
+Partitioning strategy (date-based is most common)
+Ability to answer "how would you query this?" for your own model
+Show how existing dimension tables enable new analyses via joins
+---
+Section 3: SQL (~15 min)
+CoderPad Mode: PostgreSQL 12.4 (runnable)
+What happens:
+The CoderPad switches to SQL mode with a live PostgreSQL database
+A pre-written SQL query is pasted into the left panel (claimed to be "AI-generated")
+The right panel has tabs: Instructions, Program Output, Database (schema explorer), AI Assist
+You need to find errors in the query, then fix them
+After fixing syntax/logic errors, you run the query and find data quality issues in the output
+This section has 2 sub-parts:
+Part A: Find Errors in SQL (~8–10 min)
+You're given a query with intentional errors (at least 4)
+Errors span: syntax issues, wrong join types, redundant joins, fan-out problems, missing columns
+You can edit the query directly and run it against the live DB
+Part B: Find Data Issues (~5–7 min)
+After fixing the query, you run it and inspect the output data
+You identify data quality problems (negative values, edge cases, etc.)
+AI explicitly cannot help with this part — you must spot issues yourself
+You update the query to handle the data issues
+Database Schema:
+The right panel has a Database tab with a visual schema explorer
+Shows all tables with column names and data types
+Typically includes 2-3 dimension tables and 1 fact table
+What the interviewer evaluates:
+Can you read and debug someone else's SQL?
+Do you understand join semantics (INNER vs LEFT vs fan-out)?
+Can you spot logical errors vs just syntax errors?
+Data quality intuition — spotting impossible values, selection bias, etc.
+Can you reason about query performance (redundant scans, unnecessary CTEs)?
+What's expected:
+Find 4+ critical errors (not just cosmetic issues)
+Understand why a LEFT JOIN vs INNER JOIN matters for analytical accuracy
+Recognize when a join creates row duplication (fan-out)
+Spot data issues that wouldn't cause the query to fail but produce wrong results
+Fix the query and validate the output makes sense
+---
+Section 4: Coding — Python (~15 min)
+CoderPad Mode: Python Project (multi-file)
+What happens:
+The CoderPad switches to Python Project mode with a file explorer
+A README.md file describes the coding problem with:
+Input data format and sample data (hardcoded in a data file)
+Known data quality issues you must handle
+A function signature you need to implement
+Expected output format (dictionary)
+Source files are organized:
+src/
+复制代码
+,
+main.py
+复制代码
+,
+interview_data.py
+复制代码
+You write your solution and can run it with the "Run Main" button
+The right panel shows Instructions and Program Output
+What the interviewer evaluates:
+Can you handle messy, real-world data (not clean textbook data)?
+Do you account for edge cases the prompt explicitly warns about?
+Code organization and readability
+Can you explain your approach verbally while coding?
+Format of the problem:
+
+You receive two data sources from different systems/teams
+The data has known issues explicitly stated (e.g., schema changes, missing records, orphaned data)
+You write a function that processes the data and returns a summary dictionary
+The output should directly answer the original business question from Section 1
+What's expected:
+Parse raw string data into structured objects
+Handle invalid/malformed events gracefully (skip, don't crash)
+Handle orphaned records (data in one source but not the other)
+Compute aggregate metrics grouped by categories
+Return a clean, well-structured dictionary
+Be able to explain your code's logic verbally
+---
+3. AI Usage Policy
+[!IMPORTANT]
+This is a critical part of the Meta interview format. AI is allowed but evaluated differently than you'd expect.
+What the interviewer said (verbatim from the recording):
+"You can use AI during most of the sections" — AI is enabled throughout
+"I'll be evaluating your judgment, reasoning, and critical decision-making" — not just correctness
+"AI output on its own is not an answer" — the process and judgment matter more
+"Your final answer is what you write on the left side of the CoderPad" — AI suggestions on the right don't count
+"If you include AI-generated text, I'll probably ask you to explain why you chose that" — you must defend AI output
+"I'll ask follow-ups to get understanding of any AI-generated content" — expect deep probing
+"You can explain your approach in your own words" — verbal explanation is key
+AI Tool Available:
+CoderPad AI Assist panel (right side) with a model selector dropdown
+Multiple models available including GPT (various versions), Claude Sonnet, Claude Opus, and others
+Has an "Ask something..." prompt where you can type questions
+Can generate suggestions, KPIs, code, SQL, etc.
+You can switch between models freely during the interview
+What AI CAN help with:
+✅ Brainstorming clarifying questions
+✅ Suggesting metrics/KPIs you might have missed
+✅ Generating SQL query drafts
+✅ Writing Python code scaffolding
+✅ Getting suggestions for data model extensions
+What AI CANNOT help with:
+❌ Finding data issues in SQL output (interviewer explicitly states this)
+❌ Replacing your own judgment and reasoning
+❌ Being your sole answer without explanation
+How the AI was actually used in this interview:
+The candidate used AI to:
+Get a list of suggested clarifying questions (then selected/modified the relevant ones)
+Get suggested KPIs organized by primary/secondary categories
+Get suggestions for data model extensions for the ML section
+Ask AI to add comments to their code after writing it
+The META-Rule:
+Use AI as a starting point, not a final answer. The interviewer will probe whether YOU understand what the AI suggested. If you can't explain it in your own words, it hurts more than it helps.
+---
+4. CoderPad Platform Layout
+Left Panel (your workspace):
+Where you write answers (text, SQL, or code)
+In SQL mode: executable query editor with "Run" button
+In Python mode: multi-file project with file explorer and "Run Main" button
+Right Panel (tools):
+| Tab | Description |
+|-----|-------------|
+| Instructions | The question prompt and context (can open in new window) |
+| Program Output | Results from running SQL/Python code |
+| Database | Schema explorer showing all tables, columns, and types |
+| AI Assist | ChatGPT-powered assistant (GPT-5 mini) |
+Other features:
+Screen sharing is required (candidate shares their screen)
+The interviewer can see everything you type in real-time
+There's a "History" tab showing change history
+The interviewer can toggle between different CoderPad question pads
+---
+5. Interview Flow & Transitions
+┌─────────────────────────────────────────────────────────┐
+│  INTRO (2 min)                                          │
+│  • AI policy explained                                  │
+│  • Screen sharing setup                                 │
+│  • CoderPad orientation                                 │
+├─────────────────────────────────────────────────────────┤
+│  SECTION 1: Business Case (15 min)                      │
+│  • Interviewer pastes context + question                │
+│  • Candidate writes clarifying questions                │
+│  • Can use AI for brainstorming                         │
+│  • Follow-up: translate to metrics/dimensions           │
+├─────────────────────────────────────────────────────────┤
+│  SECTION 2: Data Modeling (15 min)                      │
+│  • Interviewer adds constraints below existing text     │
+│  • Candidate designs tables in same text editor         │
+│  • Follow-up questions test model flexibility           │
+│  • Follow-up: extend for new use case                   │
+├─────────────────────────────────────────────────────────┤
+│  SECTION 3: SQL (15 min)                                │
+│  • CoderPad switches to SQL mode (new pad)              │
+│  • Pre-written query with errors appears                │
+│  • Part A: Find & fix errors                            │
+│  • Part B: Run query, find data issues                  │
+├─────────────────────────────────────────────────────────┤
+│  SECTION 4: Coding (15 min)                             │
+│  • CoderPad switches to Python Project mode (new pad)   │
+│  • README with problem + data in interview_data.py      │
+│  • Write function, handle messy data                    │
+│  • Run and verify output                                │
+├─────────────────────────────────────────────────────────┤
+│  WRAP-UP (1-2 min)                                      │
+│  • "Any questions for me?"                              │
+└─────────────────────────────────────────────────────────┘---
+6. Key Expectations Per Section
+What separates a strong candidate:
+| Section | Weak Signal | Strong Signal |
+|---------|-------------|---------------|
+| Business Case | Jumps straight to metrics | Asks "working for whom? by what measure?" first |
+| Business Case | Lists generic metrics | Considers cannibalization, user satisfaction, technical stability |
+| Metrics | Only engagement metrics | Covers growth + engagement + retention + guardrail metrics |
+| Data Model | No grain statement | Explicitly states grain ("event-level fact table") |
+| Data Model | Flat table design | Star schema with clear fact/dimension separation |
+| Data Model | Can't answer follow-ups | Model flexible enough to answer new questions via joins |
+| SQL | Only finds syntax errors | Finds logical errors (wrong join type, fan-out, selection bias) |
+| SQL | Fixes query but doesn't validate | Runs query, inspects output, catches data quality issues |
+| Coding | Crashes on bad data | Gracefully handles malformed/orphaned/edge case data |
+| Coding | Returns raw numbers | Returns structured dict that directly answers business question |
+| AI Usage | Copies AI output verbatim | Uses AI for brainstorming, rewrites in own words, explains reasoning |
+---
+7. Technical Requirements
+SQL Knowledge Required:
+CTEs (
+WITH ... AS
+复制代码
+)
+JOIN types (INNER, LEFT) and when each is appropriate
+Aggregation functions (
+AVG
+复制代码
+,
+COUNT
+复制代码
+,
+SUM
+复制代码
+,
+ROUND
+复制代码
+)
+GROUP BY
+复制代码
+semantics
+CASE WHEN
+复制代码
+for conditional logic
+Understanding of fan-out from many-to-many joins
+Data type casting and NULL handling
+Python Knowledge Required:
+String parsing (splitting CSV-like strings)
+Dictionary operations (defaultdict, nested dicts)
+Data containers (dataclasses or named tuples)
+Iteration and conditional filtering
+Edge case handling (try/except, validation)
+Function design returning structured output
+Data Modeling Knowledge Required:
+Star schema (fact + dimension tables)
+Grain definition
+Partitioning strategies (date-based)
+Entity-relationship design
+Foreign key relationships
+Incremental data loading concepts
+---
+8. Preparation Tips
+[!TIP]
+Based on what was observed in this actual interview:
+Practice the full pipeline: business question → metrics → data model → SQL → code. Meta tests all of it in one sitting.
+Get comfortable with CoderPad: The platform has specific UI quirks (SQL vs Python modes, AI panel, database explorer, instructions panel). Familiarity saves time.
+Practice explaining AI output: In a mock, use ChatGPT to answer a question, then practice explaining the answer as if it were yours. The interviewer WILL probe.
+Master star schema design: You need to go from "business question" → fact/dimension tables in under 10 minutes.
+Practice SQL debugging: Find 4+ errors in a 30-line query is a specific skill. Practice reading others' SQL critically.
+Handle messy data: The coding section intentionally gives you data with known issues. Don't write clean-path-only code.
+Time management: ~15 min per section. Don't over-invest in one section and rush through the rest.
+Talk while you work: The interviewer is watching your screen. Narrate your thought process, especially during SQL debugging and coding.
+
+
+
+
+
+
+
+地理位置推荐
+
+Design a machine learning system that recommends places to a user in a maps or local-discovery product.
+
+
+
+
+
+
+
+总共是两轮SD 一轮 behavioral 一轮coding 一轮 AI-enabled coding
+
+
+
+华人小哥 SD 设计一个OJ
+Coding轮 一个是二叉树左右view的变体 另一个是alien dictionary 要求精确估计时间空间复杂度
+白人 behavioral 怎么cross-team对齐需求 犯过最大的mistake是什么 有没有过miss的supposed to do 的work
+AI-enabled coding - complier 优化memory和time 地里其他面经里有提过 面试官明确说不用AI也可以 而且不会是minus 但是做起来不是很顺的样子 最后只过了4 5 个case 时间就没了
+SD 设计facebook post的live comment 我提到了SSE/Websocket 但是感觉这个准备的不好
+
+
+
+上周刚面的，max unique char.
+
+
+整个面试的时间非常紧凑，我建议你在做第二问solver的时候就直接一步到位，用最快的方案。
+
+
+去年11月的phone interview， 过了之后系统一直有bug， 没法约onsite。 今年绩效拿了最低，老板把我放了pip， 就跟recruiter 联系了，安排了onsite interview. meta系统还不错，可以把面试放在一周里.我老婆之前面meta，面了max unique characters, 后来觉得可能挂在这轮上了，感觉ai coding需要熟悉下， 所以放在了最后一轮。
+
+第一轮 是system design  设计一个google flight
+
+第二轮是 behavior question 那轮表现不是很好，莫名的有点紧张， 舌头都不太听话了。
+第三轮 coding: binary tree diameter, 和 11 题， 感觉放水了
+第四轮ai coding: maze. 和地里面经一样， 第一轮不能用ai. 第二轮后可以ai。本来想自己写的，结果coding 不知道出了个bug, mutableList 和 mutableSet都没法找到add。 后来直接用ai解决了。后面几题我都是说思路，让ai来完成，最后完成了bomer。 到了energy题，没几分钟了， 面试官只让我说思路，我就说了用dijkstra来解决。
+
+
+
+本帖最后由 匿名 于 2026-4-1 09:40 编辑
+
+
+Compiler Optimization
+十分钟之前刚刚刚面完这一轮，应该要挂了，熬夜准备了地理的3个AI coding常见题（Maze， max unique char, card game），结果遇到一个新题。
+
+Problem Statement
+给了几个folder，有test.py，test file文件和src文件。目标是优化complier 的time和mem。
+example：
+instruction1.txt
+res1 = var1 + var2
+res2 = var3 - var4
+res3 = res2 + var5
+res = res1 + res3
+
+instruction2.txt
+res1 = var1 * var2
+res2 = var3 - var4
+res3 = res2 / var5
+res = res1 + res3
+
+instruction3.txt
+res1 = 10 * var2
+res2 = var3 * 100 - var4
+res3 = res1 / 2
+res = res2 + res3
+
+def extract_time_and_mem_cost(instruction):
+                TODO
+                return time, memunit test：
+
+assert (extract_time_and_mem_cost('test/instruction1.txt'), 14)里面的具体数字这里有坑，我稍后说。
+
+值得吐槽的一点是opus4.6在第一个回合聊天后宕机，interviewer让我Switch到GPT。
+
+GPT根据test1和test2的条件实现了代码，就是简单的operator check：
+('+', '-', '='）cost=1
+('*', '/') cost = 5于是我顺利的把test1和test3搞定了。
+
+但是后面test4 到 test7一直报错。直到最后5分钟interviewer才提示我看看extract_time_and_mem_cost在干嘛。他提示说那些cost number可能是错的，我就GPT，1和5是哪里来的，然后GPT说它自己推理的。然后我问interviewer 我不懂compiler，但是有univeral的定义吗？他说没有。然后我一直让GPT 重新infer，最后时间不够了。
+
+面了meta 3次了，1次E4，1次E6，这次也是target E6。估计后面不会面meta了，剩下的coding和BQ我都不想面了。
+
+
+
+分享下我整理的其他人的帖子
+
+Overall summary
+🔗 www.1point3acres.com
+
+
+MAZE
+Best: 🔗 www.1point3acres.com
+🔗 www.1point3acres.com
+AI coding: Maze, 一问 fix test case， path符号不能override 起始符号。。。 二问BFS 无限循环没加visited。。。 三问有的地方只能往左或右search怎么办。。。。四问有门和对应钥匙分散在maze里，门只能有了钥匙才能通过 怎么办
+
+🔗 www.1point3acres.com
+
+Maze, find a bug without using AI, why the print is wrong, need to add a check that the current cell is empty
+Fix a bug, why the maze took too long, need to add a visited hashset to record all the cells which are visited
+Add door from left and right in the maze, and it can only go through the door in 1 direction. Can ask the AI to generate code to only go to 1 direction when meet a door, issue: when there is a wall next to the door, the path is blocked.
+
+🔗 www.1point3acres.com
+Round 2: AI-Enabled Coding（60分钟）
+这轮是Meta新推出的format，可以用AI工具辅助。
+题目：Maze Solver
+4个递进的问题：
+Q1（无AI辅助）：花了大约25分钟，有点stuck
+Q2-Q4（可以用AI）：全部完成
+楼主之前专门准备过maze mock，所以后面几个part做得很顺。大部分人只做完2-3个part，做完全部4个是top表现。
+
+🔗 www.1point3acres.com
+ai coding那个迷宫题，我记得地里有很详细的可以找一下我也是凭着记忆说一下，整个coding都是通过改代码让pass unit test，提供了ide可以直接run unit test。
+第一问说不能跑ai只能自己看，不过比较简单，就是之前是把路径都打印成*，然后现在是那个开始和结束保留原来的样子，就是加个if else判断是不是开始标志和结束标志。
+第二问好像是看bfs的bug啥的，很简单，没有visited这个set，所以跑不出来，加上就好了
+第三问是路径里面加了标志>和<，一个好像是只能从左往右，一个是只能从右往左，它给的原始代码里面有那个move的method，就直接再move method里面加一个判断就好了
+第四问就是钥匙门那个经典的，visited加个状态，用bit mask存状态
+第五问是路径里面有bomb，如果你踩到bomb，周围好像半径两格内的墙都会被炸掉，思路也简单，visited再加个bomb的状态就行了，这一问我没得时间的，就直接用ai生成代码了，然后粘贴过去直接就跑过了。
+
+🔗 www.1point3acres.com
+题目：Maze Solver
+一共4问
+第一问不用AI：bug在print的时候需要查空，如果空，打印时加”*“
+第二问答案是bfs开始的时候需要查是否visited（可以用AI但其实不建议，因为很简单，但是code base有点绕，小屏幕看着容易看错bfs实际开始的地方）
+第三问是bfs时加一个chute，单向门“>”,只能一边进一边出，不难但是方向容易搞晕，用AI其实能帮的有限，需要跟AI说很清楚
+第四问是如果路上有key 开门，比如“a”开“A”门，这样有一个点，就是第二问的visited可能需要改，因为你在一条路捡到的“a”钥匙可能能回去开另一条路的“A”门
+
+Max unique char
+Best: 🔗 www.1point3acres.com
+🔗 www.1point3acres.com
+
+🔗 www.1point3acres.com
+ai coding 抽到了maximum subset那题，前两个test cases完成，后面两个跑不完。这题前两个完成就算过，我还没见过谁跑完第三个的。所有backtracking的优化手段我都试过了，还是不行。也许DP有点希望，但是这题不是问最大子集长度，而是要打印出最大子集，就不适合用DP解，内存要爆炸。
+Someone commented:
+第三四问可以dp存<bitmask(number+letter用Long), Node>，bitmask number+letter用Long，并且做一下单词自身字母和数字的去重，Node里有previous指针指向前一个node这样内存不会炸，类似二维数组找路径类的输出路径作为结果的题目存previous指针的思路，并且在达到长度36的时候直接剪枝输出，三四问都可以跑过
+
+🔗 www.1point3acres.com
+ai enabled coding: Find subset of words with max unique character without duplicates
+我觉得这题有毒，sonnet, opus都不能给出最优解去搞定第三第四个test. 第三个test有几千个单词，第四个有一万多个单词。meta总说不考dp, 我觉得还是要复习一下，不然agent太傻，自己不能提供dp思路就挂了。
+
+AI coding: 很幸运没遇到新题 maximum unique chr backtrack优化了三轮 完成了前两个file 第三个file 100s跑完 没时间第四个file 要想跑过应该只能换dp了
+
+
+
+万能 Prompt 模板
+
+⸻
+
+1. 用AI来生成，写一个新的service的Prompt
+
+You are a senior backend engineer.
+
+Build a minimal but production-quality FastAPI service.
+
+Requirements:
+- Endpoint: POST /summarize
+- Input: JSON { "text": string }
+- Output: JSON { "summary": string }
+
+Functional requirements:
+- Summarize input text (use a placeholder function)
+- Store request/response history in memory
+
+Technical requirements:
+- Use clean architecture (separate router, service, model)
+- Use type hints (pydantic models)
+- Handle errors properly
+- Keep code modular and readable
+
+Non-functional:
+- Keep it simple (no database, in-memory is fine)
+
+- Focus on clarity over completeness
+
+Output format:
+- Show full file structure
+- Then provide code for each file
+
+
+
+2. Debug面试环节的Prompt
+
+
+You are a senior engineer reviewing code.
+
+Analyze the following code:
+
+[PASTE CODE]
+
+Tasks:
+1. Identify correctness issues
+2. Identify edge cases that break it
+3. Analyze time and space complexity
+4. Suggest improved implementation
+5. Explain why your solution is better
+
+
+
+3. System Design面试环节可以用的prompt
+
+
+You are a senior distributed systems engineer.
+
+Design a scalable system for:
+
+[problem]
+
+Include:
+- high-level architecture
+- key components
+- data flow
+- storage choices
+- scaling strategy
+
+Constraints:
+- start with a simple MVP
+- then suggest how to scale
+
+Output:
+- bullet points
+- keep it concise
+
+
+
+

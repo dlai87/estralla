@@ -1,0 +1,487 @@
+{
+  "schema_version": 1,
+  "role": "junior-engineer",
+  "role_title": "Junior Engineer Track",
+  "research": {
+    "window_start": null,
+    "window_end": null,
+    "postings_sampled": 0,
+    "last_refreshed": null,
+    "sources": []
+  },
+  "requirements": [
+    {
+      "id": "REQ-JR-MOD-001-PYTHON-FUNDAMENTALS",
+      "label": "Module 001: Python Fundamentals for AI Infrastructure",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-001-python-fundamentals/exercise-01-python-basics",
+        "mod-001-python-fundamentals/exercise-02-oop",
+        "mod-001-python-fundamentals/exercise-03-file-io-errors",
+        "mod-001-python-fundamentals/exercise-04-testing-pytest",
+        "mod-001-python-fundamentals/exercise-05-data-processing",
+        "mod-001-python-fundamentals/exercise-06-async",
+        "mod-001-python-fundamentals/exercise-07-testing"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-001-python-fundamentals/exercise-01-python-basics/README.md",
+        "modules/mod-001-python-fundamentals/exercise-01-python-basics/STEP_BY_STEP.md",
+        "modules/mod-001-python-fundamentals/exercise-02-oop/README.md",
+        "modules/mod-001-python-fundamentals/exercise-02-oop/STEP_BY_STEP.md",
+        "modules/mod-001-python-fundamentals/exercise-03-file-io-errors/README.md",
+        "modules/mod-001-python-fundamentals/exercise-04-testing-pytest/README.md",
+        "modules/mod-001-python-fundamentals/exercise-05-data-processing/README.md",
+        "modules/mod-001-python-fundamentals/exercise-05-data-processing/STEP_BY_STEP.md",
+        "modules/mod-001-python-fundamentals/exercise-06-async/README.md",
+        "modules/mod-001-python-fundamentals/exercise-07-testing/README.md"
+      ],
+      "tests": [
+        "modules/mod-001-python-fundamentals/exercise-01-python-basics/tests/test_python_basics.py",
+        "modules/mod-001-python-fundamentals/exercise-02-oop/tests/test_oop.py",
+        "modules/mod-001-python-fundamentals/exercise-03-file-io-errors/tests/test_file_io.py",
+        "modules/mod-001-python-fundamentals/exercise-04-testing-pytest/tests/test_ml_pipeline.py",
+        "modules/mod-001-python-fundamentals/exercise-05-data-processing/tests/test_data_processing.py",
+        "modules/mod-001-python-fundamentals/exercise-05-data-processing/tests/test_metrics_aggregator.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing module `mod-001-python-fundamentals`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-002-LINUX-ESSENTIALS",
+      "label": "Module 002: Linux Essentials for AI Infrastructure",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-002-linux-essentials/exercise-01-bash-scripting",
+        "mod-002-linux-essentials/exercise-02-filesystem-processes",
+        "mod-002-linux-essentials/exercise-03-ssh-networking",
+        "mod-002-linux-essentials/exercise-04-system-administration",
+        "mod-002-linux-essentials/exercise-05-package-mgmt",
+        "mod-002-linux-essentials/exercise-06-logs",
+        "mod-002-linux-essentials/exercise-07-troubleshooting",
+        "mod-002-linux-essentials/exercise-08-system-automation"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-002-linux-essentials/exercise-01-bash-scripting/README.md",
+        "modules/mod-002-linux-essentials/exercise-02-filesystem-processes/README.md",
+        "modules/mod-002-linux-essentials/exercise-03-ssh-networking/README.md",
+        "modules/mod-002-linux-essentials/exercise-04-system-administration/README.md",
+        "modules/mod-002-linux-essentials/exercise-05-package-mgmt/README.md",
+        "modules/mod-002-linux-essentials/exercise-06-logs/README.md",
+        "modules/mod-002-linux-essentials/exercise-07-troubleshooting/README.md",
+        "modules/mod-002-linux-essentials/exercise-08-system-automation/README.md"
+      ],
+      "tests": [
+        "modules/mod-002-linux-essentials/exercise-04-system-administration/tests/test_scripts.sh"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing module `mod-002-linux-essentials`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-003-GIT-VERSION-CONTROL",
+      "label": "Module 003: Git and Version Control",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-003-git-version-control/exercise-01-git-fundamentals",
+        "mod-003-git-version-control/exercise-02-commits-history",
+        "mod-003-git-version-control/exercise-03-branching",
+        "mod-003-git-version-control/exercise-04-merging-conflicts",
+        "mod-003-git-version-control/exercise-05-collaboration",
+        "mod-003-git-version-control/exercise-06-ml-workflows",
+        "mod-003-git-version-control/exercise-07-advanced",
+        "mod-003-git-version-control/exercise-08-git-lfs-ml-projects"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-003-git-version-control/exercise-01-git-fundamentals/README.md",
+        "modules/mod-003-git-version-control/exercise-01-git-fundamentals/STEP_BY_STEP.md",
+        "modules/mod-003-git-version-control/exercise-02-commits-history/README.md",
+        "modules/mod-003-git-version-control/exercise-03-branching/README.md",
+        "modules/mod-003-git-version-control/exercise-04-merging-conflicts/README.md",
+        "modules/mod-003-git-version-control/exercise-05-collaboration/README.md",
+        "modules/mod-003-git-version-control/exercise-06-ml-workflows/README.md",
+        "modules/mod-003-git-version-control/exercise-07-advanced/README.md",
+        "modules/mod-003-git-version-control/exercise-08-git-lfs-ml-projects/README.md"
+      ],
+      "tests": [
+        "modules/mod-003-git-version-control/exercise-01-git-fundamentals/tests/conftest.py",
+        "modules/mod-003-git-version-control/exercise-01-git-fundamentals/tests/test_best_practices_checker.py",
+        "modules/mod-003-git-version-control/exercise-01-git-fundamentals/tests/test_branch_manager.py",
+        "modules/mod-003-git-version-control/exercise-01-git-fundamentals/tests/test_commit_analyzer.py",
+        "modules/mod-003-git-version-control/exercise-01-git-fundamentals/tests/test_git_workflow_automation.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing module `mod-003-git-version-control`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-004-ML-BASICS",
+      "label": "Module 004: Machine Learning Basics for Infrastructure Engineers",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-004-ml-basics/exercise-01-ml-fundamentals",
+        "mod-004-ml-basics/exercise-02-model-training-pipeline",
+        "mod-004-ml-basics/exercise-03-model-deployment",
+        "mod-004-ml-basics/exercise-04-llm-basics",
+        "mod-004-ml-basics/exercise-05-gpu-fundamentals"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-004-ml-basics/exercise-01-ml-fundamentals/README.md",
+        "modules/mod-004-ml-basics/exercise-02-model-training-pipeline/README.md",
+        "modules/mod-004-ml-basics/exercise-03-model-deployment/README.md",
+        "modules/mod-004-ml-basics/exercise-04-llm-basics/README.md",
+        "modules/mod-004-ml-basics/exercise-04-llm-basics/STEP_BY_STEP.md",
+        "modules/mod-004-ml-basics/exercise-05-gpu-fundamentals/README.md",
+        "modules/mod-004-ml-basics/exercise-05-gpu-fundamentals/STEP_BY_STEP.md"
+      ],
+      "tests": [
+        "modules/mod-004-ml-basics/exercise-04-llm-basics/tests/__init__.py",
+        "modules/mod-004-ml-basics/exercise-04-llm-basics/tests/test_api.py",
+        "modules/mod-004-ml-basics/exercise-04-llm-basics/tests/test_generation.py",
+        "modules/mod-004-ml-basics/exercise-05-gpu-fundamentals/tests/__init__.py",
+        "modules/mod-004-ml-basics/exercise-05-gpu-fundamentals/tests/test_gpu_detection.py",
+        "modules/mod-004-ml-basics/exercise-05-gpu-fundamentals/tests/test_performance.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing module `mod-004-ml-basics`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-005-DOCKER-CONTAINERS",
+      "label": "Module 005: Docker and Containers",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-005-docker-containers/exercise-01-docker-fundamentals",
+        "mod-005-docker-containers/exercise-02-building-ml-images",
+        "mod-005-docker-containers/exercise-03-docker-compose",
+        "mod-005-docker-containers/exercise-04-docker-networking",
+        "mod-005-docker-containers/exercise-05-docker-volumes",
+        "mod-005-docker-containers/exercise-06-container-security",
+        "mod-005-docker-containers/exercise-07-production-deployment",
+        "mod-005-docker-containers/exercise-08-production-ml-deployment"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-005-docker-containers/exercise-01-docker-fundamentals/README.md",
+        "modules/mod-005-docker-containers/exercise-02-building-ml-images/README.md",
+        "modules/mod-005-docker-containers/exercise-03-docker-compose/README.md",
+        "modules/mod-005-docker-containers/exercise-04-docker-networking/README.md",
+        "modules/mod-005-docker-containers/exercise-05-docker-volumes/README.md",
+        "modules/mod-005-docker-containers/exercise-06-container-security/README.md",
+        "modules/mod-005-docker-containers/exercise-07-production-deployment/README.md",
+        "modules/mod-005-docker-containers/exercise-08-production-ml-deployment/README.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-005-docker-containers`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-006-KUBERNETES-INTRO",
+      "label": "Module 006: Kubernetes Introduction",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-006-kubernetes-intro/exercise-01-first-deployment",
+        "mod-006-kubernetes-intro/exercise-02-helm-chart",
+        "mod-006-kubernetes-intro/exercise-03-debugging",
+        "mod-006-kubernetes-intro/exercise-04-statefulsets-storage",
+        "mod-006-kubernetes-intro/exercise-05-configmaps-secrets",
+        "mod-006-kubernetes-intro/exercise-06-ingress-loadbalancing",
+        "mod-006-kubernetes-intro/exercise-07-ml-workloads"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-006-kubernetes-intro/exercise-01-first-deployment/README.md",
+        "modules/mod-006-kubernetes-intro/exercise-01-first-deployment/STEP_BY_STEP.md",
+        "modules/mod-006-kubernetes-intro/exercise-02-helm-chart/README.md",
+        "modules/mod-006-kubernetes-intro/exercise-02-helm-chart/STEP_BY_STEP.md",
+        "modules/mod-006-kubernetes-intro/exercise-03-debugging/README.md",
+        "modules/mod-006-kubernetes-intro/exercise-03-debugging/STEP_BY_STEP.md",
+        "modules/mod-006-kubernetes-intro/exercise-04-statefulsets-storage/README.md",
+        "modules/mod-006-kubernetes-intro/exercise-04-statefulsets-storage/STEP_BY_STEP.md",
+        "modules/mod-006-kubernetes-intro/exercise-05-configmaps-secrets/README.md",
+        "modules/mod-006-kubernetes-intro/exercise-05-configmaps-secrets/STEP_BY_STEP.md",
+        "modules/mod-006-kubernetes-intro/exercise-06-ingress-loadbalancing/README.md",
+        "modules/mod-006-kubernetes-intro/exercise-06-ingress-loadbalancing/STEP_BY_STEP.md",
+        "modules/mod-006-kubernetes-intro/exercise-07-ml-workloads/README.md",
+        "modules/mod-006-kubernetes-intro/exercise-07-ml-workloads/STEP_BY_STEP.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing module `mod-006-kubernetes-intro`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-007-APIS-WEB-SERVICES",
+      "label": "Module 007: APIs and Web Services",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-007-apis-web-services/exercise-01-fastapi-fundamentals",
+        "mod-007-apis-web-services/exercise-02-model-serving",
+        "mod-007-apis-web-services/exercise-03-production-api",
+        "mod-007-apis-web-services/exercise-04-performance-optimization",
+        "mod-007-apis-web-services/exercise-05-flask-framework",
+        "mod-007-apis-web-services/exercise-06-production-ml-api"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-007-apis-web-services/exercise-01-fastapi-fundamentals/README.md",
+        "modules/mod-007-apis-web-services/exercise-01-fastapi-fundamentals/STEP_BY_STEP.md",
+        "modules/mod-007-apis-web-services/exercise-02-model-serving/README.md",
+        "modules/mod-007-apis-web-services/exercise-02-model-serving/STEP_BY_STEP.md",
+        "modules/mod-007-apis-web-services/exercise-03-production-api/README.md",
+        "modules/mod-007-apis-web-services/exercise-03-production-api/STEP_BY_STEP.md",
+        "modules/mod-007-apis-web-services/exercise-04-performance-optimization/README.md",
+        "modules/mod-007-apis-web-services/exercise-04-performance-optimization/STEP_BY_STEP.md",
+        "modules/mod-007-apis-web-services/exercise-05-flask-framework/README.md",
+        "modules/mod-007-apis-web-services/exercise-06-production-ml-api/README.md"
+      ],
+      "tests": [
+        "modules/mod-007-apis-web-services/exercise-05-flask-framework/tests/test_app.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing module `mod-007-apis-web-services`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-008-DATABASES-SQL",
+      "label": "Module 008: Databases and SQL",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-008-databases-sql/exercise-01-sql-basics-crud",
+        "mod-008-databases-sql/exercise-02-database-design-ml-registry",
+        "mod-008-databases-sql/exercise-03-advanced-sql-joins",
+        "mod-008-databases-sql/exercise-04-sqlalchemy-orm-integration",
+        "mod-008-databases-sql/exercise-05-optimization-indexing"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-008-databases-sql/exercise-01-sql-basics-crud/README.md",
+        "modules/mod-008-databases-sql/exercise-02-database-design-ml-registry/README.md",
+        "modules/mod-008-databases-sql/exercise-03-advanced-sql-joins/README.md",
+        "modules/mod-008-databases-sql/exercise-04-sqlalchemy-orm-integration/README.md",
+        "modules/mod-008-databases-sql/exercise-05-optimization-indexing/README.md"
+      ],
+      "tests": [
+        "modules/mod-008-databases-sql/exercise-01-sql-basics-crud/tests/test_crud.py",
+        "modules/mod-008-databases-sql/exercise-02-database-design-ml-registry/tests/test_schema.py",
+        "modules/mod-008-databases-sql/exercise-03-advanced-sql-joins/tests/test_query_shape.py",
+        "modules/mod-008-databases-sql/exercise-04-sqlalchemy-orm-integration/tests/test_repositories.py",
+        "modules/mod-008-databases-sql/exercise-05-optimization-indexing/tests/test_index_chosen.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing module `mod-008-databases-sql`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-009-MONITORING-BASICS",
+      "label": "Module 009: Monitoring and Observability Basics",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-009-monitoring-basics/exercise-01-observability-foundations",
+        "mod-009-monitoring-basics/exercise-02-prometheus-stack",
+        "mod-009-monitoring-basics/exercise-03-grafana-dashboards",
+        "mod-009-monitoring-basics/exercise-04-logging-pipeline",
+        "mod-009-monitoring-basics/exercise-05-alerting-incident-response",
+        "mod-009-monitoring-basics/exercise-06-airflow-workflow-monitoring"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-009-monitoring-basics/exercise-01-observability-foundations/README.md",
+        "modules/mod-009-monitoring-basics/exercise-01-observability-foundations/STEP_BY_STEP.md",
+        "modules/mod-009-monitoring-basics/exercise-02-prometheus-stack/README.md",
+        "modules/mod-009-monitoring-basics/exercise-02-prometheus-stack/STEP_BY_STEP.md",
+        "modules/mod-009-monitoring-basics/exercise-03-grafana-dashboards/README.md",
+        "modules/mod-009-monitoring-basics/exercise-03-grafana-dashboards/STEP_BY_STEP.md",
+        "modules/mod-009-monitoring-basics/exercise-04-logging-pipeline/README.md",
+        "modules/mod-009-monitoring-basics/exercise-04-logging-pipeline/STEP_BY_STEP.md",
+        "modules/mod-009-monitoring-basics/exercise-05-alerting-incident-response/README.md",
+        "modules/mod-009-monitoring-basics/exercise-05-alerting-incident-response/STEP_BY_STEP.md",
+        "modules/mod-009-monitoring-basics/exercise-06-airflow-workflow-monitoring/README.md",
+        "modules/mod-009-monitoring-basics/exercise-06-airflow-workflow-monitoring/STEP_BY_STEP.md"
+      ],
+      "tests": [
+        "modules/mod-009-monitoring-basics/exercise-01-observability-foundations/tests/__init__.py",
+        "modules/mod-009-monitoring-basics/exercise-06-airflow-workflow-monitoring/tests/__init__.py",
+        "modules/mod-009-monitoring-basics/exercise-06-airflow-workflow-monitoring/tests/test_dags.py",
+        "modules/mod-009-monitoring-basics/exercise-06-airflow-workflow-monitoring/tests/test_tasks.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing module `mod-009-monitoring-basics`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-MOD-010-CLOUD-PLATFORMS",
+      "label": "Module 010: Cloud Platforms Fundamentals",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [
+        "mod-010-cloud-platforms/exercise-01-aws-fundamentals",
+        "mod-010-cloud-platforms/exercise-02-gcp-ml-infrastructure",
+        "mod-010-cloud-platforms/exercise-03-azure-ml-services",
+        "mod-010-cloud-platforms/exercise-04-multi-cloud-deployment",
+        "mod-010-cloud-platforms/exercise-05-cost-optimization",
+        "mod-010-cloud-platforms/exercise-06-ml-infrastructure-aws",
+        "mod-010-cloud-platforms/exercise-07-terraform-basics"
+      ],
+      "projects": [],
+      "solutions": [
+        "modules/mod-010-cloud-platforms/exercise-01-aws-fundamentals/README.md",
+        "modules/mod-010-cloud-platforms/exercise-02-gcp-ml-infrastructure/README.md",
+        "modules/mod-010-cloud-platforms/exercise-03-azure-ml-services/README.md",
+        "modules/mod-010-cloud-platforms/exercise-04-multi-cloud-deployment/README.md",
+        "modules/mod-010-cloud-platforms/exercise-05-cost-optimization/README.md",
+        "modules/mod-010-cloud-platforms/exercise-06-ml-infrastructure-aws/README.md",
+        "modules/mod-010-cloud-platforms/exercise-07-terraform-basics/README.md",
+        "modules/mod-010-cloud-platforms/exercise-07-terraform-basics/STEP_BY_STEP.md"
+      ],
+      "tests": [
+        "modules/mod-010-cloud-platforms/exercise-02-gcp-ml-infrastructure/tests/test_gcp_automation.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing module `mod-010-cloud-platforms`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-PROJECT-01-SIMPLE-MODEL-API",
+      "label": "Project 01: Simple Model API Deployment",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-01-simple-model-api"
+      ],
+      "solutions": [
+        "projects/project-01-simple-model-api/README.md",
+        "projects/project-01-simple-model-api/SOLUTION.md"
+      ],
+      "tests": [
+        "projects/project-01-simple-model-api/tests/test_app.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing project `project-01-simple-model-api`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-PROJECT-02-KUBERNETES-SERVING",
+      "label": "Project 02: Kubernetes Model Serving",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-02-kubernetes-serving"
+      ],
+      "solutions": [
+        "projects/project-02-kubernetes-serving/README.md",
+        "projects/project-02-kubernetes-serving/SOLUTION.md"
+      ],
+      "tests": [
+        "projects/project-02-kubernetes-serving/tests/test_k8s.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing project `project-02-kubernetes-serving`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-PROJECT-03-ML-PIPELINE-TRACKING",
+      "label": "Project 03: ML Pipeline with Experiment Tracking",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-03-ml-pipeline-tracking"
+      ],
+      "solutions": [
+        "projects/project-03-ml-pipeline-tracking/README.md",
+        "projects/project-03-ml-pipeline-tracking/SOLUTION.md"
+      ],
+      "tests": [
+        "projects/project-03-ml-pipeline-tracking/tests/test_pipeline.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing project `project-03-ml-pipeline-tracking`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-PROJECT-04-MONITORING-ALERTING",
+      "label": "Project 04: Monitoring & Alerting System",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-04-monitoring-alerting"
+      ],
+      "solutions": [
+        "projects/project-04-monitoring-alerting/README.md",
+        "projects/project-04-monitoring-alerting/SOLUTION.md"
+      ],
+      "tests": [
+        "projects/project-04-monitoring-alerting/tests/test_metrics.py"
+      ],
+      "coverage_status": "covered",
+      "notes": "Backfilled from existing project `project-04-monitoring-alerting`. Replace label + add evidence on next research cycle if confirmed."
+    },
+    {
+      "id": "REQ-JR-PROJECT-05-PRODUCTION-ML-CAPSTONE",
+      "label": "Project 05: Production-Ready ML System (Capstone)",
+      "frequency": null,
+      "provenance": "backfilled",
+      "requires_confirmation": true,
+      "evidence": [],
+      "discussion_topics": [],
+      "exercises": [],
+      "projects": [
+        "project-05-production-ml-capstone"
+      ],
+      "solutions": [
+        "projects/project-05-production-ml-capstone/README.md",
+        "projects/project-05-production-ml-capstone/SOLUTION.md"
+      ],
+      "tests": [],
+      "coverage_status": "partial",
+      "notes": "Backfilled from existing project `project-05-production-ml-capstone`. Replace label + add evidence on next research cycle if confirmed."
+    }
+  ]
+}

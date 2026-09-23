@@ -1,0 +1,30 @@
+name: Release package
+
+on:
+  push:
+    tags:
+      - "v20*"
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build archives
+        shell: bash
+        run: |
+          set -euo pipefail
+          repo="${GITHUB_REPOSITORY##*/}"
+          tag="${GITHUB_REF_NAME}"
+          mkdir -p dist
+          git archive --format=tar.gz --prefix="${repo}-${tag}/" -o "dist/${repo}-${tag}.tar.gz" "$tag"
+          git archive --format=zip --prefix="${repo}-${tag}/" -o "dist/${repo}-${tag}.zip" "$tag"
+      - name: Publish release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.tar.gz
+            dist/*.zip

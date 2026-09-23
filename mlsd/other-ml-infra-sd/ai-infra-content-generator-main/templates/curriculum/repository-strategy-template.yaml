@@ -1,0 +1,55 @@
+# Repository Strategy Configuration
+#
+# Copy to `curriculum/repository-strategy.yaml` (or per program).
+# Defines how learning and solutions artifacts map to Git repositories.
+
+program_name: "<Program Name>"
+version: "0.1.0"
+last_updated: "<YYYY-MM-DD>"
+
+roles:
+  - name: "Platform Engineer"
+    slug: "platform-engineer"
+  - name: "MLOps Engineer"
+    slug: "mlops-engineer"
+
+repositories:
+  mode: "single_repo"  # options: single_repo | per_role
+  base_repo_name: "ai-infra-curriculum"
+  role_repos:
+    platform-engineer: "ai-infra-platform-engineer"
+    mlops-engineer: "ai-infra-mlops-engineer"
+
+solutions:
+  placement: "separate"  # options: inline | separate
+  inline_path: "curriculum/solutions/"  # used when placement == inline
+  separate_repo_pattern: "{base}-{role}-solutions"
+  access_control_notes: >
+    Solutions repos are restricted to instructors. Sync using CI workflow nightly.
+
+shared_assets:
+  cross_role_modules:
+    - module_id: "MOD-01"
+      description: "Foundations shared across roles"
+  shared_components:
+    - name: "feature-store-lib"
+      repo: "ai-infra-shared-components"
+      owner: "platform-team"
+
+progression_rules:
+  - from_role: "platform-engineer"
+    to_role: "mlops-engineer"
+    strategy: "augment"
+    notes: "Reuse observability module; add production deployment coverage."
+  - from_role: "mlops-engineer"
+    to_role: "data-infrastructure-engineer"
+    strategy: "extend"
+    notes: "Carry over feature store project and deepen on governance."
+
+governance:
+  review_cadence: "quarterly"
+  approvers:
+    - name: "Curriculum Lead"
+      github: "@curriculum-lead"
+    - name: "Solutions Lead"
+      github: "@solutions-lead"

@@ -1,0 +1,460 @@
+# MLflow Deployment for Enterprise MLOps Platform
+# Implements ADR-005 (Model Registry Approach - MLflow)
+# Components: Tracking Server, Model Registry, Artifact Storage (S3)
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mlflow
+  labels:
+    name: mlflow
+    cost-center: mlops-platform
+---
+# Service Account for MLflow with IRSA (IAM Roles for Service Accounts)
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mlflow
+  namespace: mlflow
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/mlops-mlflow-role
+---
+# ConfigMap for MLflow configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mlflow-config
+  namespace: mlflow
+data:
+  # MLflow server configuration
+  MLFLOW_BACKEND_STORE_URI: "postgresql://mlflow:${DB_PASSWORD}@mlflow-postgres.mlflow.svc.cluster.local:5432/mlflow"
+  MLFLOW_DEFAULT_ARTIFACT_ROOT: "s3://mlops-artifacts/mlflow"
+  MLFLOW_S3_ENDPOINT_URL: "https://s3.us-east-1.amazonaws.com"
+  AWS_DEFAULT_REGION: "us-east-1"
+  MLFLOW_TRACKING_SERVER_HOST: "0.0.0.0"
+  MLFLOW_TRACKING_SERVER_PORT: "5000"
+---
+# Secret for database password (in production, use AWS Secrets Manager)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mlflow-secrets
+  namespace: mlflow
+type: Opaque
+stringData:
+  DB_PASSWORD: "changeme-use-secrets-manager"
+  AWS_ACCESS_KEY_ID: "" # Empty - using IRSA instead
+  AWS_SECRET_ACCESS_KEY: "" # Empty - using IRSA instead
+---
+# PostgreSQL StatefulSet for MLflow backend store
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mlflow-postgres
+  namespace: mlflow
+spec:
+  serviceName: mlflow-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow-postgres
+  template:
+    metadata:
+      labels:
+        app: mlflow-postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:14-alpine
+        ports:
+        - containerPort: 5432
+          name: postgres
+        env:
+        - name: POSTGRES_DB
+          value: "mlflow"
+        - name: POSTGRES_USER
+          value: "mlflow"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-secrets
+              key: DB_PASSWORD
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "2000m"
+            memory: "4Gi"
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - mlflow
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - mlflow
+          initialDelaySeconds: 5
+          periodSeconds: 5
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: gp3-encrypted
+      resources:
+        requests:
+          storage: 50Gi
+---
+# Service for PostgreSQL
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow-postgres
+  namespace: mlflow
+spec:
+  clusterIP: None
+  selector:
+    app: mlflow-postgres
+  ports:
+  - port: 5432
+    targetPort: 5432
+    name: postgres
+---
+# MLflow Tracking Server Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow-server
+  namespace: mlflow
+  labels:
+    app: mlflow-server
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mlflow-server
+  template:
+    metadata:
+      labels:
+        app: mlflow-server
+        version: v2.8.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "5000"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: mlflow
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - mlflow-server
+              topologyKey: kubernetes.io/hostname
+      containers:
+      - name: mlflow-server
+        image: python:3.11-slim
+        command:
+        - /bin/bash
+        - -c
+        - |
+          pip install mlflow==2.8.0 psycopg2-binary boto3 && \
+          mlflow server \
+            --backend-store-uri $(MLFLOW_BACKEND_STORE_URI) \
+            --default-artifact-root $(MLFLOW_DEFAULT_ARTIFACT_ROOT) \
+            --host $(MLFLOW_TRACKING_SERVER_HOST) \
+            --port $(MLFLOW_TRACKING_SERVER_PORT) \
+            --gunicorn-opts "--timeout 180 --workers 4"
+        ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: mlflow-config
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mlflow-secrets
+              key: DB_PASSWORD
+        - name: MLFLOW_BACKEND_STORE_URI
+          value: "postgresql://mlflow:$(DB_PASSWORD)@mlflow-postgres.mlflow.svc.cluster.local:5432/mlflow"
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "2Gi"
+          limits:
+            cpu: "4000m"
+            memory: "8Gi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 60
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
+      tolerations:
+      - key: "workload-type"
+        operator: "Equal"
+        value: "system"
+        effect: "NoSchedule"
+---
+# Service for MLflow Tracking Server
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlflow-service
+  namespace: mlflow
+  labels:
+    app: mlflow-server
+spec:
+  type: ClusterIP
+  selector:
+    app: mlflow-server
+  ports:
+  - port: 80
+    targetPort: 5000
+    protocol: TCP
+    name: http
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+---
+# Horizontal Pod Autoscaler for MLflow
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mlflow-server-hpa
+  namespace: mlflow
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mlflow-server
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 30
+      - type: Pods
+        value: 2
+        periodSeconds: 30
+      selectPolicy: Max
+---
+# PodDisruptionBudget for high availability
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: mlflow-server-pdb
+  namespace: mlflow
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: mlflow-server
+---
+# Ingress for external access (with TLS)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mlflow-ingress
+  namespace: mlflow
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "180"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "180"
+    # Authentication (example with OAuth2 proxy)
+    nginx.ingress.kubernetes.io/auth-url: "https://oauth2-proxy.mlops-platform.com/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://oauth2-proxy.mlops-platform.com/oauth2/start?rd=$scheme://$host$request_uri"
+spec:
+  tls:
+  - hosts:
+    - mlflow.mlops-platform.com
+    secretName: mlflow-tls
+  rules:
+  - host: mlflow.mlops-platform.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: mlflow-service
+            port:
+              number: 80
+---
+# NetworkPolicy for security (restrict access to MLflow)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: mlflow-network-policy
+  namespace: mlflow
+spec:
+  podSelector:
+    matchLabels:
+      app: mlflow-server
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  # Allow traffic from ingress controller
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+    ports:
+    - protocol: TCP
+      port: 5000
+  # Allow traffic from other namespaces (data science teams)
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          mlflow-access: "true"
+    ports:
+    - protocol: TCP
+      port: 5000
+  # Allow traffic from Prometheus for monitoring
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+      port: 5000
+  egress:
+  # Allow DNS resolution
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+  # Allow traffic to PostgreSQL
+  - to:
+    - podSelector:
+        matchLabels:
+          app: mlflow-postgres
+    ports:
+    - protocol: TCP
+      port: 5432
+  # Allow traffic to AWS (S3, Secrets Manager)
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 169.254.169.254/32 # Block access to metadata service
+    ports:
+    - protocol: TCP
+      port: 443
+---
+# ServiceMonitor for Prometheus (monitoring)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: mlflow-metrics
+  namespace: mlflow
+  labels:
+    app: mlflow-server
+spec:
+  selector:
+    matchLabels:
+      app: mlflow-server
+  endpoints:
+  - port: http
+    interval: 30s
+    path: /metrics
+---
+# ResourceQuota for MLflow namespace (cost control)
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: mlflow-quota
+  namespace: mlflow
+spec:
+  hard:
+    requests.cpu: "20"
+    requests.memory: "40Gi"
+    limits.cpu: "40"
+    limits.memory: "80Gi"
+    persistentvolumeclaims: "10"
+---
+# LimitRange for MLflow namespace (default resource limits)
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: mlflow-limits
+  namespace: mlflow
+spec:
+  limits:
+  - max:
+      cpu: "8"
+      memory: "16Gi"
+    min:
+      cpu: "100m"
+      memory: "128Mi"
+    default:
+      cpu: "1"
+      memory: "2Gi"
+    defaultRequest:
+      cpu: "500m"
+      memory: "1Gi"
+    type: Container

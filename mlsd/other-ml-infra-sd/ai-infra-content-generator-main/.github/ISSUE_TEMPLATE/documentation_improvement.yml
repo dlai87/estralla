@@ -1,0 +1,45 @@
+name: Documentation improvement
+description: Suggest corrections or enhancements to existing documentation
+title: "[Docs]: "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us keep the docs accurate and easy to follow!
+  - type: input
+    id: location
+    attributes:
+      label: Documentation Location
+      description: File path or URL to the section that needs improvement.
+      placeholder: e.g., docs/getting-started.md#quick-start
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What needs to change?
+      description: Describe the problem or gap in the current documentation.
+      placeholder: Explain what is inaccurate, missing, or confusing.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Update
+      description: Provide the wording or outline you’d like to see (optional but helpful).
+      placeholder: >
+        Suggested text, screenshots, or links that clarify the section.
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: Supporting References
+      description: External docs, tickets, or sources that back up the change.
+      placeholder: |
+        - Link 1
+        - Link 2
+    validations:
+      required: false
